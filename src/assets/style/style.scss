@@ -1,0 +1,17 @@
+@import './core/fonts';
+
+$font: 'Montserrat';
+
+body{
+  font-family: $font, sans-serif;
+  font-weight: 300;
+  font-size: 10px;
+}
+h1{
+  font-weight: 300;
+  font-size: 24px;
+}
+p{
+  font-size: 18px;
+  font-weight: 300;
+}
