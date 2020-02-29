@@ -10,24 +10,66 @@
     <div class="day__category">
       <p class="category--text">категория: Работа</p>
     </div>
-    <ul class="hours">
-      <li v-for="hour in hours" class="hour">
-        <hour :hour="hour"></hour>
-      </li>
-    </ul>
+    <div class="hours__wrapper">
+      <ul class="hours__list">
+        <li v-for="hour in hours" class="hour">
+          <hour :hour="hour"></hour>
+        </li>
+      </ul>
+      <ul class="events__list">
+        <li  class="event">
+          <event
+            :index="0"
+            :title="events[0].title"
+            :duration="events[0].duration"
+            :color="events[0].color"
+            :reference="this">
+          </event>
+        </li>
+        <li class="event">
+          <event
+            :index="1"
+            :title="events[0].title"
+            :duration="events[1].duration"
+            :color="events[1].color"
+            :reference="this">
+          </event>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
   import hourComponent from '../../components/hour-component';
+  import eventComponent from '../../components/event-component';
     export default {
         name: "view-day",
         components: {
             'hour': hourComponent,
+            'event': eventComponent,
         },
         data(){
             return {
                 hours: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
+                events: [
+                    {
+                        title: 'First Event!',
+                        color: 'red',
+                        duration: {
+                            start: 9,
+                            end: 11,
+                        }
+                    },
+                    {
+                        title: 'Second Event!',
+                        color: 'blue',
+                        duration: {
+                            start: 12,
+                            end: 15,
+                        }
+                    }
+                ]
             }
         }
 
@@ -64,7 +106,12 @@
       margin-bottom: 0;
     }
   }
-  .hours  {
+  .hours__wrapper{
+    position: relative;
+    box-sizing: border-box;
+  }
+  .hours__list  {
+    box-sizing: border-box;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -77,8 +124,28 @@
   .container{
     width: 500px;
     margin: 0 auto;
-    border: 1px solid #d2d2d2;
     min-height: 1000px;
+  }
+  .events__list{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    position: absolute;
+    padding-left: 100px;
+    margin: 0;
+    top: 0;
+    left: 0;
+
+    .event{
+      position:absolute;
+    }
+  }
+  #1{
+    top: 0;
+  }
+  #2{
+    top: 100px;
   }
 
 </style>
