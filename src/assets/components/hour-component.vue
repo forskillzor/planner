@@ -1,35 +1,38 @@
 <template>
-  <div class="hour">
-    <div class="hour__time">{{hour}}</div>
+  <li class="hour">
+    <div class="hour__time">{{ hour }}</div>
     <ul class="hour__timeline">
 <!--      <li class="timeline__item">-->
 <!--        <p class="minutes">:15</p>-->
 <!--        <p class="content">dfd</p>-->
 <!--      </li>-->
     </ul>
-  </div>
+  </li>
 </template>
 
 <script>
     export default {
         name: "hour-component",
-        props: ['hour'],
+        props: ['hour', 'hourHeight'],
+        mounted(){
+           document.querySelectorAll('.hour').forEach( el => el.style.height = this.hourHeight + 'px');
+        }
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .hour{
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-height: 50px;
     margin: 0;
     background-color: #fff;
     /*border-bottom: 2px solid #d2d2d2;*/
 
     &__time{
+      color: #4d4d4d;
       font-size: 18px;
-      padding: 0 5px 0 20px;
+      padding: 5px 5px 0 20px;
     }
 
     &__timeline{
@@ -40,7 +43,6 @@
       .timeline__item{
         display: block;
         width: 100%;
-        border-bottom: 1px solid #d2d2d2;
 
         .minutes{
           display: inline;

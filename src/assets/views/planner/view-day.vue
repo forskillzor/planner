@@ -10,32 +10,33 @@
     <div class="day__category">
       <p class="category--text">категория: Работа</p>
     </div>
-    <div class="hours__wrapper">
-      <ul class="hours__list">
-        <li v-for="hour in hours" class="hour">
-          <hour :hour="hour"></hour>
-        </li>
-      </ul>
-      <ul class="events__list">
-        <li  class="event">
-          <event
-            :index="0"
-            :title="events[0].title"
-            :duration="events[0].duration"
-            :color="events[0].color"
-            :reference="this">
+    <div class="hours__clip">
+      <div class="hours__wrapper">
+        <ul v-for="hour in hours" class="hours__list">
+          <hour class="hour"
+                :hourHeight="hourHeight"
+                :hour="hour">
+          </hour>
+        </ul>
+        <ul class="events__list">
+          <event  class="event"
+                  :index="0"
+                  :hourHeight="hourHeight"
+                  :title="events[0].title"
+                  :duration="events[0].duration"
+                  :color="events[0].color"
+                  :reference="this">
           </event>
-        </li>
-        <li class="event">
-          <event
-            :index="1"
-            :title="events[0].title"
-            :duration="events[1].duration"
-            :color="events[1].color"
-            :reference="this">
+          <event class="event"
+                 :index="1"
+                 :hourHeight="hourHeight"
+                 :title="events[1].title"
+                 :duration="events[1].duration"
+                 :color="events[1].color"
+                 :reference="this">
           </event>
-        </li>
-      </ul>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -52,18 +53,19 @@
         data(){
             return {
                 hours: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
+                hourHeight: 50,
                 events: [
                     {
-                        title: 'First Event!',
-                        color: 'red',
+                        title: 'Совещание',
+                        color: '#ff96b9',
                         duration: {
                             start: 9,
                             end: 11,
                         }
                     },
                     {
-                        title: 'Second Event!',
-                        color: 'blue',
+                        title: 'Презентация!',
+                        color: '#cb97ff',
                         duration: {
                             start: 12,
                             end: 15,
@@ -76,7 +78,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   h1{
     text-align: center;
   }
@@ -106,9 +108,23 @@
       margin-bottom: 0;
     }
   }
+  .hours__clip{
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .hours__clip::-webkit-scrollbar{
+    width: 5px;
+  }
+  .hours__clip::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  }
+  .hours__clip::-webkit-scrollbar-thumb{
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
   .hours__wrapper{
     position: relative;
-    box-sizing: border-box;
   }
   .hours__list  {
     box-sizing: border-box;
@@ -117,14 +133,14 @@
     padding: 0;
 
     li.hour{
-      border-top: 1px solid #000;
+      box-sizing: border-box;
+      border-top: 1px solid #9b9b9b;
     }
   }
 
   .container{
     width: 500px;
     margin: 0 auto;
-    min-height: 1000px;
   }
   .events__list{
     box-sizing: border-box;
@@ -141,11 +157,4 @@
       position:absolute;
     }
   }
-  #1{
-    top: 0;
-  }
-  #2{
-    top: 100px;
-  }
-
 </style>
