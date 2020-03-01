@@ -2,7 +2,7 @@
   <div id="app">
     <header class="header"></header>
     <div class="horizontal-wrapper">
-      <aside class="sidebar-left"></aside>
+      <navibar class="navibar"></navibar>
       <view-day></view-day>
       <aside class="sidebar-right"></aside>
     </div>
@@ -12,10 +12,12 @@
 
 <script>
   import viewDay from './assets/views/planner/view-day';
+  import navibar from './assets/components/navibar-component';
     export default {
         name: 'app',
         components: {
             'view-day': viewDay,
+            'navibar': navibar,
         },
         data() {
             return {
@@ -41,7 +43,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
-  .sidebar-left{
+  .navibar{
     border-right: 1px solid #e2e2e2;
   }
   .sidebar-right{
