@@ -1,8 +1,13 @@
 @import './core/fonts';
+@import './core/mixins';
 
 $font: 'Montserrat';
 
+html{
+}
+
 body{
+  @include normalize();
   font-family: $font, sans-serif;
   font-weight: 300;
   font-size: 10px;

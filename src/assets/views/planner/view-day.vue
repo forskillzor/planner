@@ -139,7 +139,7 @@
   }
 
   .container{
-    width: 500px;
+    width: 400px;
     margin: 0 auto;
   }
   .events__list{
