@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import calendar from './calendar';
+  import calendar from './calendar/calendar';
     export default {
         name: "navibar-component",
         components: {
