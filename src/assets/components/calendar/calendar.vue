@@ -1,15 +1,14 @@
 <template>
     <div class="calendar">
       <div class="calendar__header">
-        <button class="prev" @click="currentMonth--"> <</button>
-        <ul  class="calendar__month-names list">
-          <li v-for="name in namesOfMonthes"
-              v-if="currentMonth === namesOfMonthes.lastIndexOf(name)"
-              class="list__item">
-            <h1 class="calendar__month-name">{{ name }} <span class="calendar__year">2020</span></h1>
+        <button class="calendar__button" @click="currentMonth--"> < </button>
+        <ul  class="month-names__list">
+          <li class="list__item" v-for="name in namesOfMonthes"
+              v-if="currentMonth === namesOfMonthes.lastIndexOf(name)" >
+            <h1 class="month-name">{{ name }} <span class="year">2020</span></h1>
           </li>
         </ul>
-        <button class="next" @click="currentMonth++"> ></button>
+        <button class="calendar__button" @click="currentMonth++"> > </button>
       </div>
       <ul class="calendar__days-of-week">
         <li class="day-name">пн</li>
@@ -20,27 +19,26 @@
         <li class="day-name">сб</li>
         <li class="day-name">вс</li>
       </ul>
-      <div v-for="month in year" class="calendar__wrap--month">
-        <transition mode="out-in" appear
-                    enter-active-class="animated fadeIn"
-                    leave-active-class="animated fadeOut">
-          <ul v-show="currentMonth === year.indexOf(month)" class="calendar__month">
-            <li  class="month__item">
-              <ul  class="calendar__weeks">
-                <li v-for="week in month" class="weeks__item">
-                  <ul class="week__days">
-                    <li v-for="day in week" class="day"
-                        :data-month="day.month"
-                        :data-day="day.day"
-                    >{{ day.day }}
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </transition>
-      </div>
+      <ul class="calendar__month-list">
+        <li v-for="month in year"
+          class="calendar__month">
+          <transition appear
+            enter-active-class="animated fadeIn"
+            leave-active-class="animated fadeOut" >
+            <ul v-if="currentMonth === year.indexOf(month)" class="calendar__weeks">
+              <li v-for="week in month" class="week">
+                <ul class="days__list">
+                  <li v-for="day in week" class="day"
+                      :data-month="day.month"
+                      :data-day="day.day" >
+                    {{ day.day }}
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </transition>
+        </li>
+      </ul>
     </div>
 </template>
 
@@ -69,7 +67,7 @@
             }
         },
         computed: {
-            weeks() {
+            month() {
                 return createMonth(2020, this.currentMonth);
             },
             year(){
@@ -129,125 +127,107 @@
   @import '../../style/core/mixins';
 
   .list{
-    @include normalize;
-    list-style: none;
+    @include reset-list;
   }
   .calendar {
     width: 80%;
     margin: 0 auto;
-  }
-  .calendar__header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 0 20px 0;
-    height: 35px;
 
-    button{
-      border-radius: 50%;
-      border:0;
-      width: 40px;
+    &__header{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 20px 0;
       height: 35px;
-      background-color: #eeeeee;
-      outline: none;
-      transition: all 200ms;
 
-      &:hover{
-        cursor: pointer;
-        background-color: #999999;
+      button{
+        border-radius: 50%;
+        border:0;
+        width: 40px;
+        height: 35px;
+        background-color: #eeeeee;
+        outline: none;
+        transition: all 200ms;
+
+        &:hover{
+          cursor: pointer;
+          background-color: #999999;
+        }
+      }
+    }
+    .month-names__list{
+      @include reset-list;
+      position: relative;
+      width: 100%;
+      li{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    .month-name{
+      width: 200px;
+      margin: 0;
+      transition: all 200ms;
+      span{ display: inline};
+
+      .year {
+        font-weight: 200;
+        font-size: 18px;
+      }
+    }
+    .day-name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      margin-bottom: 0;
+      background-color: #eeeeee;
+    }
+    &__days-of-week {
+      @include reset-list;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      min-height: 30px;
+    }
+    &__month-list{
+      position: relative;
+      @include reset-list;
+    }
+    &__month{
+      @include reset-list;
+      position: absolute;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    &__weeks {
+      @include reset-list;
+
+      .days__list {
+        @include reset-list;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+
+        .day {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 30px;
+          border: 1px solid transparent;
+
+          &:hover {
+            cursor: pointer;
+            border: 1px solid #d2d2d2;
+          }
+
+          &:active {
+            background-color: #ff96b9;
+          }
+        }
       }
     }
   }
-  .calendar__month-names{
-    position: relative;
-    width: 100%;
-    li{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-  .calendar__month-name{
-    width: 200px;
-    margin: 0;
-    span{ display: inline};
-  }
-
-  .calendar__year {
-    font-weight: 200;
-    font-size: 18px;
-  }
-
-  .day-name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    margin-bottom: 0;
-    background-color: #eeeeee;
-  }
-  .calendar__wrap--month{
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-  }
-  .calendar__month{
-    position: absolute;
-    box-sizing: border-box;
-    width: 100%;
-  }
-  .calendar__days-of-week {
-    @include normalize;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    list-style: none;
-    min-height: 30px;
-  }
-
-  .calendar__month{
-    @include normalize;
-    list-style: none;
-  }
-  .calendar__month-name{
-    transition: all 200ms;
-  }
-  .calendar__weeks {
-    @include normalize;
-    list-style: none;
-  }
-
-  .week__days {
-    @include normalize;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    list-style: none;
-  }
-
-  .day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 30px;
-    border: 1px solid transparent;
-    /*transition-property: border;*/
-    /*transition-duration: 200ms;*/
-
-    &:hover {
-      cursor: pointer;
-      border: 1px solid #d2d2d2;
-    }
-
-    &:active {
-      background-color: #ff96b9;
-    }
-  }
-
-  .day-nonactive {
-    background-color: #eeeeee;
-  }
-
 </style>
 
