@@ -1,14 +1,14 @@
 <template>
     <div class="calendar">
       <div class="calendar__header">
-        <button class="calendar__button" @click="currentMonth--"> < </button>
+        <button class="calendar__button" @click="prevMonth"> < </button>
         <ul  class="month-names__list">
           <li class="list__item" v-for="name in namesOfMonthes"
               v-if="currentMonth === namesOfMonthes.lastIndexOf(name)" >
             <h1 class="month-name">{{ name }} <span class="year">2020</span></h1>
           </li>
         </ul>
-        <button class="calendar__button" @click="currentMonth++"> > </button>
+        <button class="calendar__button" @click="nextMonth"> > </button>
       </div>
       <ul class="calendar__days-of-week">
         <li class="day-name">пн</li>
@@ -22,9 +22,9 @@
       <ul class="calendar__month-list">
         <li v-for="month in year"
           class="calendar__month">
-          <transition appear
-            enter-active-class="animated fadeIn"
-            leave-active-class="animated fadeOut" >
+          <transition appear name="fade" mode="out-in"
+            :enter-active-class="`animated ${getSlideDirectionIn()}`"
+            :leave-active-class="`animated ${getSlideDirectionOut()}`" >
             <ul v-if="currentMonth === year.indexOf(month)" class="calendar__weeks">
               <li v-for="week in month" class="week">
                 <ul class="days__list">
@@ -50,6 +50,7 @@
         data() {
             return {
                 currentMonth: this.getCurrentMonth(),
+                slideDirection: '',
                 namesOfMonthes: [
                     'Январь',
                     'Февраль',
@@ -91,6 +92,24 @@
             getCurrentMonth(){
                 const date = new Date();
                 return date.getMonth();
+            },
+            getSlideDirectionIn(){
+                return this.slideDirection === 'left'
+                ? 'slideInLeft'
+                : 'slideInRight';
+            },
+            getSlideDirectionOut(){
+                return this.slideDirection === 'left'
+                ? 'slideOutRight'
+                : 'slideOutLeft';
+            },
+            nextMonth(){
+                this.currentMonth++;
+                this.slideDirection = 'right'
+            },
+            prevMonth(){
+                this.currentMonth--;
+                this.slideDirection = 'left'
             }
         },
         mounted() {
@@ -198,6 +217,7 @@
     }
     &__month{
       @include reset-list;
+      overflow: hidden;
       position: absolute;
       box-sizing: border-box;
       width: 100%;
