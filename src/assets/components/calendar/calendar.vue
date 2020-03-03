@@ -22,7 +22,7 @@
       <ul class="calendar__month-list">
         <li v-for="month in year"
           class="calendar__month">
-          <transition appear name="fade" mode="out-in"
+          <transition
             :enter-active-class="`animated ${getSlideDirectionIn()}`"
             :leave-active-class="`animated ${getSlideDirectionOut()}`" >
             <ul v-if="currentMonth === year.indexOf(month)" class="calendar__weeks">
