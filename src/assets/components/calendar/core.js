@@ -47,15 +47,6 @@ function getMonday(date) {
   return result;
 }
 
-export function test (){
-  const result = [];
-  const date = new Date();
-  for (let i = 0; i < 10; ++i){
-
-  }
-  console.warn();
-}
-
 function incDate(date){
   date.setDate(date.getDate() + 1);
 }

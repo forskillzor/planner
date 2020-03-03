@@ -2,7 +2,13 @@
     <div class="calendar">
       <div class="calendar__header">
         <button class="prev" @click="currentMonth--"> <</button>
-        <h1>{{namesOfMonthes[currentMonth]}} <span class="calendar__year">2020</span></h1>
+        <ul  class="calendar__month-names list">
+          <li v-for="name in namesOfMonthes"
+              v-if="currentMonth === namesOfMonthes.lastIndexOf(name)"
+              class="list__item">
+            <h1 class="calendar__month-name">{{ name }} <span class="calendar__year">2020</span></h1>
+          </li>
+        </ul>
         <button class="next" @click="currentMonth++"> ></button>
       </div>
       <ul class="calendar__days-of-week">
@@ -14,12 +20,12 @@
         <li class="day-name">сб</li>
         <li class="day-name">вс</li>
       </ul>
-      <div class="calendar__wrap--month">
-        <ul v-for="month in year" class="calendar__month">
-          <transition mode="out-in" appear
-                      enter-active-class="animated fadeInRight"
-                      leave-active-class="animated fadeOutLeft">
-            <li v-if="currentMonth === year.indexOf(month)" class="month__item">
+      <div v-for="month in year" class="calendar__wrap--month">
+        <transition mode="out-in" appear
+                    enter-active-class="animated fadeIn"
+                    leave-active-class="animated fadeOut">
+          <ul v-show="currentMonth === year.indexOf(month)" class="calendar__month">
+            <li  class="month__item">
               <ul  class="calendar__weeks">
                 <li v-for="week in month" class="weeks__item">
                   <ul class="week__days">
@@ -32,15 +38,14 @@
                 </li>
               </ul>
             </li>
-          </transition>
-        </ul>
+          </ul>
+        </transition>
       </div>
     </div>
 </template>
 
 <script>
     import {createMonth} from './core';
-    import { createCalendar } from './core';
 
     export default {
         name: "calendar",
@@ -123,6 +128,10 @@
 <style lang="scss">
   @import '../../style/core/mixins';
 
+  .list{
+    @include normalize;
+    list-style: none;
+  }
   .calendar {
     width: 80%;
     margin: 0 auto;
@@ -132,20 +141,38 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin: 20px 0 20px 0;
+    height: 35px;
 
     button{
       border-radius: 50%;
       border:0;
       width: 40px;
-      height: 40px;
+      height: 35px;
       background-color: #eeeeee;
       outline: none;
+      transition: all 200ms;
 
       &:hover{
         cursor: pointer;
         background-color: #999999;
       }
     }
+  }
+  .calendar__month-names{
+    position: relative;
+    width: 100%;
+    li{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .calendar__month-name{
+    width: 200px;
+    margin: 0;
+    span{ display: inline};
   }
 
   .calendar__year {
@@ -162,11 +189,13 @@
     background-color: #eeeeee;
   }
   .calendar__wrap--month{
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: row;
   }
   .calendar__month{
+    position: absolute;
     box-sizing: border-box;
     width: 100%;
   }
@@ -181,6 +210,9 @@
   .calendar__month{
     @include normalize;
     list-style: none;
+  }
+  .calendar__month-name{
+    transition: all 200ms;
   }
   .calendar__weeks {
     @include normalize;
