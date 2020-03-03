@@ -22,9 +22,9 @@
       <ul class="calendar__month-list">
         <li v-for="month in year"
           class="calendar__month">
-          <transition
-            :enter-active-class="`animated ${getSlideDirectionIn()}`"
-            :leave-active-class="`animated ${getSlideDirectionOut()}`" >
+          <transition name="fade" mode="out-in">
+<!--            enter-active-class="animated fadeIn"-->
+<!--            leave-active-class="animated fadeOut" >-->
             <ul v-if="currentMonth === year.indexOf(month)" class="calendar__weeks">
               <li v-for="week in month" class="week">
                 <ul class="days__list">
@@ -93,23 +93,11 @@
                 const date = new Date();
                 return date.getMonth();
             },
-            getSlideDirectionIn(){
-                return this.slideDirection === 'left'
-                ? 'slideInLeft'
-                : 'slideInRight';
-            },
-            getSlideDirectionOut(){
-                return this.slideDirection === 'left'
-                ? 'slideOutRight'
-                : 'slideOutLeft';
-            },
             nextMonth(){
                 this.currentMonth++;
-                this.slideDirection = 'right'
             },
             prevMonth(){
                 this.currentMonth--;
-                this.slideDirection = 'left'
             }
         },
         mounted() {
@@ -248,6 +236,12 @@
         }
       }
     }
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 1.5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+    opacity: 0;
   }
 </style>
 
