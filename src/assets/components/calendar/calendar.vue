@@ -1,35 +1,46 @@
 <template>
-  <div class="calendar">
-    <div class="calendar__header">
-      <button class="prev" @click="currentMonth--"> <</button>
-      <h1>{{namesOfMonthes[currentMonth]}} <span class="calendar__year">2020</span></h1>
-      <button class="next" @click="currentMonth++"> ></button>
-    </div>
-    <ul class="calendar__days-of-week">
-      <li class="day-name">пн</li>
-      <li class="day-name">вт</li>
-      <li class="day-name">ср</li>
-      <li class="day-name">чт</li>
-      <li class="day-name">пт</li>
-      <li class="day-name">сб</li>
-      <li class="day-name">вс</li>
-    </ul>
-    <ul class="calendar__weeks">
-      <li v-for="week in weeks" class="weeks__item">
-        <ul class="week__days">
-          <li v-for="day in week" class="day"
-              :data-month="day.month"
-              :data-day="day.day"
-          >{{ day.day }}
-          </li>
+    <div class="calendar">
+      <div class="calendar__header">
+        <button class="prev" @click="currentMonth--"> <</button>
+        <h1>{{namesOfMonthes[currentMonth]}} <span class="calendar__year">2020</span></h1>
+        <button class="next" @click="currentMonth++"> ></button>
+      </div>
+      <ul class="calendar__days-of-week">
+        <li class="day-name">пн</li>
+        <li class="day-name">вт</li>
+        <li class="day-name">ср</li>
+        <li class="day-name">чт</li>
+        <li class="day-name">пт</li>
+        <li class="day-name">сб</li>
+        <li class="day-name">вс</li>
+      </ul>
+      <div class="calendar__wrap--month">
+        <ul v-for="month in year" class="calendar__month">
+          <transition mode="out-in" appear
+                      enter-active-class="animated fadeInRight"
+                      leave-active-class="animated fadeOutLeft">
+            <li v-if="currentMonth === year.indexOf(month)" class="month__item">
+              <ul  class="calendar__weeks">
+                <li v-for="week in month" class="weeks__item">
+                  <ul class="week__days">
+                    <li v-for="day in week" class="day"
+                        :data-month="day.month"
+                        :data-day="day.day"
+                    >{{ day.day }}
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </transition>
         </ul>
-      </li>
-    </ul>
-  </div>
+      </div>
+    </div>
 </template>
 
 <script>
     import {createMonth} from './core';
+    import { createCalendar } from './core';
 
     export default {
         name: "calendar",
@@ -56,6 +67,22 @@
             weeks() {
                 return createMonth(2020, this.currentMonth);
             },
+            year(){
+                return [
+                    createMonth(2020, 0),
+                    createMonth(2020, 1),
+                    createMonth(2020, 2),
+                    createMonth(2020, 3),
+                    createMonth(2020, 4),
+                    createMonth(2020, 5),
+                    createMonth(2020, 6),
+                    createMonth(2020, 7),
+                    createMonth(2020, 8),
+                    createMonth(2020, 9),
+                    createMonth(2020, 10),
+                    createMonth(2020, 11),
+                ]
+            }
         },
         methods:{
             getCurrentMonth(){
@@ -76,10 +103,14 @@
         const today = date.getDate();
         const month = date.getMonth();
         document.querySelectorAll('.day').forEach(day => {
-            if (parseInt(day.dataset.month) !== currentMonth)
+            if (parseInt(day.dataset.month) !== currentMonth){
                 day.style.color = '#777777';
-            else
+                day.style.fontWeight = '200';
+            }
+            else{
+                day.style.color = '#000';
                 day.style.fontWeight = '400';
+            }
             if (parseInt(day.dataset.day) === today
                 && parseInt(day.dataset.month) === month)
                 day.style.backgroundColor = "#d2d2d2";
@@ -130,7 +161,15 @@
     margin-bottom: 0;
     background-color: #eeeeee;
   }
-
+  .calendar__wrap--month{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .calendar__month{
+    box-sizing: border-box;
+    width: 100%;
+  }
   .calendar__days-of-week {
     @include normalize;
     display: grid;
@@ -139,6 +178,10 @@
     min-height: 30px;
   }
 
+  .calendar__month{
+    @include normalize;
+    list-style: none;
+  }
   .calendar__weeks {
     @include normalize;
     list-style: none;
