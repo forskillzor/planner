@@ -10,7 +10,7 @@
     <div class="day__category">
       <p class="category--text">категория: Работа</p>
     </div>
-    <div class="hours__clip">
+    <div class="scroll-area">
       <div class="hours__wrapper">
         <ul v-for="hour in hours" class="hours__list">
           <hour class="hour"
@@ -112,16 +112,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
   }
-  .hours__clip::-webkit-scrollbar{
-    width: 5px;
-  }
-  .hours__clip::-webkit-scrollbar-track{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  }
-  .hours__clip::-webkit-scrollbar-thumb{
-    background-color: darkgrey;
-    outline: 1px solid slategrey;
-  }
+
   .hours__wrapper{
     position: relative;
   }

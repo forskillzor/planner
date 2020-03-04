@@ -1,14 +1,12 @@
 <template>
     <div class="calendar">
       <div class="calendar__header">
-        <button class="calendar__button" @click="prevMonth"> < </button>
-        <ul  class="month-names__list">
-          <li class="list__item" v-for="name in namesOfMonthes"
-              v-if="currentMonth === namesOfMonthes.lastIndexOf(name)" >
-            <h1 class="month-name">{{ name }} <span class="year">{{ currentYear }}</span></h1>
-          </li>
-        </ul>
-        <button class="calendar__button" @click="nextMonth"> > </button>
+        <button v-if="calendar" class="calendar__button" @click="prevMonth"> < </button>
+        <h1 class="month-name">{{ namesOfMonthes[currentMonth] }}
+          <span v-if="calendar" class="year">{{ currentYear }}</span>
+        </h1>
+
+        <button v-if="calendar" class="calendar__button" @click="nextMonth"> > </button>
       </div>
       <ul class="calendar__days-of-week">
         <li class="day-name">пн</li>
@@ -22,8 +20,6 @@
       <ul class="calendar__month-list">
         <li v-for="month in year"
           class="calendar__month">
-          <transition mode="in-out"
-            enter-active-class="animated fadeIn" >
             <ul v-show="currentMonth === year.indexOf(month)"
                 :key="`${currentMonth}`"
                 class="calendar__weeks">
@@ -38,21 +34,20 @@
                 </ul>
               </li>
             </ul>
-          </transition>
         </li>
       </ul>
     </div>
 </template>
 
 <script>
-    import { createCalendar } from '../month-component/core';
+    import { createCalendar } from './core';
 
     export default {
         name: "calendar",
-        props:['month'],
+        props:['month', 'calendar'],
         data() {
             return {
-                currentMonth: this.month || this.getCurrentMonth(),
+                currentMonth: this.month >= 0 ? this.month : this.getCurrentMonth(),
                 currentYear: this.getCurrentYear(),
                 slideDirection: '',
                 namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ]
@@ -93,9 +88,11 @@
         },
         mounted() {
             hightlightCurrentDate(this.currentMonth);
+            console.warn('mounted');
         },
         updated() {
             hightlightCurrentDate(this.currentMonth);
+            console.warn('updated');
         }
     }
 
@@ -129,11 +126,12 @@
     margin: 0 auto;
 
     &__header{
+      text-align: center;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      margin: 20px 0 20px 0;
+      margin: 20px 0;
       height: 35px;
 
       button{
