@@ -5,7 +5,7 @@
         <ul  class="month-names__list">
           <li class="list__item" v-for="name in namesOfMonthes"
               v-if="currentMonth === namesOfMonthes.lastIndexOf(name)" >
-            <h1 class="month-name">{{ name }} <span class="year">2020</span></h1>
+            <h1 class="month-name">{{ name }} <span class="year">{{ currentYear }}</span></h1>
           </li>
         </ul>
         <button class="calendar__button" @click="nextMonth"> > </button>
@@ -29,6 +29,7 @@
               <li v-for="week in month" class="week">
                 <ul class="days__list">
                   <li v-for="day in week" class="day"
+                      :date-year="currentYear"
                       :data-month="day.month"
                       :data-day="day.day" >
                     {{ day.day }}
@@ -50,42 +51,19 @@
         data() {
             return {
                 currentMonth: this.getCurrentMonth(),
+                currentYear: this.getCurrentYear(),
                 slideDirection: '',
-                namesOfMonthes: [
-                    'Январь',
-                    'Февраль',
-                    'Март',
-                    'Апрель',
-                    'Май',
-                    'Июнь',
-                    'Июль',
-                    'Август',
-                    'Сентябрь',
-                    'Октябрь',
-                    'Ноябрь',
-                    'Декабрь',
-                ]
+                namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ]
             }
         },
         computed: {
-            month() {
-                return createMonth(2020, this.currentMonth);
-            },
             year(){
-                return [
-                    createMonth(2020, 0),
-                    createMonth(2020, 1),
-                    createMonth(2020, 2),
-                    createMonth(2020, 3),
-                    createMonth(2020, 4),
-                    createMonth(2020, 5),
-                    createMonth(2020, 6),
-                    createMonth(2020, 7),
-                    createMonth(2020, 8),
-                    createMonth(2020, 9),
-                    createMonth(2020, 10),
-                    createMonth(2020, 11),
-                ]
+                const result = [];
+                for (let i = 0; i < 12; ++i){
+                    result.push(createMonth(this.currentYear, i));
+                }
+                console.warn(result);
+                return result;
             }
         },
         methods:{
@@ -93,11 +71,25 @@
                 const date = new Date();
                 return date.getMonth();
             },
+            getCurrentYear(){
+                const date = new Date();
+                return date.getFullYear();
+            },
             nextMonth(){
                 this.currentMonth++;
+                if (this.currentMonth > 11){
+                    this.currentMonth = 0;
+                    this.currentYear++;
+                    console.log(this.currentMonth, this.currentYear)
+                }
             },
             prevMonth(){
                 this.currentMonth--;
+                if (this.currentMonth < 0){
+                    this.currentMonth = 11;
+                    this.currentYear--;
+                    console.log(this.currentMonth, this.currentYear)
+                }
             }
         },
         mounted() {
@@ -238,7 +230,7 @@
     }
   }
   .fade-enter-active, .fade-leave-active {
-    transition: opacity 1.5s;
+    transition: opacity .5s;
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
     opacity: 0;

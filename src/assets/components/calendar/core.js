@@ -36,8 +36,6 @@ export function createMonth(year, month) {
     currentWeek++;
     count++;
   }
-  console.warn(calendar[currentWeek], 'count: ', count);
-  console.warn(calendar[currentWeek].find( (day) => day.month === month));
   return result;
 }
 function getMonday(date) {
