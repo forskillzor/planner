@@ -1,14 +1,12 @@
 <template>
     <div class="calendar">
       <div class="calendar__header">
-        <button class="calendar__button" @click="prevMonth"> < </button>
         <ul  class="month-names__list">
           <li class="list__item" v-for="name in namesOfMonthes"
               v-if="currentMonth === namesOfMonthes.lastIndexOf(name)" >
-            <h1 class="month-name">{{ name }} <span class="year">{{ currentYear }}</span></h1>
+            <h1 class="month-name">{{ name }}</h1>
           </li>
         </ul>
-        <button class="calendar__button" @click="nextMonth"> > </button>
       </div>
       <ul class="calendar__days-of-week">
         <li class="day-name">пн</li>
@@ -45,14 +43,14 @@
 </template>
 
 <script>
-    import { createCalendar } from '../month-component/core';
+    import { createCalendar } from './core';
 
     export default {
         name: "calendar",
         props:['month'],
         data() {
             return {
-                currentMonth: this.month || this.getCurrentMonth(),
+                currentMonth: this.month,
                 currentYear: this.getCurrentYear(),
                 slideDirection: '',
                 namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ]
