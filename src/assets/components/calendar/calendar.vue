@@ -22,16 +22,15 @@
       <ul class="calendar__month-list">
         <li v-for="month in year"
           class="calendar__month">
-          <transition mode="out-in"
-            enter-active-class="animated fadeIn"
-            leave-active-class="animated fadeOut" >
-            <ul v-if="currentMonth === year.indexOf(month)"
-                :key="`${currentYear}${currentMonth}`"
+          <transition mode="in-out"
+            enter-active-class="animated fadeIn" >
+            <ul v-show="currentMonth === year.indexOf(month)"
+                :key="`${currentMonth}`"
                 class="calendar__weeks">
               <li v-for="week in month" class="week">
                 <ul class="days__list">
                   <li v-for="day in week" class="day"
-                      :date-year="currentYear"
+                      :data-year="currentYear"
                       :data-month="day.month"
                       :data-day="day.day" >
                     {{ day.day }}
@@ -103,20 +102,16 @@
         const date = new Date();
         const today = date.getDate();
         const month = date.getMonth();
+        const year = date.getFullYear();
         document.querySelectorAll('.day').forEach(day => {
-            if (parseInt(day.dataset.month) !== currentMonth){
-                day.style.color = '#777777';
-                day.style.fontWeight = '200';
-            }
-            else{
+            if (parseInt(day.dataset.month) === currentMonth){
                 day.style.color = '#000';
                 day.style.fontWeight = '400';
             }
             if (parseInt(day.dataset.day) === today
-                && parseInt(day.dataset.month) === month)
-                day.style.backgroundColor = "#d2d2d2";
-            else
-                day.style.backgroundColor = 'transparent';
+                && parseInt(day.dataset.month) === month
+                && parseInt(day.dataset.year) === year)
+                day.classList.add('today');
         });
     }
 </script>
@@ -209,10 +204,15 @@
         display: grid;
         grid-template-columns: repeat(7, 1fr);
 
+        .today{
+          background-color: #d2d2d2;
+        }
         .day {
           display: flex;
           justify-content: center;
           align-items: center;
+          color: #777777;
+          font-weight: 200;
           min-height: 30px;
           border: 1px solid transparent;
 
