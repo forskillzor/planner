@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import monthComponent from '../../components/calendar/calendar';
+  import monthComponent from '../../components/calendar/month-component';
     export default {
         name: "view-year",
         components:{

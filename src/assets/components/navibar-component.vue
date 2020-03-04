@@ -1,6 +1,6 @@
 <template>
   <aside>
-    <calendar :calendar="true"></calendar>
+    <calendar></calendar>
   </aside>
 </template>
 

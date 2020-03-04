@@ -1,46 +1,37 @@
 <template>
-    <div class="calendar">
-      <div class="calendar__header">
-        <button class="calendar__button" @click="prevMonth"> < </button>
-        <h1 class="month-name">{{ namesOfMonthes[currentMonth] }}
-          <span class="year">{{ currentYear }}</span>
-        </h1>
-
-        <button class="calendar__button" @click="nextMonth"> > </button>
-      </div>
-      <ul class="calendar__days-of-week">
-        <li class="day-name">пн</li>
-        <li class="day-name">вт</li>
-        <li class="day-name">ср</li>
-        <li class="day-name">чт</li>
-        <li class="day-name">пт</li>
-        <li class="day-name">сб</li>
-        <li class="day-name">вс</li>
-      </ul>
-      <ul class="calendar__month-list">
-        <li v-for="month in year"
+  <div class="month-component">
+    <div class="calendar__header">
+      <h1 class="month-name">{{ namesOfMonthes[currentMonth] }} </h1>
+    </div>
+    <ul class="calendar__days-of-week">
+      <li class="day-name">пн</li>
+      <li class="day-name">вт</li>
+      <li class="day-name">ср</li>
+      <li class="day-name">чт</li>
+      <li class="day-name">пт</li>
+      <li class="day-name">сб</li>
+      <li class="day-name">вс</li>
+    </ul>
+    <ul class="calendar__month-list">
+      <li v-for="month in year"
           class="calendar__month">
-            <ul v-show="currentMonth === year.indexOf(month)"
-                :key="`${currentMonth}`"
-                class="calendar__weeks">
-              <li v-for="week in month" class="week">
-                <ul class="days__list">
-                  <li v-for="day in week" class="day"
-                      :data-year="currentYear"
-                      :data-month="day.month"
-                      :data-day="day.day"
-                      :class="{'today': (day.day === date.day
-                                      && day.month === date.month
-                                      && currentYear === getCurrentYear()),
-                               'actual': day.month === currentMonth}" >
-                    {{ day.day }}
-                  </li>
-                </ul>
+        <ul v-show="currentMonth === year.indexOf(month)"
+            :key="`${currentMonth}`"
+            class="calendar__weeks">
+          <li v-for="week in month" class="week">
+            <ul class="days__list">
+              <li v-for="day in week" class="day"
+                  :data-year="currentYear"
+                  :data-month="day.month"
+                  :data-day="day.day" >
+                {{ day.day }}
               </li>
             </ul>
-        </li>
-      </ul>
-    </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -48,9 +39,10 @@
 
     export default {
         name: "calendar",
+        props: ['month'],
         data() {
             return {
-                currentMonth: this.getCurrentMonth(),
+                currentMonth: this.month,
                 currentYear: this.getCurrentYear(),
                 slideDirection: '',
                 namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ]
@@ -63,13 +55,6 @@
                     result.push(createCalendar(this.currentYear, i));
                 }
                 return result;
-            },
-            date(){
-                const date = new Date();
-                return { day: date.getDate(),
-                    month: date.getMonth(),
-                    year: date.getFullYear()
-                }
             }
         },
         methods:{
@@ -97,6 +82,7 @@
             }
         },
     }
+
 </script>
 
 <style lang="scss">
@@ -106,7 +92,7 @@
   .list{
     @include reset-list;
   }
-  .calendar {
+  .month-component {
     width: 90%;
     min-height: 300px;
     margin: 0 auto;
@@ -193,15 +179,11 @@
         .today{
           background-color: #d2d2d2;
         }
-        .actual{
-          color: $black !important;
-          font-weight: 400 !important;
-        }
         .day {
           display: flex;
           justify-content: center;
           align-items: center;
-          color: #777;
+          color: blue;
           font-weight: 200;
           min-height: 30px;
           border: 1px solid transparent;
@@ -216,6 +198,9 @@
           }
         }
       }
+    }
+    .actual{
+     color: $black;
     }
   }
 </style>
