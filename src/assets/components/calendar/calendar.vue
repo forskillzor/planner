@@ -22,10 +22,12 @@
       <ul class="calendar__month-list">
         <li v-for="month in year"
           class="calendar__month">
-          <transition name="fade" mode="out-in">
-<!--            enter-active-class="animated fadeIn"-->
-<!--            leave-active-class="animated fadeOut" >-->
-            <ul v-if="currentMonth === year.indexOf(month)" class="calendar__weeks">
+          <transition mode="out-in"
+            enter-active-class="animated fadeIn"
+            leave-active-class="animated fadeOut" >
+            <ul v-if="currentMonth === year.indexOf(month)"
+                :key="`${currentYear}${currentMonth}`"
+                class="calendar__weeks">
               <li v-for="week in month" class="week">
                 <ul class="days__list">
                   <li v-for="day in week" class="day"
@@ -44,7 +46,7 @@
 </template>
 
 <script>
-    import {createMonth} from './core';
+    import { createCalendar } from './core';
 
     export default {
         name: "calendar",
@@ -60,9 +62,8 @@
             year(){
                 const result = [];
                 for (let i = 0; i < 12; ++i){
-                    result.push(createMonth(this.currentYear, i));
+                    result.push(createCalendar(this.currentYear, i));
                 }
-                console.warn(result);
                 return result;
             }
         },
@@ -80,7 +81,6 @@
                 if (this.currentMonth > 11){
                     this.currentMonth = 0;
                     this.currentYear++;
-                    console.log(this.currentMonth, this.currentYear)
                 }
             },
             prevMonth(){
@@ -88,7 +88,6 @@
                 if (this.currentMonth < 0){
                     this.currentMonth = 11;
                     this.currentYear--;
-                    console.log(this.currentMonth, this.currentYear)
                 }
             }
         },
@@ -229,11 +228,11 @@
       }
     }
   }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-    opacity: 0;
-  }
+  /*.fade-enter-active, .fade-leave-active {*/
+  /*  transition: opacity .5s;*/
+  /*}*/
+  /*.fade-enter, .fade-leave-to !* .fade-leave-active до версии 2.1.8 *! {*/
+  /*  opacity: 0;*/
+  /*}*/
 </style>
 

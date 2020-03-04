@@ -1,6 +1,6 @@
-function createCalendar(year){
+export function createCalendar(year, month){
   const calendar = [];
-  const startYear = new Date(year, 0, 1);
+  const startYear = new Date(year, month, 1);
   const date = getMonday(startYear);
   let currentWeek = [];
 
@@ -19,24 +19,10 @@ function createCalendar(year){
     calendar.push(currentWeek);
     currentWeek = week;
   }
-  while(currentWeek[0].year === year
+  while(currentWeek[0].month === month
         ||
-        currentWeek[6].year === year);
+        currentWeek[6].month === month);
   return calendar;
-}
-export function createMonth(year, month) {
-  const result = [];
-  const calendar = createCalendar(year);
-  let count = 0;
-  let currentWeek = calendar.findIndex( (week) => {
-    return week.find( (day) => day.month === month);
-  });
-  while(calendar[currentWeek].find( (day) => day.month === month)){
-    result.push(calendar[currentWeek]);
-    currentWeek++;
-    count++;
-  }
-  return result;
 }
 function getMonday(date) {
   const dayOfWeek = date.getDay();
