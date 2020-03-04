@@ -32,7 +32,7 @@
             rect.style.top = (this.duration.start - 7) * this.hourHeight + 'px';
             rect.style.backgroundColor = this.color;
             // rect.style.opacity = 0.2 + '';
-            console.log(this.reference);
+            // console.log(this.reference);
         }
     }
 </script>

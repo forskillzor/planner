@@ -27,7 +27,10 @@ export function createCalendar(year, month){
 function getMonday(date) {
   const dayOfWeek = date.getDay();
   const result = new Date(date);
-  result.setDate(date.getDate() - dayOfWeek + 1);
+  if (!date.getDay())
+    result.setDate(date.getDate() - 6);
+  else
+    result.setDate(date.getDate() - dayOfWeek + 1);
   return result;
 }
 
