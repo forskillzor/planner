@@ -32,6 +32,7 @@
     }
     &__scroll-wrap{
       overflow-y: scroll;
+      overflow-x: hidden;
       height: 600px;
     }
   }

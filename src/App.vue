@@ -1,47 +1,64 @@
 <template>
   <div id="app">
-    <header class="header"></header>
+    <app-header class="header"></app-header>
     <div class="horizontal-wrapper">
       <navibar class="navibar"></navibar>
-<!--      <view-day></view-day>-->
-      <view-year></view-year>
-      <aside class="sidebar-right"></aside>
+      <div class="main">
+        <transition appear mode="out-in"
+                    enter-active-class="animated fadeIn"
+                    leave-active-class="animated fadeOut">
+
+          <view-day v-if="view === 'week'" key="week"></view-day>
+          <view-year v-if="view === 'year'" key="year"></view-year>
+        </transition>
+      </div>
+<!--      <aside class="sidebar-right"></aside>-->
     </div>
     <footer></footer>
   </div>
 </template>
 
 <script>
-  import viewDay from './assets/views/planner/view-day';
+  import header from './assets/components/header';
+  import viewDay from './assets/views/planner/view-week';
   import viewYear from './assets/views/planner/view-year';
   import navibar from './assets/components/navibar-component';
+  import { mapGetters } from 'vuex';
     export default {
         name: 'app',
         components: {
+            'app-header': header,
             'view-year': viewYear,
             'view-day': viewDay,
             'navibar': navibar,
         },
         data() {
             return {
-
             }
+        },
+        computed:{
+            ...mapGetters('calendar', {
+                view: 'getView',
+            })
         }
     }
 </script>
 
 <style lang="scss">
-  header{
+  .header{
     min-height: 50px;
     /*background-color: #eeeeee;*/
     border-bottom: 1px solid #e2e2e2;
   }
   .horizontal-wrapper{
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 300px 2fr ;
   }
   .navibar{
     border-right: 1px solid #e2e2e2;
+  }
+  .main{
+    overflow: hidden;
   }
   .sidebar-right{
     border-left: 1px solid #e2e2e2;

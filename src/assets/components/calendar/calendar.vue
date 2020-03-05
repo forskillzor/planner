@@ -1,23 +1,27 @@
 <template>
     <div class="calendar">
       <div v-if="mode === 'calendar'" class="calendar__header">
-        <button class="calendar__button" @click="prevMonth"> < </button>
+        <button class="calendar__button btn" @click="prevMonth"> < </button>
         <h1  class="month-name">{{ namesOfMonthes[currentMonth] }}
           <span class="year">{{ currentYear }}</span>
         </h1>
-        <button class="calendar__button" @click="nextMonth"> > </button>
+        <button class="calendar__button btn" @click="nextMonth"> > </button>
       </div>
 
       <ul class="calendar__month-list"
           :class="{'year-grid': mode === 'year'}">
-        <li v-for="month in year"
+        <li v-for="(month, index) in year"
           class="calendar__month ">
-          <ul v-show="mode ==='calendar'
+
+          <transition appear mode="out-in"
+                      enter-active-class="animated fadeIn"
+                      leave-active-class="animated fadeOut">
+          <ul v-if="mode ==='calendar'
                       && currentMonth === year.indexOf(month)
                       ||
                       mode === 'year'"
-                :key="`${currentMonth}`"
-                class="calendar__weeks">
+                          :key="index"
+             class="calendar__weeks">
 
             <h1 v-if="mode ==='year'"
                 class="month-name-year">
@@ -49,6 +53,7 @@
                 </ul>
               </li>
             </ul>
+          </transition>
         </li>
       </ul>
     </div>
@@ -130,21 +135,13 @@
       align-items: center;
       margin: 20px 0;
       height: 35px;
+    }
 
-      button{
-        border-radius: 50%;
-        border:0;
-        width: 40px;
-        height: 35px;
-        background-color: #eeeeee;
-        outline: none;
-        transition: all 200ms;
-
-        &:hover{
-          cursor: pointer;
-          background-color: #999999;
-        }
-      }
+    &__button{
+      border-radius: 50%;
+      width: 40px;
+      height: 35px;
+      transition: all 200ms;
     }
     .month-names__list{
       @include reset-list;
@@ -186,6 +183,7 @@
       min-height: 30px;
     }
     &__month-list{
+      overflow-x: hidden;
       position: relative;
       @include reset-list;
     }
@@ -231,12 +229,6 @@
           }
         }
       }
-    }
-    .absolute{
-      overflow: hidden;
-      position: absolute;
-      box-sizing: border-box;
-      width: 100%;
     }
   }
 </style>

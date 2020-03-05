@@ -8,10 +8,14 @@ export const calendar = {
     currentMonth: getCurrentMonth(),
     currentDate: getCurrentDate(),
     getSelectedMonth: getCurrentMonth(),
+    view: '',
   },
   mutations:{
     setYear(state, payload){
       state.year = payload;
+    },
+    setView(state, payload){
+      state.view = payload;
     }
   },
   getters:{
@@ -29,12 +33,18 @@ export const calendar = {
     },
     getSelectedMonth(state){
       return state.selectedMonth;
+    },
+    getView(state){
+      return state.view;
     }
 
   },
   actions:{
     setYear(context, payload){
       context.commit('setYear', payload);
+    },
+    setView(context, payload){
+      context.commit('setView', payload);
     }
 
   }
