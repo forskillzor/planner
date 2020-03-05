@@ -1,28 +1,39 @@
 <template>
     <div class="calendar">
-      <div class="calendar__header">
+      <div v-if="mode === 'calendar'" class="calendar__header">
         <button class="calendar__button" @click="prevMonth"> < </button>
-        <h1 class="month-name">{{ namesOfMonthes[currentMonth] }}
+        <h1  class="month-name">{{ namesOfMonthes[currentMonth] }}
           <span class="year">{{ currentYear }}</span>
         </h1>
-
         <button class="calendar__button" @click="nextMonth"> > </button>
       </div>
-      <ul class="calendar__days-of-week">
-        <li class="day-name">пн</li>
-        <li class="day-name">вт</li>
-        <li class="day-name">ср</li>
-        <li class="day-name">чт</li>
-        <li class="day-name">пт</li>
-        <li class="day-name">сб</li>
-        <li class="day-name">вс</li>
-      </ul>
-      <ul class="calendar__month-list">
+
+      <ul class="calendar__month-list"
+          :class="{'year-grid': mode === 'year'}">
         <li v-for="month in year"
-          class="calendar__month">
-            <ul v-show="currentMonth === year.indexOf(month)"
+          class="calendar__month ">
+          <ul v-show="mode ==='calendar'
+                      && currentMonth === year.indexOf(month)
+                      ||
+                      mode === 'year'"
                 :key="`${currentMonth}`"
                 class="calendar__weeks">
+
+            <h1 v-if="mode ==='year'"
+                class="month-name-year">
+              {{ namesOfMonthes[year.indexOf(month)] }}
+            </h1>
+
+            <ul class="calendar__days-of-week">
+              <li class="day-name">пн</li>
+              <li class="day-name">вт</li>
+              <li class="day-name">ср</li>
+              <li class="day-name">чт</li>
+              <li class="day-name">пт</li>
+              <li class="day-name">сб</li>
+              <li class="day-name">вс</li>
+            </ul>
+
               <li v-for="week in month" class="week">
                 <ul class="days__list">
                   <li v-for="day in week" class="day"
@@ -32,7 +43,7 @@
                       :class="{'today': (day.day === date.day
                                       && day.month === date.month
                                       && currentYear === getCurrentYear()),
-                               'actual': day.month === currentMonth}" >
+                               'actual': day.month === year.indexOf(month)}" >
                     {{ day.day }}
                   </li>
                 </ul>
@@ -48,11 +59,11 @@
 
     export default {
         name: "calendar",
+        props:['mode'],
         data() {
             return {
                 currentMonth: this.getCurrentMonth(),
                 currentYear: this.getCurrentYear(),
-                slideDirection: '',
                 namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ]
             }
         },
@@ -157,6 +168,9 @@
         font-size: 18px;
       }
     }
+    .month-name-year{
+      text-align: center;
+    }
     .day-name {
       display: flex;
       justify-content: center;
@@ -175,12 +189,13 @@
       position: relative;
       @include reset-list;
     }
+    .year-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+    }
     &__month{
       @include reset-list;
-      overflow: hidden;
-      position: absolute;
-      box-sizing: border-box;
-      width: 100%;
     }
     &__weeks {
       @include reset-list;
@@ -216,6 +231,12 @@
           }
         }
       }
+    }
+    .absolute{
+      overflow: hidden;
+      position: absolute;
+      box-sizing: border-box;
+      width: 100%;
     }
   }
 </style>

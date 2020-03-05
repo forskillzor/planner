@@ -4,30 +4,21 @@
       <h1>2020 год</h1>
     </div>
     <div class="scroll-area">
-      <div class="year-calendar">
-        <month :month="0"></month>
-        <month :month="1"></month>
-        <month :month="2"></month>
-        <month :month="3"></month>
-        <month :month="4"></month>
-        <month :month="5"></month>
-        <month :month="6"></month>
-        <month :month="7"></month>
-        <month :month="8"></month>
-        <month :month="9"></month>
-        <month :month="10"></month>
-        <month :month="11"></month>
-      </div>
+      <calendar mode="year"></calendar>
     </div>
   </div>
 </template>
 
 <script>
-  import monthComponent from '../../components/calendar/month-component';
+  import calendar from '../../components/calendar/calendar';
     export default {
         name: "view-year",
         components:{
-            'month': monthComponent,
+            'calendar': calendar,
+        },
+        data(){
+            return {
+            }
         }
     }
 </script>

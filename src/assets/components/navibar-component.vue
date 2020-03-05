@@ -1,6 +1,6 @@
 <template>
   <aside>
-    <calendar></calendar>
+    <calendar mode="calendar"></calendar>
   </aside>
 </template>
 
