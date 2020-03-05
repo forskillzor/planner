@@ -44,7 +44,7 @@
 </template>
 
 <script>
-    import { createCalendar } from './core';
+    import { createMonth } from './core';
 
     export default {
         name: "calendar",
@@ -60,7 +60,7 @@
             year(){
                 const result = [];
                 for (let i = 0; i < 12; ++i){
-                    result.push(createCalendar(this.currentYear, i));
+                    result.push(createMonth(this.currentYear, i));
                 }
                 return result;
             },

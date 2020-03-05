@@ -1,4 +1,10 @@
-export function createCalendar(year, month){
+export function createYear(year){
+  const result = [];
+  for(let i = 0; i < 12; ++i)
+    result.push(createMonth(year, i));
+  return result;
+}
+export function createMonth(year, month){
   const calendar = [];
   const startYear = new Date(year, month, 1);
   const date = getMonday(startYear);

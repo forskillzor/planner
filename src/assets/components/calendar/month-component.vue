@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    import { createCalendar } from './core';
+    import { createMonth } from './core';
 
     export default {
         name: "calendar",

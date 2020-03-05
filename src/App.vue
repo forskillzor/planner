@@ -4,7 +4,7 @@
     <div class="horizontal-wrapper">
       <navibar class="navibar"></navibar>
 <!--      <view-day></view-day>-->
-      <view-year></view-year>
+<!--      <view-year></view-year>-->
       <aside class="sidebar-right"></aside>
     </div>
     <footer></footer>
