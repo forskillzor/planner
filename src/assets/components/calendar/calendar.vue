@@ -86,7 +86,7 @@
                     month: date.getMonth(),
                     year: date.getFullYear()
                 }
-            }
+            },
         },
         methods:{
             getCurrentMonth(){

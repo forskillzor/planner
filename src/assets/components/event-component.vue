@@ -1,6 +1,7 @@
 <template>
-  <li :class="'event' + index" class="rectangle"
-      @mouseover.stop="showToolTip">
+  <li class="rectangle"
+      :class="[{ 'selected': isSelected }, 'event' + index]"
+      @click="isSelected = !isSelected">
     <p class="event__title">{{title}}</p>
   </li>
 
@@ -12,6 +13,7 @@
         props: ['duration', 'color', 'reference', 'title', 'index', 'hourHeight'],
         data() {
             return {
+                isSelected: false,
             }
         },
         methods:{
@@ -45,15 +47,24 @@
 <style lang="scss">
   .rectangle{
     display: block;
+    width: 100%;
     box-sizing: border-box;
     border: 2px solid rgba(255, 255, 255, 1);
     /*border: 2px solid rgba(119, 119, 119, 0.5);*/
-    /*border-radius: 5px;*/
+    border-radius: 15px;
     padding: 10px;
+    opacity: 0.8;
+    position:absolute;
+    &:hover{
+      opacity: 1;
+    }
   }
   .event__title{
     color: #000;
     margin: 0;
     font-size: 14px;
+  }
+  .selected{
+    border: 2px solid rgb(255, 98, 113);
   }
 </style>

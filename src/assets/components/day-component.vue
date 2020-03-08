@@ -158,12 +158,5 @@
     margin: 0;
     top: 0;
     left: 0;
-
-    .event{
-      box-sizing: border-box;
-      width: 100%;
-      opacity: 0.8;
-      position:absolute;
-    }
   }
 </style>
