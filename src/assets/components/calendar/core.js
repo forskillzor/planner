@@ -1,3 +1,20 @@
+export function createCalendar(year) {
+  const result = [];
+  const date = new Date(year, 0, 1);
+
+  while (date.getFullYear() === year){
+    result.push({
+      year: date.getFullYear(),
+      month: date.getMonth(),
+      day: date.getDate(),
+      dayOfWeek: date.getDay(),
+      event: [],
+      todo: [],
+    });
+    incDate(date);
+  }
+  return result;
+}
 export function createYear(year){
   const result = [];
   for(let i = 0; i < 12; ++i)
@@ -17,8 +34,9 @@ export function createMonth(year, month){
       const year = date.getFullYear();
       const month = date.getMonth();
       const day = date.getDate();
+      const dayOfWeek = date.getDay();
 
-      week.push({ year, month, day });
+      week.push({ year, month, day, dayOfWeek });
 
       incDate(date);
     }

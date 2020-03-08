@@ -1,4 +1,5 @@
 import { createYear } from "../../components/calendar/core";
+import { createCalendar } from "../../components/calendar/core";
 import weekView from '../../views/planner/view-week';
 import yearView from '../../views/planner/view-year';
 
@@ -6,6 +7,7 @@ export const calendar = {
   namespaced: true,
   state:{
     year: createYear(2020),
+    calendar: createCalendar(2020),
     currentYear: getCurrentYear(),
     currentMonth: getCurrentMonth(),
     currentDate: getCurrentDate(),

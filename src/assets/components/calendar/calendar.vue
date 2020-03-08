@@ -7,21 +7,20 @@
         </h1>
         <button class="calendar__button btn" @click="nextMonth"> > </button>
       </div>
-
       <ul class="calendar__month-list"
           :class="{'year-grid': mode === 'year'}">
+        <!-- TODO extract month -->
         <li v-for="(month, index) in year"
-          class="calendar__month ">
-          <!-- TODO move class to computed -->
+        class="calendar__month ">
           <transition appear mode="out-in"
-                      enter-active-class="animated fadeIn"
-                      leave-active-class="animated fadeOut">
+                    enter-active-class="animated fadeIn"
+                    leave-active-class="animated fadeOut">
           <ul v-if="mode ==='calendar'
                       && currentMonth === year.indexOf(month)
                       ||
                       mode === 'year'"
-                          :key="index"
-             class="calendar__weeks">
+              :key="index"
+              class="calendar__weeks">
 
             <h1 v-if="mode ==='year'"
                 class="month-name-year">
@@ -38,22 +37,22 @@
               <li class="day-name">вс</li>
             </ul>
 
-              <li v-for="week in month" class="week">
-                <ul class="days__list">
-                  <li v-for="day in week" class="day"
-                      :data-year="currentYear"
-                      :data-month="day.month"
-                      :data-day="day.day"
-                      :class="{'today': (day.day === date.day
+            <li v-for="week in month" class="week">
+              <ul class="days__list">
+                <li v-for="day in week" class="day"
+                    :data-year="currentYear"
+                    :data-month="day.month"
+                    :data-day="day.day"
+                    :class="{'today': (day.day === date.day
                                       && day.month === date.month
                                       && currentYear === getCurrentYear()),
                                'actual': day.month === year.indexOf(month)}" >
-                    {{ day.day }}
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </transition>
+                  {{ day.day }}
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </transition>
         </li>
       </ul>
     </div>
