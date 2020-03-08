@@ -45,16 +45,10 @@
 
                 <!-- TODO extract day -->
 
-                <li v-for="day in week" class="day"
-                    :data-year="day.year"
-                    :data-month="day.month"
-                    :data-day="day.day"
-                    :class="{'today': (day.day === current.day
-                                      && day.month === current.month
-                                      && day.year === current.year),
-                               'actual': day.month === yearModel.indexOf(month)}" >
-                  {{ day.day }}
-                </li>
+                <day v-for="day in week" class="day"
+                     :day="day"
+                     :year="yearModel">
+                </day>
               </ul>
             </li>
           </ul>
@@ -73,10 +67,14 @@
 
     import { mapGetters } from 'vuex';
     import { mapActions } from 'vuex';
+    import dayComponent from '../../components/calendar/day-component';
 
     export default {
         name: "calendar",
         props:['mode'],
+        components: {
+            'day': dayComponent,
+        },
         data() {
             return {
                 namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ],
