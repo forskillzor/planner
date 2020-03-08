@@ -5,11 +5,10 @@
       :data-day="day.day"
       :class="{'today': (day.day === current.day
                       && day.month === current.month
-                      && day.year === current.year) }">
-<!--    'actual': day.month === year.indexOf(month)}">-->
+                      && day.year === current.year),
+              'actual': day.month === year.indexOf(month)}">
     {{ day.day }}
   </li>
-
 </template>
 
 <script>
@@ -19,10 +18,9 @@
         getCurrentDate
     } from "./core";
     import { mapGetters } from 'vuex';
-    import { mapActions } from 'vuex';
     export default {
         name: "day-component",
-        props: ['day', 'year'],
+        props: ['day', 'year', 'month'],
         data(){
             return{
             }

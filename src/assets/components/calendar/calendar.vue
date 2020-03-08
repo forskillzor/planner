@@ -42,12 +42,10 @@
 
             <li v-for="week in month" class="week">
               <ul class="days__list">
-
-                <!-- TODO extract day -->
-
                 <day v-for="day in week" class="day"
-                     :day="day"
-                     :year="yearModel">
+                     :year="yearModel"
+                     :month="month"
+                     :day="day">
                 </day>
               </ul>
             </li>
