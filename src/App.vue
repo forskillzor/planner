@@ -7,12 +7,9 @@
         <transition appear mode="out-in"
                     enter-active-class="animated fadeIn"
                     leave-active-class="animated fadeOut">
-
-          <view-day v-if="view === 'week'" key="week"></view-day>
-          <view-year v-if="view === 'year'" key="year"></view-year>
+          <component :is="view"></component>
         </transition>
       </div>
-<!--      <aside class="sidebar-right"></aside>-->
     </div>
     <footer></footer>
   </div>
@@ -20,7 +17,7 @@
 
 <script>
   import header from './assets/components/header';
-  import viewDay from './assets/views/planner/view-week';
+  import viewWeek from './assets/views/planner/view-week';
   import viewYear from './assets/views/planner/view-year';
   import navibar from './assets/components/navibar-component';
   import { mapGetters } from 'vuex';
@@ -29,11 +26,12 @@
         components: {
             'app-header': header,
             'view-year': viewYear,
-            'view-day': viewDay,
+            'view-week': viewWeek,
             'navibar': navibar,
         },
         data() {
             return {
+                currentView: viewWeek,
             }
         },
         computed:{

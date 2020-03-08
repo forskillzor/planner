@@ -1,4 +1,6 @@
 import { createYear } from "../../components/calendar/core";
+import weekView from '../../views/planner/view-week';
+import yearView from '../../views/planner/view-year';
 
 export const calendar = {
   namespaced: true,
@@ -8,14 +10,15 @@ export const calendar = {
     currentMonth: getCurrentMonth(),
     currentDate: getCurrentDate(),
     getSelectedMonth: getCurrentMonth(),
-    view: '',
+    view: weekView,
   },
   mutations:{
     setYear(state, payload){
       state.year = payload;
     },
     setView(state, payload){
-      state.view = payload;
+      if (payload)
+        state.view = views[payload];
     }
   },
   getters:{
@@ -60,4 +63,9 @@ function getCurrentMonth() {
 function getCurrentDate() {
   const date = new Date();
   return date.getDate();
+}
+
+const views = {
+  'week': weekView,
+  'year': yearView,
 }

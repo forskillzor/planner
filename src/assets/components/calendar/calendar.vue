@@ -12,7 +12,7 @@
           :class="{'year-grid': mode === 'year'}">
         <li v-for="(month, index) in year"
           class="calendar__month ">
-
+          <!-- TODO move class to computed -->
           <transition appear mode="out-in"
                       enter-active-class="animated fadeIn"
                       leave-active-class="animated fadeOut">
