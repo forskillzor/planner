@@ -15,6 +15,7 @@
 <script>
     export default {
         name: "day-component",
+        props: ['day'],
         data(){
             return{
 
