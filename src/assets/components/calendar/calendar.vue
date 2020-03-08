@@ -1,22 +1,23 @@
 <template>
     <div class="calendar">
       <div v-if="mode === 'calendar'" class="calendar__header">
+        <!-- TODO fix caledar buttons -->
         <button class="calendar__button btn" @click="prevMonth"> < </button>
-        <h1  class="month-name">{{ namesOfMonthes[currentMonth] }}
-          <span class="year">{{ currentYear }}</span>
+        <h1  class="month-name">{{ namesOfMonthes[activeMonth] }}
+          <span class="year">{{ activeYear }}</span>
         </h1>
         <button class="calendar__button btn" @click="nextMonth"> > </button>
       </div>
       <ul class="calendar__month-list"
           :class="{'year-grid': mode === 'year'}">
         <!-- TODO extract month -->
-        <li v-for="(month, index) in year"
+        <li v-for="(month, index) in yearModel"
         class="calendar__month ">
           <transition appear mode="out-in"
                     enter-active-class="animated fadeIn"
                     leave-active-class="animated fadeOut">
           <ul v-if="mode ==='calendar'
-                      && currentMonth === year.indexOf(month)
+                      && activeMonth === yearModel.indexOf(month)
                       ||
                       mode === 'year'"
               :key="index"
@@ -24,7 +25,7 @@
 
             <h1 v-if="mode ==='year'"
                 class="month-name-year">
-              {{ namesOfMonthes[year.indexOf(month)] }}
+              {{ namesOfMonthes[yearModel.indexOf(month)] }}
             </h1>
 
             <ul class="calendar__days-of-week">
@@ -37,16 +38,21 @@
               <li class="day-name">вс</li>
             </ul>
 
+            <!-- TODO extract week -->
+
             <li v-for="week in month" class="week">
               <ul class="days__list">
+
+                <!-- TODO extract day -->
+
                 <li v-for="day in week" class="day"
-                    :data-year="currentYear"
+                    :data-year="day.year"
                     :data-month="day.month"
                     :data-day="day.day"
-                    :class="{'today': (day.day === date.day
-                                      && day.month === date.month
-                                      && currentYear === getCurrentYear()),
-                               'actual': day.month === year.indexOf(month)}" >
+                    :class="{'today': (day.day === current.day
+                                      && day.month === current.month
+                                      && day.year === current.year),
+                               'actual': day.month === yearModel.indexOf(month)}" >
                   {{ day.day }}
                 </li>
               </ul>
@@ -59,55 +65,55 @@
 </template>
 
 <script>
-    import { createMonth } from './core';
+    import {
+        getCurrentYear,
+        getCurrentMonth,
+        getCurrentDate
+    } from "./core";
+
+    import { mapGetters } from 'vuex';
+    import { mapActions } from 'vuex';
 
     export default {
         name: "calendar",
         props:['mode'],
         data() {
             return {
-                currentMonth: this.getCurrentMonth(),
-                currentYear: this.getCurrentYear(),
-                namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ]
+                namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ],
+                activeMonth: getCurrentMonth(),
+                activeYear: getCurrentYear(),
             }
         },
         computed: {
-            year(){
-                const result = [];
-                for (let i = 0; i < 12; ++i){
-                    result.push(createMonth(this.currentYear, i));
-                }
-                return result;
-            },
-            date(){
+            ...mapGetters('calendar', {
+                yearModel: 'getYear',
+                year: 'getCurrentYear',
+                month: 'getCurrentMonth',
+                day: 'getCurrentDate'
+            }),
+            current(){
                 const date = new Date();
-                return { day: date.getDate(),
+                return {
+                    day: date.getDate(),
                     month: date.getMonth(),
                     year: date.getFullYear()
                 }
             },
         },
         methods:{
-            getCurrentMonth(){
-                const date = new Date();
-                return date.getMonth();
-            },
-            getCurrentYear(){
-                const date = new Date();
-                return date.getFullYear();
-            },
+            ...mapActions('calendar', ['setYear']),
             nextMonth(){
-                this.currentMonth++;
-                if (this.currentMonth > 11){
-                    this.currentMonth = 0;
-                    this.currentYear++;
+                this.activeMonth++;
+                if (this.activeMonth > 11){
+                    this.activeMonth = 0;
+                    this.setYear(++this.activeYear);
                 }
             },
             prevMonth(){
-                this.currentMonth--;
-                if (this.currentMonth < 0){
-                    this.currentMonth = 11;
-                    this.currentYear--;
+                this.activeMonth--;
+                if (this.activeMonth < 0){
+                    this.activeMonth = 11;
+                    this.setYear(--this.activeYear);
                 }
             }
         },

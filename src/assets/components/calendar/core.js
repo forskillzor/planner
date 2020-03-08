@@ -1,3 +1,15 @@
+export function getCurrentYear() {
+  const date = new Date();
+  return date.getFullYear();
+}
+export function getCurrentMonth() {
+  const date = new Date();
+  return date.getMonth();
+}
+export function getCurrentDate() {
+  const date = new Date();
+  return date.getDate();
+}
 export function createCalendar(year) {
   const result = [];
   const date = new Date(year, 0, 1);
@@ -61,3 +73,4 @@ function getMonday(date) {
 function incDate(date){
   date.setDate(date.getDate() + 1);
 }
+

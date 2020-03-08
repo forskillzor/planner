@@ -15,8 +15,8 @@ export const calendar = {
     view: weekView,
   },
   mutations:{
-    setYear(state, payload){
-      state.year = payload;
+    setYear(state, year){
+      state.year = createYear(year);
     },
     setView(state, payload){
       if (payload)
@@ -45,8 +45,8 @@ export const calendar = {
 
   },
   actions:{
-    setYear(context, payload){
-      context.commit('setYear', payload);
+    setYear(context, year){
+      context.commit('setYear', year);
     },
     setView(context, payload){
       context.commit('setView', payload);
