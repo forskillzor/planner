@@ -13,42 +13,11 @@
 
         <!-- TODO extract month -->
 
-        <transition-group appear mode="out-in"
-                    enter-active-class="animated fadeIn"
-                    leave-active-class="animated fadeOut">
-          <li v-for="(month, index) in yearModel"
-                      :key="'month' + index"
-                      class="calendar__month ">
-            <ul v-if="mode ==='calendar'
-                        && activeMonth === yearModel.indexOf(month)
-                        ||
-                        mode === 'year'"
-                :key="index"
-                class="calendar__weeks">
-
-              <h1 v-if="mode ==='year'"
-                  class="month-name-year">
-                {{ namesOfMonthes[yearModel.indexOf(month)] }}
-              </h1>
-
-              <ul class="calendar__days-of-week">
-                                                  <li class="day-name">пн</li>
-                                                  <li class="day-name">вт</li>
-                                                  <li class="day-name">ср</li>
-                                                  <li class="day-name">чт</li>
-                                                  <li class="day-name">пт</li>
-                                                  <li class="day-name">сб</li>
-                                                  <li class="day-name">вс</li>
-                                                  </ul>
-
-              <week v-for="(week, index) in month"
-                    class="week"
-                    :key="'week' + index"
-                    :week="week">
-              </week>
-            </ul>
-          </li>
-        </transition-group>
+          <month class="calendar__month " v-for="(month, index) in yearModel"
+                      :mode="mode"
+                      :month="month"
+                      :key="'month' + index">
+          </month>
       </ul>
     </div>
 </template>
@@ -57,13 +26,12 @@
     import { mapGetters } from 'vuex';
     import { mapActions } from 'vuex';
     import monthComponent from '../../components/calendar/month-component';
-    import weekComponent from '../../components/calendar/week-component';
 
     export default {
         name: "calendar",
         props:['mode'],
         components: {
-            'week': weekComponent,
+            'month': monthComponent,
         },
         data() {
             return {

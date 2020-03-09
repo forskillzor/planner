@@ -1,5 +1,5 @@
 <template>
-  <li class="calendar__month ">
+  <li >
     <ul class="calendar__weeks"
         v-if="mode ==='calendar'
             && activeMonth === yearModel.indexOf(month)
@@ -37,8 +37,14 @@
 
     export default {
         name: "month-component",
+        props:['mode', 'month'],
         components: {
             'week': weekComponent,
+        },
+        data(){
+            return{
+                namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ],
+            }
         },
         computed:{
             ...mapGetters('calendar', {
