@@ -23,7 +23,7 @@ export const calendar = {
     },
 
     setView(state, view) {
-      if (view)
+      if (views[view])
         state.view = views[view];
     },
 

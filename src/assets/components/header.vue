@@ -33,6 +33,7 @@
 
 <style lang="scss">
   @import '../style/core/variables';
+
   .header__wrap{
   }
   .toolbar{
@@ -52,5 +53,4 @@
       background-color: #91baff;
     }
   }
-
 </style>
