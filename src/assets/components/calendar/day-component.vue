@@ -6,7 +6,7 @@
       :class="{'today': (day.day === current.day
                       && day.month === current.month
                       && day.year === current.year),
-              'actual': day.month === year.indexOf(month)}">
+              'actual': day.month === model.indexOf(month)}">
     {{ day.day }}
   </li>
 </template>
@@ -20,7 +20,7 @@
     import { mapGetters } from 'vuex';
     export default {
         name: "day-component",
-        props: ['day', 'year', 'month'],
+        props: ['day', 'model', 'month'],
         data(){
             return{
             }

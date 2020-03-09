@@ -43,7 +43,7 @@
             <li v-for="week in month" class="week">
               <ul class="days__list">
                 <day v-for="day in week" class="day"
-                     :year="yearModel"
+                     :model="yearModel"
                      :month="month"
                      :day="day">
                 </day>
