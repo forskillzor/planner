@@ -17,7 +17,9 @@
                   :hour="hour">
             </hour>
           </ul>
+
           <!-- TODO change from props to slot or object -->
+
           <ul class="events__list">
             <event  v-for="(event, index) in events" class="event"
                     :index="index"
