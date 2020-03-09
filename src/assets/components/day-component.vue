@@ -22,12 +22,9 @@
 
           <ul class="events__list">
             <event  v-for="(event, index) in events" class="event"
-                    :index="index"
                     :hourHeight="hourHeight"
-                    :title="event.title"
-                    :duration="event.duration"
-                    :color="event.color"
-                    :reference="this"
+                    :event="event"
+                    :dayRef="this"
                     :key="'event' + index">
             </event>
           </ul>
@@ -38,6 +35,7 @@
 <script>
   import hourComponent from './hour-component';
   import eventComponent from './events/event-component';
+  import { mapGetters } from 'vuex';
     export default {
         name: "view-day",
         components: {
@@ -48,47 +46,13 @@
             return {
                 hours: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
                 hourHeight: 50,
-                events: [
-                    {
-                        title: 'Совещание',
-                        id: '23jfi3iowfio2',
-                        color: '#ff96b9',
-                        duration: {
-                            start: 9,
-                            end: 11,
-                        }
-                    },
-                    {
-                        title: 'Презентация!',
-                        id: 'd23fid93fd',
-                        color: '#cb97ff',
-                        duration: {
-                            start: 12,
-                            end: 15,
-                        }
-                    },
-                    {
-                        title: 'Ужин!',
-                        id: 'dfj3990j3',
-                        color: '#7aff7f',
-                        duration: {
-                            start: 15,
-                            end: 17,
-                        }
-                    },
-                    {
-                        title: 'Сон!',
-                        id: 'dfj3990dfj3',
-                        color: '#7aff7f',
-                        duration: {
-                            start: 20,
-                            end: 22,
-                        }
-                    },
-
-                ]
             }
-        }
+        },
+        computed:{
+            ...mapGetters('events', {
+                events: 'getEvents',
+            })
+        },
     }
 </script>
 

@@ -1,8 +1,8 @@
 <template>
   <li class="rectangle"
-      :class="[{ 'selected': isSelected }, 'event' + index]"
+      :class="[{ 'selected': isSelected }, 'event-' + event.id]"
       @click="isSelected = !isSelected">
-    <p class="event__title">{{title}}</p>
+    <p class="event__title">{{event.title}}</p>
   </li>
 
 </template>
@@ -10,42 +10,36 @@
 <script>
     export default {
         name: "event-component",
-        props: ['duration', 'color', 'reference', 'title', 'index', 'hourHeight'],
+        props: ['event', 'dayRef', 'hourHeight'],
         data() {
             return {
                 isSelected: false,
             }
         },
-        methods:{
-            showToolTip(){
+        methods: {
+            showToolTip() {
                 console.log('TOOLTIP!');
             }
 
         },
-        computed: {
-            height() {
-                return (this.duration.end - this.duration.start) * this.hourHeight;
-            }
-        },
+        computed: {},
         mounted() {
-            const rect = document.querySelectorAll('.event' + this.index);
-            rect.forEach((item)=>{
-                item.style.height = this.height + 'px';
-                item.style.top = (this.duration.start - 7) * this.hourHeight + 'px';
-                item.style.backgroundColor = this.color;
-            });
+            const rect = document.querySelector('.event-' + this.event.id);
+            rect.style.height = ((this.event.duration.end - this.event.duration.start) * this.hourHeight) + 'px';
+            rect.style.top = (this.event.duration.start - 7) * this.hourHeight + 'px';
+            rect.style.backgroundColor = this.event.color;
         },
-        updated(){
+        updated() {
             const rect = document.querySelector('.event' + this.index);
-            rect.style.height = this.height + 'px';
-            rect.style.top = (this.duration.start - 7) * this.hourHeight + 'px';
-            rect.style.backgroundColor = this.color;
+            rect.style.height = ((this.event.duration.end - this.event.duration.start) * this.hourHeight) + 'px';
+            rect.style.top = (this.event.duration.start - 7) * this.hourHeight + 'px';
+            rect.style.backgroundColor = this.event.color;
         }
     }
 </script>
 
 <style lang="scss">
-  .rectangle{
+  .rectangle {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -54,17 +48,20 @@
     border-radius: 15px;
     padding: 10px;
     opacity: 0.8;
-    position:absolute;
-    &:hover{
+    position: absolute;
+
+    &:hover {
       opacity: 1;
     }
   }
-  .event__title{
+
+  .event__title {
     color: #000;
     margin: 0;
     font-size: 14px;
   }
-  .selected{
+
+  .selected {
     border: 2px solid rgb(255, 98, 113);
   }
 </style>

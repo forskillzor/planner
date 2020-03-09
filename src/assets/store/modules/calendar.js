@@ -13,9 +13,40 @@ export const calendar = {
     currentYear: getCurrentYear(),
     currentMonth: getCurrentMonth(),
     currentDate: getCurrentDate(),
+    hours: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
+    hourHeight: 50,
     getSelectedMonth: getCurrentMonth(),
     namesOfMonth: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',],
     view: weekView,
+  },
+  getters: {
+    getYear(state) {
+      return state.year;
+    },
+    getCurrentYear(state) {
+      return state.currentYear;
+    },
+    getCurrentMonth(state) {
+      return state.currentMonth;
+    },
+    getCurrentDate(state) {
+      return state.currentDate;
+    },
+    getView(state) {
+      return state.view;
+    },
+    getViewName(state) {
+      return state.view.name
+    },
+    getCalendarViewCurrentMonth(state) {
+      return state.calendarViewCurrentMonth;
+    },
+    getCalendarViewCurrentYear(state) {
+      return state.calendarViewCurrentYear;
+    },
+    getNamesOfMonth(state) {
+      return state.namesOfMonth;
+    }
   },
   mutations: {
     setYear(state, year) {
@@ -49,35 +80,6 @@ export const calendar = {
 
     setCalendarViewCurrentYear(state, year) {
       state.calendarViewCurrentYear = year;
-    }
-  },
-  getters: {
-    getYear(state) {
-      return state.year;
-    },
-    getCurrentYear(state) {
-      return state.currentYear;
-    },
-    getCurrentMonth(state) {
-      return state.currentMonth;
-    },
-    getCurrentDate(state) {
-      return state.currentDate;
-    },
-    getView(state) {
-      return state.view;
-    },
-    getViewName(state) {
-      return state.view.name
-    },
-    getCalendarViewCurrentMonth(state) {
-      return state.calendarViewCurrentMonth;
-    },
-    getCalendarViewCurrentYear(state) {
-      return state.calendarViewCurrentYear;
-    },
-    getNamesOfMonth(state) {
-      return state.namesOfMonth;
     }
   },
   actions: {
