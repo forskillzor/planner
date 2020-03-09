@@ -10,7 +10,9 @@
       </div>
       <ul class="calendar__month-list"
           :class="{'year-grid': mode === 'year'}">
+
         <!-- TODO extract month -->
+
         <li v-for="(month, index) in yearModel"
         class="calendar__month ">
           <transition appear mode="out-in"
