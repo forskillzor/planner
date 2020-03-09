@@ -4,22 +4,46 @@
       <h1>2020 год</h1>
     </div>
     <div class="scroll-area">
-      <calendar mode="year"></calendar>
+      <div class="calendar year-grid">
+        <month class="calendar__month " v-for="(month, index) in yearModel"
+               mode="year"
+               :month="month"
+               :key="'month' + index">
+          <h2 slot="monthName"
+              class="month-name">{{ namesOfMonth[index]}}</h2>
+        </month>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import calendar from '../../components/calendar/calendar';
+  import { mapGetters } from 'vuex';
+  import { mapActions } from 'vuex';
+  import monthComponent from '../../components/calendar/month-component';
     export default {
         name: "view-year",
         components:{
-            'calendar': calendar,
+            'month': monthComponent,
         },
         data(){
             return {
             }
-        }
+        },
+        computed: {
+            ...mapGetters('calendar', {
+                activeYear: 'getCalendarViewCurrentYear',
+                activeMonth: 'getCalendarViewCurrentMonth',
+                yearModel: 'getYear',
+                namesOfMonth: 'getNamesOfMonth'
+            }),
+        },
+        methods:{
+            ...mapActions('calendar', {
+                nextMonth: 'setCalendarNextMonth',
+                prevMonth: 'setCalendarPrevMonth',
+            }),
+        },
     }
 </script>
 
@@ -40,5 +64,11 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .year-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
   }
 </style>

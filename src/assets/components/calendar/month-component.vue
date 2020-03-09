@@ -1,15 +1,8 @@
 <template>
   <li >
-    <ul class="calendar__weeks"
-        v-if="mode ==='calendar'
-            && activeMonth === yearModel.indexOf(month)
-            ||
-            mode === 'year'" >
+    <ul class="calendar__weeks">
 
-      <h2 v-if="mode ==='year'"
-          class="month-name-year">
-        {{ namesOfMonthes[yearModel.indexOf(month)] }}
-      </h2>
+      <slot v-if="mode === 'year'" name="monthName"></slot>
 
       <ul class="calendar__days-of-week">
         <li class="day-name">пн</li>
@@ -43,7 +36,6 @@
         },
         data(){
             return{
-                namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ],
             }
         },
         computed:{
@@ -57,5 +49,67 @@
 </script>
 
 <style lang="scss">
+  @import '../../style/core/mixins';
+  @import '../../style/core/variables';
 
+  .calendar{
+
+    .month-name-year{
+      text-align: center;
+    }
+
+    .day-name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      margin-bottom: 0;
+      background-color: #eeeeee;
+    }
+
+    &__days-of-week {
+      @include reset-list;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      min-height: 30px;
+    }
+
+    &__weeks {
+      @include reset-list;
+
+      .days__list {
+        @include reset-list;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+
+        .today {
+          background-color: #d2d2d2;
+        }
+
+        .actual {
+          color: $black !important;
+          font-weight: 400 !important;
+        }
+
+        .day {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #777;
+          font-weight: 200;
+          min-height: 30px;
+          border: 1px solid transparent;
+
+          &:hover {
+            cursor: pointer;
+            border: 1px solid #d2d2d2;
+          }
+
+          &:active {
+            background-color: #ff96b9;
+          }
+        }
+      }
+    }
+  }
 </style>

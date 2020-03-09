@@ -14,6 +14,7 @@ export const calendar = {
     currentMonth: getCurrentMonth(),
     currentDate: getCurrentDate(),
     getSelectedMonth: getCurrentMonth(),
+    namesOfMonth: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ],
     view: weekView,
   },
   mutations:{
@@ -63,9 +64,6 @@ export const calendar = {
     getCurrentDate(state){
       return state.currentDate;
     },
-    getSelectedMonth(state){
-      return state.selectedMonth;
-    },
     getView(state){
       return state.view;
     },
@@ -74,8 +72,10 @@ export const calendar = {
     },
     getCalendarViewCurrentYear(state) {
       return state.calendarViewCurrentYear;
+    },
+    getNamesOfMonth(state){
+      return state.namesOfMonth;
     }
-
   },
   actions:{
     setYear(context, year){
