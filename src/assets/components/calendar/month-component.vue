@@ -1,9 +1,6 @@
 <template>
-  <li >
     <ul class="calendar__weeks">
-
       <slot v-if="mode === 'year'" name="monthName"></slot>
-
       <ul class="calendar__days-of-week">
         <li class="day-name">пн</li>
         <li class="day-name">вт</li>
@@ -13,14 +10,12 @@
         <li class="day-name">сб</li>
         <li class="day-name">вс</li>
       </ul>
-
       <week v-for="(week, index) in month"
             class="week"
             :key="'week' + index"
             :week="week">
       </week>
     </ul>
-  </li>
 
 </template>
 
