@@ -43,12 +43,13 @@ export function createMonth(year, month){
     const week = [];
 
     for(let i = 0; i < 7; ++i){
-      const year = date.getFullYear();
-      const month = date.getMonth();
-      const day = date.getDate();
-      const dayOfWeek = date.getDay();
-
-      week.push({ year, month, day, dayOfWeek });
+      week.push({
+        year: date.getFullYear(),
+        month: date.getMonth(),
+        day: date.getDate(),
+        dayOfWeek: date.getDay(),
+        currentMonth: month,
+      });
 
       incDate(date);
     }

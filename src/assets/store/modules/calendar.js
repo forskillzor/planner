@@ -8,6 +8,8 @@ export const calendar = {
   state:{
     year: createYear(2020),
     calendar: createCalendar(2020),
+    calendarViewCurrentMonth: getCurrentMonth(),
+    calendarViewCurrentYear: getCurrentYear(),
     currentYear: getCurrentYear(),
     currentMonth: getCurrentMonth(),
     currentDate: getCurrentDate(),
@@ -18,9 +20,34 @@ export const calendar = {
     setYear(state, year){
       state.year = createYear(year);
     },
+
     setView(state, payload){
       if (payload)
         state.view = views[payload];
+    },
+
+    setCalendarViewCurrentMonth(state, inc){
+      state.calendarViewCurrentMonth += inc;
+    },
+
+    setCalendarNextMonth(state){
+      state.calendarViewCurrentMonth++;
+      if (state.calendarViewCurrentMonth > 11){
+        state.calendarViewCurrentMonth = 0;
+        state.calendarViewCurrentYear++;
+      }
+    },
+
+    setCalendarPrevMonth(state){
+      state.calendarViewCurrentMonth--;
+      if (state.calendarViewCurrentMonth < 0){
+        state.calendarViewCurrentMonth = 11;
+        state.calendarViewCurrentYear--;
+      }
+    },
+
+    setCalendarViewCurrentYear(state, year){
+      state.calendarViewCurrentYear = year;
     }
   },
   getters:{
@@ -41,6 +68,12 @@ export const calendar = {
     },
     getView(state){
       return state.view;
+    },
+    getCalendarViewCurrentMonth(state){
+      return state.calendarViewCurrentMonth;
+    },
+    getCalendarViewCurrentYear(state) {
+      return state.calendarViewCurrentYear;
     }
 
   },
@@ -50,8 +83,19 @@ export const calendar = {
     },
     setView(context, payload){
       context.commit('setView', payload);
+    },
+    setCalendarViewCurrentMonth(context, inc) {
+      context.commit('setCalendarViewCurrentMonth', inc)
+    },
+    setCalendarViewCurrentYear(context, year) {
+      context.commit('setCalendarViewCurrentYear', year)
+    },
+    setCalendarNextMonth(context){
+      context.commit('setCalendarNextMonth');
+    },
+    setCalendarPrevMonth(context){
+      context.commit('setCalendarPrevMonth');
     }
-
   }
 };
 function getCurrentYear() {

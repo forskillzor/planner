@@ -38,17 +38,11 @@
               <li class="day-name">вс</li>
             </ul>
 
-            <!-- TODO extract week -->
-
-            <li v-for="week in month" class="week">
-              <ul class="days__list">
-                <day v-for="day in week" class="day"
-                     :model="yearModel"
-                     :month="month"
-                     :day="day">
-                </day>
-              </ul>
-            </li>
+            <week v-for="(week, index) in month"
+                  class="week"
+                  :key="'week' + index"
+                  :week="week">
+            </week>
           </ul>
         </transition>
         </li>
@@ -65,53 +59,35 @@
 
     import { mapGetters } from 'vuex';
     import { mapActions } from 'vuex';
+    import weekComponent from '../../components/calendar/week-component';
     import dayComponent from '../../components/calendar/day-component';
 
     export default {
         name: "calendar",
         props:['mode'],
         components: {
-            'day': dayComponent,
+            'week': weekComponent,
         },
         data() {
             return {
                 namesOfMonthes: [ 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь', ],
-                activeMonth: getCurrentMonth(),
-                activeYear: getCurrentYear(),
             }
         },
         computed: {
             ...mapGetters('calendar', {
+                activeYear: 'getCalendarViewCurrentYear',
+                activeMonth: 'getCalendarViewCurrentMonth',
                 yearModel: 'getYear',
                 year: 'getCurrentYear',
                 month: 'getCurrentMonth',
                 day: 'getCurrentDate'
             }),
-            current(){
-                const date = new Date();
-                return {
-                    day: date.getDate(),
-                    month: date.getMonth(),
-                    year: date.getFullYear()
-                }
-            },
         },
         methods:{
-            ...mapActions('calendar', ['setYear']),
-            nextMonth(){
-                this.activeMonth++;
-                if (this.activeMonth > 11){
-                    this.activeMonth = 0;
-                    this.setYear(++this.activeYear);
-                }
-            },
-            prevMonth(){
-                this.activeMonth--;
-                if (this.activeMonth < 0){
-                    this.activeMonth = 11;
-                    this.setYear(--this.activeYear);
-                }
-            }
+            ...mapActions('calendar', {
+                nextMonth: 'setCalendarNextMonth',
+                prevMonth: 'setCalendarPrevMonth',
+            }),
         },
     }
 </script>
