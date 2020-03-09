@@ -13,56 +13,51 @@
 
         <!-- TODO extract month -->
 
-        <li v-for="(month, index) in yearModel"
-        class="calendar__month ">
-          <transition appear mode="out-in"
+        <transition-group appear mode="out-in"
                     enter-active-class="animated fadeIn"
                     leave-active-class="animated fadeOut">
-          <ul v-if="mode ==='calendar'
-                      && activeMonth === yearModel.indexOf(month)
-                      ||
-                      mode === 'year'"
-              :key="index"
-              class="calendar__weeks">
+          <li v-for="(month, index) in yearModel"
+                      :key="'month' + index"
+                      class="calendar__month ">
+            <ul v-if="mode ==='calendar'
+                        && activeMonth === yearModel.indexOf(month)
+                        ||
+                        mode === 'year'"
+                :key="index"
+                class="calendar__weeks">
 
-            <h1 v-if="mode ==='year'"
-                class="month-name-year">
-              {{ namesOfMonthes[yearModel.indexOf(month)] }}
-            </h1>
+              <h1 v-if="mode ==='year'"
+                  class="month-name-year">
+                {{ namesOfMonthes[yearModel.indexOf(month)] }}
+              </h1>
 
-            <ul class="calendar__days-of-week">
-              <li class="day-name">пн</li>
-              <li class="day-name">вт</li>
-              <li class="day-name">ср</li>
-              <li class="day-name">чт</li>
-              <li class="day-name">пт</li>
-              <li class="day-name">сб</li>
-              <li class="day-name">вс</li>
+              <ul class="calendar__days-of-week">
+                                                  <li class="day-name">пн</li>
+                                                  <li class="day-name">вт</li>
+                                                  <li class="day-name">ср</li>
+                                                  <li class="day-name">чт</li>
+                                                  <li class="day-name">пт</li>
+                                                  <li class="day-name">сб</li>
+                                                  <li class="day-name">вс</li>
+                                                  </ul>
+
+              <week v-for="(week, index) in month"
+                    class="week"
+                    :key="'week' + index"
+                    :week="week">
+              </week>
             </ul>
-
-            <week v-for="(week, index) in month"
-                  class="week"
-                  :key="'week' + index"
-                  :week="week">
-            </week>
-          </ul>
-        </transition>
-        </li>
+          </li>
+        </transition-group>
       </ul>
     </div>
 </template>
 
 <script>
-    import {
-        getCurrentYear,
-        getCurrentMonth,
-        getCurrentDate
-    } from "./core";
-
     import { mapGetters } from 'vuex';
     import { mapActions } from 'vuex';
+    import monthComponent from '../../components/calendar/month-component';
     import weekComponent from '../../components/calendar/week-component';
-    import dayComponent from '../../components/calendar/day-component';
 
     export default {
         name: "calendar",
@@ -80,9 +75,6 @@
                 activeYear: 'getCalendarViewCurrentYear',
                 activeMonth: 'getCalendarViewCurrentMonth',
                 yearModel: 'getYear',
-                year: 'getCurrentYear',
-                month: 'getCurrentMonth',
-                day: 'getCurrentDate'
             }),
         },
         methods:{

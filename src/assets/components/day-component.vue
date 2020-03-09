@@ -35,7 +35,7 @@
 
 <script>
   import hourComponent from './hour-component';
-  import eventComponent from './event-component';
+  import eventComponent from './events/event-component';
     export default {
         name: "view-day",
         components: {
