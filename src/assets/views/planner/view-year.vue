@@ -5,15 +5,14 @@
     </div>
     <div class="scroll-area">
       <ul class="calendar year-grid">
-        <li v-for="(month, index) in yearModel">
-          <month class="calendar__month "
-                 mode="year"
-                 :month="month"
-                 :key="'month' + index">
-            <h2 slot="monthName"
-                class="month-name">{{ namesOfMonth[index]}}</h2>
-          </month>
-        </li>
+        <month v-for="(month, index) in yearModel"
+                class="calendar__month"
+                mode="year"
+                :month="month"
+                :key="'month' + index">
+          <h2 slot="monthName"
+              class="month-name">{{ namesOfMonth[index]}}</h2>
+        </month>
       </ul>
     </div>
   </div>

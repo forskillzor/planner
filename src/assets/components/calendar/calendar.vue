@@ -11,15 +11,13 @@
     <ul class="calendar__month-list">
       <transition appear mode="out-in"
         enter-active-class="animated fadeIn"
-        leave-active-class="animated fadeOut">
+        leave-active-class="animated faster fadeOut">
         <template v-for="(month, index) in yearModel">
-          <li v-if="index === activeMonth"
-              :key="'month' + index">
-            <month class="calendar__month"
+            <month v-if="index === activeMonth"
+                   :key="'month' + index"
                    :mode="mode"
                    :month="month" >
             </month>
-          </li>
         </template>
       </transition>
     </ul>

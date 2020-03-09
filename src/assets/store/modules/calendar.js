@@ -22,9 +22,9 @@ export const calendar = {
       state.year = createYear(year);
     },
 
-    setView(state, payload) {
-      if (payload)
-        state.view = views[payload];
+    setView(state, view) {
+      if (view)
+        state.view = views[view];
     },
 
     setCalendarViewCurrentMonth(state, inc) {
@@ -66,6 +66,9 @@ export const calendar = {
     },
     getView(state) {
       return state.view;
+    },
+    getViewName(state) {
+      return state.view.name
     },
     getCalendarViewCurrentMonth(state) {
       return state.calendarViewCurrentMonth;
@@ -117,4 +120,4 @@ function getCurrentDate() {
 const views = {
   'week': weekView,
   'year': yearView,
-}
+};

@@ -6,7 +6,7 @@
       <div class="main">
         <transition appear mode="out-in"
                     enter-active-class="animated fadeIn"
-                    leave-active-class="animated fadeOut">
+                    leave-active-class="animated faster fadeOut">
           <component :is="view"></component>
         </transition>
       </div>

@@ -13,7 +13,7 @@
 <script>
   import dayComponent from '../../components/day-component';
     export default {
-        name: "week-view",
+        name: "view-week",
         components: {
             day: dayComponent,
         },

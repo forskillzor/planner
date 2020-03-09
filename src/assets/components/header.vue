@@ -3,13 +3,13 @@
     <div class="toolbar">
       <button class="toolbar__button btn" >Сегодня</button>
       <button class="toolbar__button btn"
-              :class="{'btn--active': getView === 'week'}"
+              :class="{'btn--active': getViewName === 'view-week'}"
         @click="setView('week')">Неделя</button>
       <button class="toolbar__button btn"
-              :class="{'btn--active': getView === 'month'}"
+              :class="{'btn--active': getViewName === 'month'}"
         @click="setView('month')">Месяц</button>
       <button class="toolbar__button btn"
-              :class="{'btn--active': getView === 'year'}"
+              :class="{'btn--active': getViewName === 'view-year'}"
         @click="setView('year')">Год</button>
     </div>
   </div>
@@ -19,14 +19,14 @@
   import { mapActions } from 'vuex';
   import { mapGetters } from 'vuex';
     export default {
-        name: "header",
+        name: "app-header",
         methods:{
             ...mapActions('calendar',
             ['setView'])
         },
         computed:{
             ...mapGetters('calendar',
-                ['getView'])
+                ['getViewName'])
         }
     }
 </script>
@@ -47,6 +47,9 @@
 
     &__button{
       min-width: 90px;
+    }
+    .btn--active{
+      background-color: #91baff;
     }
   }
 
