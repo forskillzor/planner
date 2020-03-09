@@ -1,7 +1,6 @@
 <template>
     <div class="calendar">
       <div v-if="mode === 'calendar'" class="calendar__header">
-        <!-- TODO fix caledar buttons -->
         <button class="calendar__button btn" @click="prevMonth"> < </button>
         <h1  class="month-name">{{ namesOfMonth[activeMonth] }}
           <span class="year">{{ activeYear }}</span>
@@ -9,7 +8,7 @@
         <button class="calendar__button btn" @click="nextMonth"> > </button>
       </div>
 
-
+      <!-- TODO  add sliding to calendar -->
 
       <ul class="calendar__month-list" >
           <month class="calendar__month " v-for="(month, index) in yearModel"
