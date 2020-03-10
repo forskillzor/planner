@@ -4,13 +4,10 @@
     <div class="horizontal-wrapper">
       <navibar class="navibar"></navibar>
       <div class="main">
-
-        <!-- TODO replace component to router -->
-
         <transition appear mode="out-in"
                     enter-active-class="animated fadeIn"
                     leave-active-class="animated faster fadeOut">
-          <component :is="view"></component>
+          <router-view></router-view>
         </transition>
       </div>
     </div>

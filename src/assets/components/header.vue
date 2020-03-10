@@ -1,16 +1,22 @@
 <template>
   <div class="header__wrap">
     <div class="toolbar">
-      <button class="toolbar__button btn" >Сегодня</button>
-      <button class="toolbar__button btn"
-              :class="{'btn--active': getViewName === 'view-week'}"
-        @click="setView('week')">Неделя</button>
-      <button class="toolbar__button btn"
-              :class="{'btn--active': getViewName === 'month'}"
-        @click="setView('month')">Месяц</button>
-      <button class="toolbar__button btn"
-              :class="{'btn--active': getViewName === 'view-year'}"
-        @click="setView('year')">Год</button>
+      <router-link tag="button"
+                   class="toolbar__button btn"
+                   active-class="btn--active"
+                   :to="{name: 'today'}" >Сегодня</router-link>
+      <router-link tag="button"
+                   class="toolbar__button btn"
+                   active-class="btn--active"
+                   :to="{name: 'week'}">Неделя</router-link>
+      <router-link tag="button"
+                   class="toolbar__button btn"
+                   active-class="btn--active"
+                   :to="{name: 'month'}">Месяц</router-link>
+      <router-link tag="button"
+                   class="toolbar__button btn"
+                   active-class="btn--active"
+                   :to="{name: 'year'}" >Год</router-link>
     </div>
   </div>
 </template>
