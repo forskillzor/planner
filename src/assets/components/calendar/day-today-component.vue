@@ -43,7 +43,6 @@
         created(){
             this.hourHeight = this.$router.currentRoute.name === 'month'?
                 10 : 50;
-            console.log('created day-component');
         }
     }
 </script>

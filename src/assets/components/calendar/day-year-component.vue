@@ -44,9 +44,6 @@
                 }
             },
         },
-        created() {
-            console.log(this.day.actual);
-        }
     }
 </script>
 
