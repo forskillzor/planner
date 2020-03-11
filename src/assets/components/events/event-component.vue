@@ -1,5 +1,5 @@
 <template>
-  <li class="rectangle"
+  <li @mousemove="drag" class="rectangle"
       :class="[{ 'selected': isSelected }, 'event-' + event.id]"
       @click="isSelected = !isSelected">
     <p class="event__title">{{event.title}}</p>
@@ -19,8 +19,10 @@
         methods: {
             showToolTip() {
                 console.log('TOOLTIP!');
-            }
+            },
+            drag(e){
 
+            }
         },
         computed: {},
         mounted() {

@@ -10,8 +10,6 @@
                 mode="year"
                 :month="month"
                 :key="'month' + index">
-          <h2 slot="monthName"
-              class="month-name">{{ namesOfMonth[index]}}</h2>
         </month>
       </ul>
     </div>

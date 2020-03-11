@@ -1,15 +1,11 @@
 <template>
   <li class="calendar__month">
-      <slot v-if="mode === 'year'" name="monthName"></slot>
-      <ul class="calendar__days-of-week">
-        <li class="day-name">пн</li>
-        <li class="day-name">вт</li>
-        <li class="day-name">ср</li>
-        <li class="day-name">чт</li>
-        <li class="day-name">пт</li>
-        <li class="day-name">сб</li>
-        <li class="day-name">вс</li>
-      </ul>
+    <h2 v-if="mode === 'year'" class="month-name">{{ dayName }}</h2>
+    <ul class="calendar__days-of-week">
+      <li v-for="dayName in dayNames" class="day-name">
+        <span>{{ dayName }}</span>
+      </li>
+    </ul>
     <ul class="calendar__weeks">
       <week v-for="(week, index) in month"
             class="week"
@@ -21,25 +17,30 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
-  import weekComponent from './week-component';
+    import {mapGetters} from 'vuex';
+    import weekComponent from './week-component';
 
     export default {
         name: "month-component",
-        props:['mode', 'month'],
+        props: ['mode', 'month'],
         components: {
             'week': weekComponent,
         },
-        data(){
-            return{
+        data() {
+            return {
+                dayNames: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
             }
         },
-        computed:{
+        computed: {
             ...mapGetters('calendar', {
                 yearModel: 'getYear',
                 activeYear: 'getCalendarViewCurrentYear',
                 activeMonth: 'getCalendarViewCurrentMonth',
-            })
+                monthNames: 'getNamesOfMonth',
+            }),
+            dayName(){
+                return (this.monthNames[this.yearModel.indexOf(this.month)]);
+            },
         }
     }
 </script>
@@ -48,9 +49,9 @@
   @import '../../style/core/mixins';
   @import '../../style/core/variables';
 
-  .calendar{
+  .calendar {
 
-    .month-name-year{
+    .month-name-year {
       text-align: center;
     }
 

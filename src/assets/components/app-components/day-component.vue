@@ -18,7 +18,7 @@
             </hour>
           </ul>
           <ul class="events__list">
-            <event  v-for="(event, index) in events" class="event"
+            <event v-for="(event, index) in events" class="event"
                     :hourHeight="hourHeight"
                     :event="event"
                     :dayRef="this"
@@ -31,7 +31,7 @@
 
 <script>
   import hourComponent from './hour-component';
-  import eventComponent from './events/event-component';
+  import eventComponent from '../events/event-component';
   import { mapGetters } from 'vuex';
     export default {
         name: "view-day",

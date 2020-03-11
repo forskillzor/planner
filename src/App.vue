@@ -16,10 +16,10 @@
 </template>
 
 <script>
-  import header from './assets/components/header';
+  import header from './assets/components/app-components/header';
   import viewWeek from './assets/views/planner/view-week';
   import viewYear from './assets/views/planner/view-year';
-  import navibar from './assets/components/navibar-component';
+  import navibar from './assets/components/app-components/navibar-component';
   import { mapGetters } from 'vuex';
     export default {
         name: 'app',

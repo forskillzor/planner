@@ -46,7 +46,10 @@ export const calendar = {
     },
     getNamesOfMonth(state) {
       return state.namesOfMonth;
-    }
+    },
+    getMonthDataModel(state) {
+      return state.year[state.currentMonth];
+    },
   },
   mutations: {
     setYear(state, year) {

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import dayComponent from '../../components/day-component';
+  import dayComponent from '../../components/app-components/day-component';
     export default {
         name: "view-week",
         components: {

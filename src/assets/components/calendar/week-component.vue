@@ -1,7 +1,7 @@
 <template>
   <li class="week">
     <ul class="days__list">
-      <day v-for="(day, index) in week" :key="'day' + index" class="day"
+      <day v-for="(day, index) in week" :key="'day' + index"
            :yearModel="yearModel"
            :month="month"
            :day="day">
