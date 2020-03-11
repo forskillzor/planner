@@ -1,8 +1,10 @@
 <template>
-  <li class="day"
+  <li class="day-view"
       :data-year="day.year"
       :data-month="day.month"
       :data-day="day.day"
+      :data-day-of-week="day.dayOfWeek"
+      :data-actual="day.actual"
       :data-current-month="day.currentMonth"
       :class="{'today': (day.day === current.day
                       && day.month === current.month
@@ -42,6 +44,9 @@
                 }
             },
         },
+        created() {
+            console.log(this.day.actual);
+        }
     }
 </script>
 

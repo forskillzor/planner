@@ -11,11 +11,11 @@
 </template>
 
 <script>
-  import dayComponent from '../../components/calendar/day-component';
+  import dayViewComponent from '../../components/calendar/day-today-component';
     export default {
         name: "view-week",
         components: {
-            day: dayComponent,
+            'day': dayViewComponent,
         },
         data(){
             return {

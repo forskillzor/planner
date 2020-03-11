@@ -7,7 +7,9 @@
         <transition appear mode="out-in"
                     enter-active-class="animated fadeIn"
                     leave-active-class="animated faster fadeOut">
-          <router-view></router-view>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
         </transition>
       </div>
     </div>

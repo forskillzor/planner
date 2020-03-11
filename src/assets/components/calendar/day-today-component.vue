@@ -1,16 +1,6 @@
 <template>
-    <div class="day">
-      <div class="day__header">
-        <p class="day-number">26</p>
-        <div class="date__wrapper">
-          <p class="date__month">Февраля</p>
-          <p class="date__day-of-week">Суббота</p>
-        </div>
-      </div><!-- ./header -->
-      <div class="day__category">
-        <p class="category--text">категория: Работа</p>
-      </div>
-        <div class="hours__wrapper">
+    <div class="day-view">
+      <div class="hours__wrapper">
           <ul v-for="hour in hours" class="hours__list">
             <hour class="hour"
                   :hourHeight="hourHeight"
@@ -50,6 +40,11 @@
                 events: 'getEvents',
             })
         },
+        created(){
+            this.hourHeight = this.$router.currentRoute.name === 'month'?
+                10 : 50;
+            console.log('created day-component');
+        }
     }
 </script>
 
@@ -60,7 +55,7 @@
   .week{
     display: flex;
   }
-  .day{
+  .day-view{
     margin: 0;
   }
   p{color: #4d4d4d;}

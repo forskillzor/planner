@@ -43,12 +43,16 @@ export function createMonth(year, month){
     const week = [];
 
     for(let i = 0; i < 7; ++i){
+      const currentMonth = getCurrentMonth();
+      const actual = (month === currentMonth);
       week.push({
         year: date.getFullYear(),
         month: date.getMonth(),
         day: date.getDate(),
-        dayOfWeek: date.getDay(),
+        dayOfWeek: i,
         currentMonth: month,
+        actual: actual,
+        // actual: this.month === month,
       });
 
       incDate(date);

@@ -1,23 +1,36 @@
 <template>
   <li class="week">
     <ul class="days__list">
-      <day v-for="(day, index) in week" :key="'day' + index"
-           :yearModel="yearModel"
-           :month="month"
-           :day="day">
-      </day>
+        <component :is="currentView"
+             v-for="(day, index) in week"
+             :key="'day' + index"
+             :yearModel="yearModel"
+             :month="month"
+             :day="day">
+        </component>
     </ul>
   </li>
 </template>
 
 <script>
-  import dayComponent from './day-small-component';
+  import dayYearComponent from './day-year-component';
+  import dayTodayComponent from './day-today-component';
+  import dayMonthComponent from './day-month-component';
     export default {
         name: "week-component",
-        props: ['yearModel', 'month', 'week'],
+        props: ['mode', 'yearModel', 'month', 'week'],
         components:{
-            'day': dayComponent,
+        },
+        data(){
+            return {
+                currentView: dayTodayComponent,
+            }
+        },
+        created() {
+            this.currentView = this.$router.currentRoute.name === 'month'
+                && this.mode !== 'calendar'? dayMonthComponent : dayYearComponent;
         }
+
     }
 </script>
 

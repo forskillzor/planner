@@ -9,6 +9,7 @@
     <ul class="calendar__weeks">
       <week v-for="(week, index) in month"
             class="week"
+            :mode="mode"
             :key="'week' + index"
             :week="week">
       </week>
@@ -90,7 +91,7 @@
           font-weight: 400 !important;
         }
 
-        .day {
+        .day-view {
           display: flex;
           justify-content: center;
           align-items: center;
