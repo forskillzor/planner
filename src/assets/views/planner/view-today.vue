@@ -1,10 +1,16 @@
 <template>
-  <h1 style="text-align: center">Компонент в разработке</h1>
+  <div class="">
+    <day-component></day-component>
+  </div>
 </template>
 
 <script>
+  import dayComponent from '../../components/calendar/day-component';
     export default {
-        name: "view-today"
+        name: "view-today",
+        components: {
+            'day-component': dayComponent,
+        }
     }
 </script>
 

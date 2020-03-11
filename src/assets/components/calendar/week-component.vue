@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import dayComponent from './day-component';
+  import dayComponent from './day-small-component';
     export default {
         name: "week-component",
         props: ['yearModel', 'month', 'week'],

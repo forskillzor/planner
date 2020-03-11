@@ -64,7 +64,6 @@
   }
 
   .calendar {
-    width: 90%;
     min-height: 300px;
     margin: 0 auto;
     overflow: hidden;

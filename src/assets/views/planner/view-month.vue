@@ -1,6 +1,5 @@
 <template>
   <div class="month-component">
-    <h1 style="text-align: center">Компонент в разработке</h1>
     <month-component
       :mode="'year'"
       :month="month">
@@ -26,14 +25,20 @@
 
 <style lang="scss">
   .month-component{
+    .month-name{
+      font-size: 34px;
+      font-weight: 400;
+    }
     .day-name {
       display: flex;
-      text-align: center;
+      justify-content: center;
+      align-items: center ;
+      font-size: 16px;
+      font-weight: 400;
       background-color: #eee;
-      align-content: center;
     }
     .day{
-      height: 50px;
+      height: 100px;
       border: 1px solid #d2d2d2;
     }
   }

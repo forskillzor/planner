@@ -54,9 +54,11 @@
   }
   .navibar{
     border-right: 1px solid #e2e2e2;
+    padding: 20px;
   }
   .main{
     overflow: hidden;
+    padding: 20px;
   }
   .sidebar-right{
     border-left: 1px solid #e2e2e2;

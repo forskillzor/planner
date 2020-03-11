@@ -55,6 +55,8 @@
       text-align: center;
     }
 
+    &__month{ }
+
     .day-name {
       display: flex;
       justify-content: center;
