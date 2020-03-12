@@ -9,20 +9,20 @@
         >
       </event-editor>
     </transition>
-    <div class="hours__wrapper">
-      <ul v-for="hour in hours" class="hours__list"
+    <ul class="hours__list">
+      <li v-for="hour in hours" class="hour" :style="{height: hourHeight + 'px'}"
           @mousedown="setStartDate"
           @mouseup="setEndDate"
       >
 
-
+        <div class="hour__time">{{ hour }}</div>
         <!-- TODO replace implementation from component to regular layout -->
 
-        <hour class="hour"
-              :hourHeight="hourHeight"
-              :hour="hour">
-        </hour>
-      </ul>
+<!--        <hour class="hour"-->
+<!--              :hourHeight="hourHeight"-->
+<!--              :hour="hour">-->
+<!--        </hour>-->
+      </li>
 
       <!-- TODO fix this @handlers propagation -->
 
@@ -32,12 +32,11 @@
              :dayRef="this"
              :key="'event' + index">
       </event>
-    </div>
+    </ul>
   </div>
 </template>
 
 <script>
-    import hourComponent from '../app-components/hour-component';
     import eventComponent from '../events/event-component';
     import eventEditor from '../modals/event-editor';
     import {mapGetters} from 'vuex';
@@ -45,7 +44,6 @@
     export default {
         name: "view-day",
         components: {
-            'hour': hourComponent,
             'event': eventComponent,
             'event-editor': eventEditor,
         },
@@ -91,6 +89,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import '../../style/core/mixins.scss';
   h1 {
     text-align: center;
   }
@@ -151,19 +150,24 @@
     overflow-x: hidden;
   }
 
-  .hours__wrapper {
-    position: relative;
-  }
-
   .hours__list {
-    box-sizing: border-box;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    position: relative;
+    @include reset-list;
 
-    li.hour {
+    .hour{
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      margin: 0;
+      background-color: #fff;
       box-sizing: border-box;
-      border-top: 1px solid #dfdfdf;
+      border-top: 1px solid #e2e2e2;
+
+      &__time{
+        color: #4d4d4d;
+        font-size: 18px;
+        padding: 5px 5px 0 20px;
+      }
     }
   }
 
