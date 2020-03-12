@@ -17,29 +17,10 @@ export const events = {
         id: 'd23fid93fd',
         color: '#cb97ff',
         duration: {
-          start: 12,
-          end: 15,
-        }
-      },
-      {
-        title: 'Ужин!',
-        id: 'dfj3990j3',
-        color: '#7aff7f',
-        duration: {
           start: 15,
-          end: 17,
+          end: 16,
         }
       },
-      {
-        title: 'Сон!',
-        id: 'dfj3990dfj3',
-        color: '#7aff7f',
-        duration: {
-          start: 20,
-          end: 22,
-        }
-      },
-
     ]
   },
   getters: {
@@ -48,9 +29,13 @@ export const events = {
     }
   },
   mutations: {
-
+    addEvent(state, event){
+      state.events.push(event);
+    },
   },
   actions: {
-
+    addEvent(context, event){
+      context.commit('addEvent', event)
+    }
   }
 };

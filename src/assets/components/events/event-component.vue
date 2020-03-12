@@ -1,9 +1,10 @@
 <template>
-  <li @mousemove="drag" class="rectangle"
-      :class="[{ 'selected': isSelected }, 'event-' + event.id]"
-      @click="isSelected = !isSelected">
+  <div @mousemove.stop="drag" class="rectangle"
+      :class="{ 'selected': isSelected }"
+       :id="'event-' + event.id"
+      @click.stop="isSelected = !isSelected">
     <p class="event__title">{{event.title}}</p>
-  </li>
+  </div>
 
 </template>
 
@@ -20,22 +21,23 @@
             showToolTip() {
                 console.log('TOOLTIP!');
             },
+            // TODO make implementation of drag and drop
             drag(e){
-
             }
         },
         computed: {},
         mounted() {
-            const rect = document.querySelector('.event-' + this.event.id);
+            const rect = document.querySelector('#event-' + this.event.id);
             rect.style.height = ((this.event.duration.end - this.event.duration.start) * this.hourHeight) + 'px';
             rect.style.top = (this.event.duration.start - 7) * this.hourHeight + 'px';
             rect.style.backgroundColor = this.event.color;
         },
         updated() {
-            const rect = document.querySelector('.event' + this.index);
-            rect.style.height = ((this.event.duration.end - this.event.duration.start) * this.hourHeight) + 'px';
-            rect.style.top = (this.event.duration.start - 7) * this.hourHeight + 'px';
-            rect.style.backgroundColor = this.event.color;
+            // TODO update of event component fix error ( style of null )
+            // const rect = document.querySelector('.event' + this.index);
+            // rect.style.height = ((this.event.duration.end - this.event.duration.start) * this.hourHeight) + 'px';
+            // rect.style.top = (this.event.duration.start - 7) * this.hourHeight + 'px';
+            // rect.style.backgroundColor = this.event.color;
         }
     }
 </script>

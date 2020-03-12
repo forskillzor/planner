@@ -14,32 +14,3 @@
   outline: 1px solid slategrey;
 }
 
-.btn{
-  box-sizing: border-box;
-  height: 30px;
-  border-radius: 5px;
-  outline:none;
-  background-color: $button-color;
-  border:0;
-
-  &:hover{
-    cursor:pointer;
-    background-color: darken($button-color, 5);
-  }
-  &:active{
-    background-color: darken($button-color, 10);
-  }
-}
-.btn--active{
-  background-color: $button-active-color;
-
-  &:hover{
-    cursor:pointer;
-    background-color: darken($button-active-color, 5);
-  }
-
-  &:active{
-    background-color: darken($button-active-color, 10);
-  }
-
-}

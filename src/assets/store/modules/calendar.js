@@ -13,7 +13,7 @@ export const calendar = {
     currentYear: getCurrentYear(),
     currentMonth: getCurrentMonth(),
     currentDate: getCurrentDate(),
-    hours: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
+    hoursList: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
     hourHeight: 50,
     getSelectedMonth: getCurrentMonth(),
     namesOfMonth: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',],
@@ -50,6 +50,10 @@ export const calendar = {
     getMonthDataModel(state) {
       return state.year[state.currentMonth];
     },
+    getHoursList(state){
+      console.log('getter ok');
+      return state.hoursList;
+    }
   },
   mutations: {
     setYear(state, year) {

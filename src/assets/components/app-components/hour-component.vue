@@ -1,12 +1,6 @@
 <template>
   <li class="hour">
     <div class="hour__time">{{ hour }}</div>
-    <ul class="hour__timeline">
-<!--      <li class="timeline__item">-->
-<!--        <p class="minutes">:15</p>-->
-<!--        <p class="content">dfd</p>-->
-<!--      </li>-->
-    </ul>
   </li>
 </template>
 
