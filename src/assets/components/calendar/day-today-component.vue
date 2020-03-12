@@ -15,6 +15,7 @@
           @mouseup="setEndDate"
       >
 
+
         <!-- TODO replace implementation from component to regular layout -->
 
         <hour class="hour"
