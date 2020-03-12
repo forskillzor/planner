@@ -1,5 +1,6 @@
 <template>
-  <li class="day-view"
+  <li @click="changeCurrentDate"
+      class="day-view"
       :data-year="day.year"
       :data-month="day.month"
       :data-day="day.day"
@@ -15,12 +16,9 @@
 </template>
 
 <script>
-    import {
-        getCurrentYear,
-        getCurrentMonth,
-        getCurrentDate
-    } from "./core";
+    import { getCurrentMonth } from "./core";
     import { mapGetters } from 'vuex';
+    import { mapActions } from 'vuex';
     export default {
         name: "day-component",
         props: ['day', 'month'],
@@ -28,12 +26,16 @@
             return{
             }
         },
+        methods: {
+            ...mapActions('calendar', ['setCurrentDate']),
+            changeCurrentDate(){
+                console.log(this.day)
+                // this.setCurrentDate()
+            }
+        },
         computed: {
             ...mapGetters('calendar', {
-                yearModel: 'getYear',
-                currentYear: 'getCurrentYear',
                 currentMonth: 'getCurrentMonth',
-                currentDate: 'getCurrentDate'
             }),
             current(){
                 const date = new Date();

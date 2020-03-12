@@ -1,23 +1,22 @@
 import {createYear} from "../../components/calendar/core";
 import {createCalendar} from "../../components/calendar/core";
-import weekView from '../../views/planner/view-week';
-import yearView from '../../views/planner/view-year';
 
 export const calendar = {
   namespaced: true,
   state: {
     year: createYear(2020),
     calendar: createCalendar(2020),
-    calendarViewCurrentMonth: getCurrentMonth(),
-    calendarViewCurrentYear: getCurrentYear(),
-    currentYear: getCurrentYear(),
-    currentMonth: getCurrentMonth(),
+    calendarViewCurrentMonth: getCurrentDate().month,
+    calendarViewCurrentYear: getCurrentDate().year,
+    currentYear: getCurrentDate().year,
+    currentMonth: getCurrentDate().month,
+    currentDay: getCurrentDate().day,
+    currentDayOfWeek: getCurrentDate.dayOfWeek,
     currentDate: getCurrentDate(),
     hoursList: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
     hourHeight: 50,
-    getSelectedMonth: getCurrentMonth(),
+    getSelectedMonth: getCurrentDate().month,
     namesOfMonth: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',],
-    view: weekView,
   },
   getters: {
     getYear(state) {
@@ -29,14 +28,11 @@ export const calendar = {
     getCurrentMonth(state) {
       return state.currentMonth;
     },
-    getCurrentDate(state) {
+    getCurrentDay(state) {
       return state.currentDate;
     },
-    getView(state) {
-      return state.view;
-    },
-    getViewName(state) {
-      return state.view.name
+    getCurrentDate(state) {
+      return state.currentDate;
     },
     getCalendarViewCurrentMonth(state) {
       return state.calendarViewCurrentMonth;
@@ -51,18 +47,12 @@ export const calendar = {
       return state.year[state.currentMonth];
     },
     getHoursList(state){
-      console.log('getter ok');
       return state.hoursList;
     }
   },
   mutations: {
     setYear(state, year) {
       state.year = createYear(year);
-    },
-
-    setView(state, view) {
-      if (views[view])
-        state.view = views[view];
     },
 
     setCalendarViewCurrentMonth(state, inc) {
@@ -87,6 +77,12 @@ export const calendar = {
 
     setCalendarViewCurrentYear(state, year) {
       state.calendarViewCurrentYear = year;
+    },
+    setCurrentDate(state, date){
+      state.currentYear = date.year;
+      state.currentMonth = date.month;
+      state.currentDay = date.day;
+      state.currentDayOfWeek = date.dayOfWeek;
     }
   },
   actions: {
@@ -107,26 +103,20 @@ export const calendar = {
     },
     setCalendarPrevMonth(context) {
       context.commit('setCalendarPrevMonth');
+    },
+    setCurrentDate(context, date) {
+      context.commit('setCurrentDate', date)
     }
   }
 };
 
-function getCurrentYear() {
-  const date = new Date();
-  return date.getFullYear();
-}
-
-function getCurrentMonth() {
-  const date = new Date();
-  return date.getMonth();
-}
-
 function getCurrentDate() {
   const date = new Date();
-  return date.getDate();
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth(),
+    day: date.getDate(),
+    dayOfWeek: date.getDay(),
+  };
 }
 
-const views = {
-  'week': weekView,
-  'year': yearView,
-};

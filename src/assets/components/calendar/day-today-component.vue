@@ -5,27 +5,15 @@
       <event-editor
         v-if="showEditor"
         :eventBegin="start"
-        :eventEnd="end"
-        >
+        :eventEnd="end" >
       </event-editor>
     </transition>
     <ul class="hours__list">
       <li v-for="hour in hours" class="hour" :style="{height: hourHeight + 'px'}"
           @mousedown="setStartDate"
-          @mouseup="setEndDate"
-      >
-
+          @mouseup="setEndDate" >
         <div class="hour__time">{{ hour }}</div>
-        <!-- TODO replace implementation from component to regular layout -->
-
-<!--        <hour class="hour"-->
-<!--              :hourHeight="hourHeight"-->
-<!--              :hour="hour">-->
-<!--        </hour>-->
       </li>
-
-      <!-- TODO fix this @handlers propagation -->
-
       <event v-for="(event, index) in events" class="event"
              :hourHeight="hourHeight"
              :event="event"
@@ -39,7 +27,7 @@
 <script>
     import eventComponent from '../events/event-component';
     import eventEditor from '../modals/event-editor';
-    import {mapGetters} from 'vuex';
+    import { mapGetters } from 'vuex';
 
     export default {
         name: "view-day",
@@ -47,16 +35,11 @@
             'event': eventComponent,
             'event-editor': eventEditor,
         },
+        props:['date'],
         data() {
             return {
                 hourHeight: 50,
                 showEditor: false,
-                date:{
-                    year:'',
-                    month:'',
-                    day:'',
-                    dayOfMonth:'',
-                },
                 start: '',
                 end: '',
             }

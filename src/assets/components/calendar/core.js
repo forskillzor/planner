@@ -20,7 +20,7 @@ export function createCalendar(year) {
       month: date.getMonth(),
       day: date.getDate(),
       dayOfWeek: date.getDay(),
-      event: [],
+      events: [],
       todo: [],
     });
     incDate(date);

@@ -33,8 +33,8 @@
             rect.style.backgroundColor = this.event.color;
         },
         updated() {
-            // TODO update of event component fix error ( style of null )
-            // const rect = document.querySelector('.event' + this.index);
+            // TODO  need implementation to a day of the date array
+            // const rect = document.querySelector('#event-' + this.event.id);
             // rect.style.height = ((this.event.duration.end - this.event.duration.start) * this.hourHeight) + 'px';
             // rect.style.top = (this.event.duration.start - 7) * this.hourHeight + 'px';
             // rect.style.backgroundColor = this.event.color;
