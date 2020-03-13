@@ -1,6 +1,6 @@
 <template>
   <li class="calendar__month">
-    <h2 v-if="mode === 'year'" class="month-name">{{ dayName }}</h2>
+    <h2 v-if="mode === 'year'" class="month-name">{{ monthName }}</h2>
     <ul class="calendar__days-of-week">
       <li v-for="dayName in dayNames" class="day-name">
         <span>{{ dayName }}</span>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+    import {calendarApi} from "./calendar-api-mixin";
     import weekComponent from './week-component';
 
     export default {
@@ -27,19 +27,13 @@
         components: {
             'week': weekComponent,
         },
+        mixins: [calendarApi],
         data() {
             return {
-                dayNames: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
             }
         },
         computed: {
-            ...mapGetters('calendar', {
-                yearModel: 'getYear',
-                activeYear: 'getCalendarViewCurrentYear',
-                activeMonth: 'getCalendarViewCurrentMonth',
-                monthNames: 'getNamesOfMonth',
-            }),
-            dayName(){
+            monthName(){
                 return (this.monthNames[this.yearModel.indexOf(this.month)]);
             },
         }

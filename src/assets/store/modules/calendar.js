@@ -14,6 +14,7 @@ export const calendar = {
     hourHeight: 50,
     getSelectedMonth: getCurrentDate().month,
     namesOfMonth: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',],
+    dayNames: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
   },
   getters: {
     getYear(state) {
@@ -42,6 +43,9 @@ export const calendar = {
     },
     getCalendarViewCurrentYear(state) {
       return state.calendarViewCurrentYear;
+    },
+    getDayNames(state) {
+      return state.dayNames;
     },
     getNamesOfMonth(state) {
       return state.namesOfMonth;

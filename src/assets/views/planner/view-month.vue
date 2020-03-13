@@ -18,7 +18,7 @@
         },
         computed: {
             ...mapGetters('calendar', {
-                month: 'getMonthDataModel',
+                month: 'getMonthDataModel', // state.currentDate.month
             })
         }
     }

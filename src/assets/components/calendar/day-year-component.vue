@@ -17,16 +17,16 @@
 
 <script>
     import {calendarApi} from '../calendar/calendar-api-mixin';
+
     export default {
         name: "day-component",
         props: ['day', 'month'],
         mixins: [calendarApi],
-        data(){
-            return{
-            }
+        data() {
+            return {}
         },
         methods: {
-            changeCurrentDate(){
+            changeCurrentDate() {
                 console.log(this.day);
                 this.setCurrentDate(this.day);
             }

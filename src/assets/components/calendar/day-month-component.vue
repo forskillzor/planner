@@ -13,15 +13,14 @@
 </template>
 
 <script>
-    import { calendarApi} from "./calendar-api-mixin";
+    import {calendarApi} from "./calendar-api-mixin";
 
     export default {
         name: "day-component",
         props: ['day', 'month'],
         mixins: [calendarApi],
-        data(){
-            return{
-            }
+        data() {
+            return {}
         },
     }
 </script>
