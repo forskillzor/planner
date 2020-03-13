@@ -2,7 +2,7 @@
   <div class="calendar">
     <div v-if="mode === 'calendar'" class="calendar__header">
       <button class="calendar__button btn" @click="prevMonth"> <</button>
-      <h1 class="month-name">{{ namesOfMonth[activeMonth] }}
+      <h1 class="month-name">{{ monthNames[activeMonth] }}
         <span class="year">{{ activeYear }}</span>
       </h1>
       <button class="calendar__button btn" @click="nextMonth"> ></button>
@@ -27,24 +27,18 @@
 <script>
     import {mapGetters} from 'vuex';
     import {mapActions} from 'vuex';
+    import {calendarApi} from '../calendar/calendar-api-mixin';
     import monthComponent from '../../components/calendar/month-component';
 
     export default {
         name: "calendar",
         props: ['mode'],
+        mixins: [calendarApi],
         components: {
             'month': monthComponent,
         },
         data() {
             return {}
-        },
-        computed: {
-            ...mapGetters('calendar', {
-                activeYear: 'getCalendarViewCurrentYear',
-                activeMonth: 'getCalendarViewCurrentMonth',
-                yearModel: 'getYear',
-                namesOfMonth: 'getNamesOfMonth'
-            }),
         },
         methods: {
             ...mapActions('calendar', {
