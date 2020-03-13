@@ -9,6 +9,7 @@ export const calendar = {
     calendarViewCurrentMonth: getCurrentDate().month,
     calendarViewCurrentYear: getCurrentDate().year,
     currentDate: getCurrentDate(),
+    actualDate: getCurrentDate(),
     hoursList: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
     hourHeight: 50,
     getSelectedMonth: getCurrentDate().month,
@@ -17,6 +18,9 @@ export const calendar = {
   getters: {
     getYear(state) {
       return state.year;
+    },
+    getActualDate(state) {
+      return state.actualDate;
     },
     getCurrentYear(state) {
       return state.currentDate.year;
@@ -109,7 +113,7 @@ export const calendar = {
   }
 };
 
-function getCurrentDate() {
+export function getCurrentDate() {
   const date = new Date();
   return {
     year: date.getFullYear(),

@@ -15,9 +15,10 @@ export const calendarApi = {
     }),
     ...mapGetters('calendar', {
 
-      hours: 'getHoursList',
+      hoursList: 'getHoursList',
       activeYear: 'getCalendarViewCurrentYear',
       activeMonth: 'getCalendarViewCurrentMonth',
+      actualDate: 'getActualDate',
       yearModel: 'getYear',
       monthNames: 'getNamesOfMonth',
       currentYear: 'getCurrentYear',
@@ -26,4 +27,4 @@ export const calendarApi = {
       currentDayOfWeek: 'getCurrentDayOfWeek',
     })
   }
-}
+};

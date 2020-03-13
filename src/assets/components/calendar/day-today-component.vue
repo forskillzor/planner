@@ -5,13 +5,13 @@
       <event-editor
         v-if="showEditor"
         :eventBegin="start"
-        :eventEnd="end" >
+        :eventEnd="end">
       </event-editor>
     </transition>
     <ul class="hours__list">
-      <li v-for="hour in hours" class="hour noselect" :style="{height: hourHeight + 'px'}"
+      <li v-for="hour in hoursList" class="hour noselect" :style="{height: hourHeight + 'px'}"
           @mousedown="setStartDate"
-          @mouseup="setEndDate" >
+          @mouseup="setEndDate">
         <div class="hour__time">{{ hour }}</div>
       </li>
       <event v-for="(event, index) in events" class="event"
@@ -27,7 +27,7 @@
 <script>
     import eventComponent from '../events/event-component';
     import eventEditor from '../modals/event-editor';
-    import { mapGetters } from 'vuex';
+    import {calendarApi} from '../../components/calendar/calendar-api-mixin';
 
     export default {
         name: "view-day",
@@ -35,7 +35,8 @@
             'event': eventComponent,
             'event-editor': eventEditor,
         },
-        props:['date'],
+        props: ['date'],
+        mixins: [calendarApi],
         data() {
             return {
                 hourHeight: 50,
@@ -44,28 +45,20 @@
                 end: '',
             }
         },
-        computed: {
-            ...mapGetters('events', {
-                events: 'getEvents',
-            }),
-            ...mapGetters('calendar', {
-                hours: 'getHoursList',
-            })
-        },
         methods: {
             setStartDate(e) {
                 this.start = Math.ceil(e.target.offsetTop / 50) + 7;
             },
-            setEndDate(e){
+            setEndDate(e) {
                 const endDate = (Math.ceil(e.target.offsetTop / 50) + 7);
-                this.end = (endDate - this.start)? endDate + 1 : this.start + 1;
+                this.end = (endDate - this.start) ? endDate + 1 : this.start + 1;
                 this.toggleEventEditor()
             },
             toggleEventEditor() {
                 this.showEditor = !this.showEditor;
             }
         },
-        updated(){
+        updated() {
             console.log('update day-today-component');
         }
     }
@@ -73,6 +66,7 @@
 
 <style scoped lang="scss">
   @import '../../style/core/mixins.scss';
+
   h1 {
     text-align: center;
   }
@@ -137,7 +131,7 @@
     position: relative;
     @include reset-list;
 
-    .hour{
+    .hour {
       display: flex;
       flex-direction: row;
       width: 100%;
@@ -146,7 +140,7 @@
       box-sizing: border-box;
       border-top: 1px solid #e2e2e2;
 
-      &__time{
+      &__time {
         color: #4d4d4d;
         font-size: 18px;
         padding: 5px 5px 0 20px;
