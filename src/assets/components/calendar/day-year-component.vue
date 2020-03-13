@@ -29,7 +29,8 @@
         methods: {
             ...mapActions('calendar', ['setCurrentDate']),
             changeCurrentDate(){
-                console.log(this.day)
+                console.log(this.day);
+                this.setCurrentDate(this.day);
                 // this.setCurrentDate()
             }
         },
@@ -37,7 +38,7 @@
             ...mapGetters('calendar', {
                 currentMonth: 'getCurrentMonth',
             }),
-            current(){
+            current(){  // TODO  getCurrentDate --> vuex.calendar
                 const date = new Date();
                 return {
                     day: date.getDate(),

@@ -33,7 +33,7 @@
                 currentMonth: 'getCurrentMonth',
                 currentDate: 'getCurrentDate'
             }),
-            current(){
+            current(){  // TODO  getCurrentDate --> vuex.calendar
                 const date = new Date();
                 return {
                     day: date.getDate(),

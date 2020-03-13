@@ -9,7 +9,7 @@
       </event-editor>
     </transition>
     <ul class="hours__list">
-      <li v-for="hour in hours" class="hour" :style="{height: hourHeight + 'px'}"
+      <li v-for="hour in hours" class="hour noselect" :style="{height: hourHeight + 'px'}"
           @mousedown="setStartDate"
           @mouseup="setEndDate" >
         <div class="hour__time">{{ hour }}</div>
@@ -58,7 +58,7 @@
             },
             setEndDate(e){
                 const endDate = (Math.ceil(e.target.offsetTop / 50) + 7);
-                this.end = (endDate - this.start)? endDate : this.start + 1;
+                this.end = (endDate - this.start)? endDate + 1 : this.start + 1;
                 this.toggleEventEditor()
             },
             toggleEventEditor() {

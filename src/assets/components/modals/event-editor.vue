@@ -31,7 +31,7 @@
             return {
                 title: '',
                 id: '',
-                color: '',
+                color: '#d2d2d2',
                 start: this.eventBegin,
                 end: this.eventEnd
             }

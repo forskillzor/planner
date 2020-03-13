@@ -8,10 +8,6 @@ export const calendar = {
     calendar: createCalendar(2020),
     calendarViewCurrentMonth: getCurrentDate().month,
     calendarViewCurrentYear: getCurrentDate().year,
-    currentYear: getCurrentDate().year,
-    currentMonth: getCurrentDate().month,
-    currentDay: getCurrentDate().day,
-    currentDayOfWeek: getCurrentDate.dayOfWeek,
     currentDate: getCurrentDate(),
     hoursList: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
     hourHeight: 50,
@@ -23,13 +19,16 @@ export const calendar = {
       return state.year;
     },
     getCurrentYear(state) {
-      return state.currentYear;
+      return state.currentDate.year;
     },
     getCurrentMonth(state) {
-      return state.currentMonth;
+      return state.currentDate.month;
     },
     getCurrentDay(state) {
-      return state.currentDate;
+      return state.currentDate.day;
+    },
+    getCurrentDayOfWeek(state){
+      return state.currentDate.dayOfWeek;
     },
     getCurrentDate(state) {
       return state.currentDate;
@@ -44,7 +43,7 @@ export const calendar = {
       return state.namesOfMonth;
     },
     getMonthDataModel(state) {
-      return state.year[state.currentMonth];
+      return state.year[state.currentDate.month];
     },
     getHoursList(state){
       return state.hoursList;
@@ -79,10 +78,10 @@ export const calendar = {
       state.calendarViewCurrentYear = year;
     },
     setCurrentDate(state, date){
-      state.currentYear = date.year;
-      state.currentMonth = date.month;
-      state.currentDay = date.day;
-      state.currentDayOfWeek = date.dayOfWeek;
+      state.currentDate.year = date.year;
+      state.currentDate.month = date.month;
+      state.currentDate.day = date.day;
+      state.currentDate.dayOfWeek = date.dayOfWeek;
     }
   },
   actions: {
