@@ -28,6 +28,7 @@
     import eventComponent from '../events/event-component';
     import eventEditor from '../modals/event-editor';
     import {calendarApi} from '../../components/calendar/calendar-api-mixin';
+    import {eventApi} from "../events/event-api-mixin";
 
     export default {
         name: "view-day",
@@ -35,8 +36,9 @@
             'event': eventComponent,
             'event-editor': eventEditor,
         },
+        // TODO unusable prop -->
         props: ['date'],
-        mixins: [calendarApi],
+        mixins: [calendarApi, eventApi],
         data() {
             return {
                 hourHeight: 50,

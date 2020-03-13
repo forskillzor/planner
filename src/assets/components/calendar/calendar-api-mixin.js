@@ -9,10 +9,6 @@ export const calendarApi = {
     })
   },
   computed: {
-    ...mapGetters('events', {
-
-      events: 'getEvents'
-    }),
     ...mapGetters('calendar', {
 
       hoursList: 'getHoursList',
@@ -21,6 +17,7 @@ export const calendarApi = {
       actualDate: 'getActualDate',
       yearModel: 'getYear',
       monthNames: 'getNamesOfMonth',
+      currentDate: 'getCurrentDate',
       currentYear: 'getCurrentYear',
       currentMonth: 'getCurrentMonth',
       currentDay: 'getCurrentDay',
