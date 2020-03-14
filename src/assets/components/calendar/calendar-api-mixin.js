@@ -1,5 +1,5 @@
-import {mapGetters} from 'vuex';
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
+import {getCurrentDateLocalString} from "./core";
 
 export const calendarApi = {
   name: "calendar-api-mixin",
@@ -24,6 +24,7 @@ export const calendarApi = {
       currentMonth: 'getCurrentMonth',
       currentDay: 'getCurrentDay',
       currentDayOfWeek: 'getCurrentDayOfWeek',
-    })
+    }),
+    actualDate: getCurrentDateLocalString, //from calendar/core.js
   }
 };

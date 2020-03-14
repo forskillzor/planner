@@ -22,14 +22,10 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex';
-  import { mapGetters } from 'vuex';
+    import {mapGetters} from 'vuex';
+
     export default {
         name: "app-header",
-        methods:{
-            ...mapActions('calendar',
-            ['setView'])
-        },
         computed:{
             ...mapGetters('calendar',
                 ['getViewName'])

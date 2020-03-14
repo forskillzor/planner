@@ -1,15 +1,12 @@
 import {createYear} from "../../components/calendar/core";
-import {createCalendar} from "../../components/calendar/core";
 
 export const calendar = {
   namespaced: true,
   state: {
     year: createYear(2020),
-    calendar: createCalendar(2020),
     calendarViewCurrentMonth: getCurrentDate().month,
     calendarViewCurrentYear: getCurrentDate().year,
     currentDate: getCurrentDate(),
-    actualDate: getCurrentDate(),
     hoursList: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
     hourHeight: 50,
     getSelectedMonth: getCurrentDate().month,
@@ -19,9 +16,6 @@ export const calendar = {
   getters: {
     getYear(state) {
       return state.year;
-    },
-    getActualDate(state) {
-      return state.actualDate;
     },
     getLocaleDate(state) {
       let month = state.currentDate.month + 1;
@@ -58,9 +52,10 @@ export const calendar = {
     getNamesOfMonth(state) {
       return state.namesOfMonth;
     },
-    getMonthDataModel(state) {
-      return state.year[state.currentDate.month];
-    },
+    // getMonthDataModel(state) {
+    //   return state.year[state.currentDate.month];
+    // },
+    getMonthDataModel: state => month => state.year[month],
     getHoursList(state){
       return state.hoursList;
     }
@@ -104,8 +99,8 @@ export const calendar = {
     setYear(context, year) {
       context.commit('setYear', year);
     },
-    setView(context, payload) {
-      context.commit('setView', payload);
+    setView(context, view) {
+      context.commit('setView', view);
     },
     setCalendarViewCurrentMonth(context, inc) {
       context.commit('setCalendarViewCurrentMonth', inc)
@@ -133,8 +128,4 @@ export function getCurrentDate() {
     day: date.getDate(),
     dayOfWeek: date.getDay(),
   };
-}
-function getLocaleDate(){
-  const date = new Date();
-  return date.toLocaleDateString();
 }

@@ -1,8 +1,9 @@
 <template>
   <div class="month-view">
+    <!-- Configurable month change in getter month() -->
     <month-component
       :mode="'year'"
-      :month="month">
+      :month="month(currentDate.month)">
     </month-component>
   </div>
 </template>
@@ -10,15 +11,17 @@
 <script>
     import monthComponent from '../../components/calendar/month-component';
     import {mapGetters} from 'vuex';
+    import {calendarApi} from '../../components/calendar/calendar-api-mixin';
 
     export default {
         name: "view-month",
         components: {
             'month-component': monthComponent,
         },
+        mixins: [calendarApi],
         computed: {
             ...mapGetters('calendar', {
-                month: 'getMonthDataModel', // state.currentDate.month
+                month: 'getMonthDataModel', // state.year[state.currentDate.month]
             })
         }
     }

@@ -1,12 +1,7 @@
 <template>
   <li class="day-month-view"
-      :data-year="day.year"
-      :data-month="day.month"
-      :data-day="day.day"
-      :data-current-month="day.currentMonth"
-      :class="[{'today': (day.day === actualDate.day
-                      && day.month === actualDate.month
-                      && day.year === actualDate.year),
+      :data-date="day.date"
+      :class="[{'today': (day.date == actualDate),
               'actual': day.month === day.currentMonth}]">
     {{ day.day }}
   </li>

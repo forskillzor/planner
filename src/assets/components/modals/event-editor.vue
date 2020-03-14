@@ -32,6 +32,7 @@
 
 <script>
     import {mapActions} from 'vuex';
+    import {dateFormatter} from "../calendar/core";
     import calendarComponent from '../calendar/calendar';
     // TODO fix api for new
     export default {
@@ -75,12 +76,6 @@
     const genarateId = function () {
         return `f${(+new Date).toString(16)}`;
     };
-    function dateFormatter(date){
-        const temp = date.split('-');
-        const result = `${temp[1]}/${temp[2]}/${temp[0]}`;
-        console.log(result);
-        return result;
-    }
 </script>
 
 <style lang="scss">

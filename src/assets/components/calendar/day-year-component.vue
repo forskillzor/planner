@@ -1,15 +1,8 @@
 <template>
   <li @click="changeCurrentDate"
       class="day-view"
-      :data-year="day.year"
-      :data-month="day.month"
-      :data-day="day.day"
-      :data-day-of-week="day.dayOfWeek"
-      :data-actual="day.actual"
-      :data-current-month="day.currentMonth"
-      :class="[{'today': (day.day === actualDate.day
-                      && day.month === actualDate.month
-                      && day.year === actualDate.year),
+      :data-date="day.date"
+      :class="[{'today': (day.date === actualDate),
               'actual': day.month === day.currentMonth}]">
     {{ day.day }}
   </li>
@@ -27,7 +20,6 @@
         },
         methods: {
             changeCurrentDate() {
-                console.log(this.day);
                 this.setCurrentDate(this.day);
             }
         },
