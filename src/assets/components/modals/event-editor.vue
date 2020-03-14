@@ -23,7 +23,7 @@
 
 <script>
     import { mapActions } from 'vuex';
-
+// TODO fix api for new
     export default {
         name: "event-edit",
         props: ['eventBegin', 'eventEnd'],

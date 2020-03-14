@@ -53,4 +53,12 @@ const eventsArray = [
     id: 'd23fiddf93fd',
     color: '#93ff94',
   },
+  {
+    title: 'Шоппинг!!',
+    date: '3/18/2020',
+    begin: 8,
+    end: 12,
+    id: 'd23fidf93fd',
+    color: '#ffea3f',
+  },
 ];
