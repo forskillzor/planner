@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO add scroll area like view-year -->
   <div class="view-today">
     <h1 class="view-today__header">{{ currentDay }} {{ monthNames[currentMonth] }}</h1>
     <day-component :date="localeDate"></day-component>
@@ -6,9 +7,10 @@
 </template>
 
 <script>
-  import dayTodayComponent from '../../components/calendar/day-today-component';
-  import {calendarApi} from "../../components/calendar/calendar-api-mixin";
-  import { mapGetters } from 'vuex';
+    import dayTodayComponent from '../../components/calendar/day-today-component';
+    import {calendarApi} from "../../components/calendar/calendar-api-mixin";
+    import {mapGetters} from 'vuex';
+
     export default {
         name: "view-today",
         components: {

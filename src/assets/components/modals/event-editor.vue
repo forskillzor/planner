@@ -34,7 +34,7 @@
     import {mapActions} from 'vuex';
     import {dateFormatter} from "../calendar/core";
     import calendarComponent from '../calendar/calendar';
-    // TODO fix api for new
+
     export default {
         name: "event-edit",
         components: {
@@ -66,11 +66,6 @@
                 });
                 this.$parent.showEditor = false;
             },
-            check() {
-                // const date = this.date.split('-');
-                // const newDateString = `${date[1]}/${date[2]}/${date[0]}`
-                console.log(dateFormatter(this.date));
-            }
         },
     }
     const genarateId = function () {
