@@ -31,7 +31,7 @@
             rect.style.height = ((this.event.end - this.event.begin) * this.hourHeight) + 'px';
             rect.style.top = (this.event.begin - 7) * this.hourHeight + 'px';
             rect.style.backgroundColor = this.event.color;
-            console.warn('event on mount:', this.event)
+            rect.dataset.eventId = this.event.id;
         },
         updated() {
             // TODO  need implementation to a day of the date array
@@ -39,7 +39,7 @@
             rect.style.height = ((this.event.end - this.event.begin) * this.hourHeight) + 'px';
             rect.style.top = (this.event.begin - 7) * this.hourHeight + 'px';
             rect.style.backgroundColor = this.event.color;
-            console.warn('event on mount:', this.event)
+            rect.dataset.eventId = this.event.id;
         }
     }
 </script>

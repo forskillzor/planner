@@ -1,12 +1,12 @@
 <template>
     <div class="week-view">
-      <day date="3/14/2020"></day>
-      <day date="3/15/2020"></day>
-      <day date="3/16/2020"></day>
-      <day date="3/17/2020"></day>
-      <day date="3/18/2020"></day>
-      <day date="3/19/2020"></day>
-      <day date="3/20/2020"></day>
+      <day date="03/14/2020"></day>
+      <day date="03/15/2020"></day>
+      <day date="03/16/2020"></day>
+      <day date="03/17/2020"></day>
+      <day date="03/18/2020"></day>
+      <day date="03/19/2020"></day>
+      <day date="03/20/2020"></day>
     </div>
 </template>
 <!-- TODO date array for week header date-list -->

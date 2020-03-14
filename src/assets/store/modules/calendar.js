@@ -24,7 +24,12 @@ export const calendar = {
       return state.actualDate;
     },
     getLocaleDate(state) {
-      return `${state.currentDate.month + 1}/${state.currentDate.day}/${state.currentDate.year}`
+      let month = state.currentDate.month + 1;
+      if (month.toString().length === 1) {
+        month = '0' + month;
+      }
+      return `${month}/${state.currentDate.day}/${state.currentDate.year}`
+
     },
     getCurrentYear(state) {
       return state.currentDate.year;
@@ -129,7 +134,7 @@ export function getCurrentDate() {
     dayOfWeek: date.getDay(),
   };
 }
-function getLocalDate(){
+function getLocaleDate(){
   const date = new Date();
   return date.toLocaleDateString();
 }
