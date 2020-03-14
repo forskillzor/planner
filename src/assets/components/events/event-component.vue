@@ -28,16 +28,18 @@
         computed: {},
         mounted() {
             const rect = document.querySelector('#event-' + this.event.id);
-            rect.style.height = ((this.event.duration.end - this.event.duration.start) * this.hourHeight) + 'px';
-            rect.style.top = (this.event.duration.start - 7) * this.hourHeight + 'px';
+            rect.style.height = ((this.event.end - this.event.begin) * this.hourHeight) + 'px';
+            rect.style.top = (this.event.begin - 7) * this.hourHeight + 'px';
             rect.style.backgroundColor = this.event.color;
+            console.warn('event on mount:', this.event)
         },
         updated() {
             // TODO  need implementation to a day of the date array
-            // const rect = document.querySelector('#event-' + this.event.id);
-            // rect.style.height = ((this.event.duration.end - this.event.duration.start) * this.hourHeight) + 'px';
-            // rect.style.top = (this.event.duration.start - 7) * this.hourHeight + 'px';
-            // rect.style.backgroundColor = this.event.color;
+            const rect = document.querySelector('#event-' + this.event.id);
+            rect.style.height = ((this.event.end - this.event.begin) * this.hourHeight) + 'px';
+            rect.style.top = (this.event.begin - 7) * this.hourHeight + 'px';
+            rect.style.backgroundColor = this.event.color;
+            console.warn('event on mount:', this.event)
         }
     }
 </script>

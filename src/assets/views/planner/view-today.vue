@@ -1,7 +1,7 @@
 <template>
   <div class="view-today">
     <h1 class="view-today__header">{{ currentDay }} {{ monthNames[currentMonth] }}</h1>
-    <day-component :date="currentDate"></day-component>
+    <day-component :date="localeDate"></day-component>
   </div>
 </template>
 
@@ -17,12 +17,9 @@
         mixins: [calendarApi],
         computed: {
             ...mapGetters('calendar', [
-                'getCurrentDay',
-                'getCurrentMonth',
-                'getNamesOfMonth',
-                'getCurrentDate'
+                'getLocaleDate',
             ])
-        }
+        },
     }
 </script>
 

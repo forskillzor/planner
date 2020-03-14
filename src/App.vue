@@ -22,8 +22,10 @@
   import viewWeek from './assets/views/planner/view-week';
   import viewYear from './assets/views/planner/view-year';
   import navibar from './assets/components/app-components/navibar-component';
-  import { mapGetters } from 'vuex';
-    export default {
+  import {mapGetters} from 'vuex';
+  import {mapActions} from 'vuex';
+
+  export default {
         name: 'app',
         components: {
             'app-header': header,
@@ -40,6 +42,14 @@
             ...mapGetters('calendar', {
                 view: 'getView',
             })
+        },
+      methods: {
+            ...mapActions('events', {
+                loadEvents: 'fetchEvents',
+            })
+      },
+        mounted(){
+            this.loadEvents()
         }
     }
 </script>

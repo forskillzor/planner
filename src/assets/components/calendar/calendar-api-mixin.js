@@ -18,6 +18,7 @@ export const calendarApi = {
       yearModel: 'getYear',
       monthNames: 'getNamesOfMonth',
       dayNames: 'getDayNames',
+      localeDate: 'getLocaleDate',
       currentDate: 'getCurrentDate',
       currentYear: 'getCurrentYear',
       currentMonth: 'getCurrentMonth',

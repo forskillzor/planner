@@ -5,6 +5,7 @@ export const eventApi = {
   name: "event-api-mixin",
   methods: {
     ...mapActions('events', {
+      loadEvents: 'fetchEvents',
     }),
   },
   computed: {

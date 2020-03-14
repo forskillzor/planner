@@ -14,7 +14,8 @@
           @mouseup="setEndDate">
         <div class="hour__time">{{ hour }}</div>
       </li>
-      <event v-for="(event, index) in events" class="event"
+      <!-- TODO get events by datestring -->
+      <event v-for="(event, index) in events(date)" class="event"
              :hourHeight="hourHeight"
              :event="event"
              :dayRef="this"
@@ -60,9 +61,6 @@
                 this.showEditor = !this.showEditor;
             }
         },
-        updated() {
-            console.log('update day-today-component');
-        }
     }
 </script>
 
