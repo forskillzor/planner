@@ -11,13 +11,14 @@
 </template>
 <!-- TODO date array for week header date-list -->
 <script>
-  import dayTodayComponent from '../../components/calendar/day-today-component';
+    import dayTodayComponent from '../../components/calendar/day-today-component';
+
     export default {
         name: "view-week",
         components: {
             'day': dayTodayComponent,
         },
-        data(){
+        data: function () {
             return {
             }
         }

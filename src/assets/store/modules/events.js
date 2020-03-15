@@ -5,22 +5,15 @@ export const events = {
   },
   getters: {
     // date === date.toLocaleDateString()
-    getEvents: (state) => (date) => state.events.filter( event => event.date === date )
+    getEvents: (state) => (date) => state.events.filter(event => event.date === date)
   },
   mutations: {
-    // addEvent(state, event){
-    //   state.events.push(event);
-    // },
-    addEvent(state, event) {
-      state.events.push(event);
-    }
+    addEvent: (state, event) => state.events.push(event),
   },
   actions: {
-    addEvent(context, event){
-      context.commit('addEvent', event)
-    },
-    fetchEvents(context) {
-      eventsArray.forEach( event => {
+    addEvent: (context, event) => context.commit('addEvent', event),
+    fetchEvents: (context) => {
+      eventsArray.forEach(event => {
         context.commit('addEvent', event);
       });
     }

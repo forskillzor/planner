@@ -41,7 +41,7 @@
             'calendar-widget': calendarComponent,
         },
         props: ['eventBegin', 'eventEnd'],
-        data() {
+        data: function () {
             return {
                 title: '',
                 id: '',
@@ -65,6 +65,7 @@
                     color: this.color,
                 });
                 this.$parent.showEditor = false;
+                console.log('new event:', this.title, this.id, dateFormatter(this.date));
             },
         },
     }

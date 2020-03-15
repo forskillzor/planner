@@ -27,19 +27,18 @@
         },
         computed: {},
         mounted() {
-            const rect = document.querySelector('#event-' + this.event.id);
-            rect.style.height = ((this.event.end - this.event.begin) * this.hourHeight) + 'px';
-            rect.style.top = (this.event.begin - 7) * this.hourHeight + 'px';
-            rect.style.backgroundColor = this.event.color;
-            rect.dataset.eventId = this.event.id;
+            const el = this.$vnode.elm;
+            el.style.height = ((this.event.end - this.event.begin) * this.hourHeight) + 'px';
+            el.style.top = (this.event.begin - 7) * this.hourHeight + 'px';
+            el.style.backgroundColor = this.event.color;
+            el.dataset.eventId = this.event.id;
         },
         updated() {
-            // TODO  need implementation to a day of the date array
-            const rect = document.querySelector('#event-' + this.event.id);
-            rect.style.height = ((this.event.end - this.event.begin) * this.hourHeight) + 'px';
-            rect.style.top = (this.event.begin - 7) * this.hourHeight + 'px';
-            rect.style.backgroundColor = this.event.color;
-            rect.dataset.eventId = this.event.id;
+            const el = this.$vnode.elm;
+            el.style.height = ((this.event.end - this.event.begin) * this.hourHeight) + 'px';
+            el.style.top = (this.event.begin - 7) * this.hourHeight + 'px';
+            el.style.backgroundColor = this.event.color;
+            el.dataset.eventId = this.event.id;
         }
     }
 </script>

@@ -14,10 +14,8 @@ export const calendar = {
     dayNames: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
   },
   getters: {
-    getYear(state) {
-      return state.year;
-    },
-    getLocaleDate(state) {
+    getYear: (state) => state.year,
+    getLocaleDate: (state) => {
       let month = state.currentDate.month + 1;
       if (month.toString().length === 1) {
         month = '0' + month;
@@ -25,70 +23,37 @@ export const calendar = {
       return `${month}/${state.currentDate.day}/${state.currentDate.year}`
 
     },
-    getCurrentYear(state) {
-      return state.currentDate.year;
-    },
-    getCurrentMonth(state) {
-      return state.currentDate.month;
-    },
-    getCurrentDay(state) {
-      return state.currentDate.day;
-    },
-    getCurrentDayOfWeek(state){
-      return state.currentDate.dayOfWeek;
-    },
-    getCurrentDate(state) {
-      return state.currentDate;
-    },
-    getCalendarViewCurrentMonth(state) {
-      return state.calendarViewCurrentMonth;
-    },
-    getCalendarViewCurrentYear(state) {
-      return state.calendarViewCurrentYear;
-    },
-    getDayNames(state) {
-      return state.dayNames;
-    },
-    getNamesOfMonth(state) {
-      return state.namesOfMonth;
-    },
-    // getMonthDataModel(state) {
-    //   return state.year[state.currentDate.month];
-    // },
+    getCurrentYear: (state) => state.currentDate.year,
+    getCurrentMonth: (state) => state.currentDate.month,
+    getCurrentDay: (state) => state.currentDate.day,
+    getCurrentDayOfWeek: (state) => state.currentDate.dayOfWeek,
+    getCurrentDate: (state) => state.currentDate,
+    getCalendarViewCurrentMonth: (state) => state.calendarViewCurrentMonth,
+    getCalendarViewCurrentYear: (state) => state.calendarViewCurrentYear,
+    getDayNames: (state) => state.dayNames,
+    getNamesOfMonth: (state) => state.namesOfMonth,
     getMonthDataModel: state => month => state.year[month],
-    getHoursList(state){
-      return state.hoursList;
-    }
+    getHoursList: (state) => state.hoursList,
   },
   mutations: {
-    setYear(state, year) {
-      state.year = createYear(year);
-    },
-
-    setCalendarViewCurrentMonth(state, inc) {
-      state.calendarViewCurrentMonth += inc;
-    },
-
-    setCalendarNextMonth(state) {
+    setYear: (state, year) => state.year = createYear(year),
+    setCalendarViewCurrentMonth: (state, inc) => state.calendarViewCurrentMonth += inc,
+    setCalendarNextMonth: (state) => {
       state.calendarViewCurrentMonth++;
       if (state.calendarViewCurrentMonth > 11) {
         state.calendarViewCurrentMonth = 0;
         state.calendarViewCurrentYear++;
       }
     },
-
-    setCalendarPrevMonth(state) {
+    setCalendarPrevMonth: (state) => {
       state.calendarViewCurrentMonth--;
       if (state.calendarViewCurrentMonth < 0) {
         state.calendarViewCurrentMonth = 11;
         state.calendarViewCurrentYear--;
       }
     },
-
-    setCalendarViewCurrentYear(state, year) {
-      state.calendarViewCurrentYear = year;
-    },
-    setCurrentDate(state, date){
+    setCalendarViewCurrentYear: (state, year) => state.calendarViewCurrentYear = year,
+    setCurrentDate: (state, date) => {
       state.currentDate.year = date.year;
       state.currentDate.month = date.month;
       state.currentDate.day = date.day;
@@ -96,27 +61,13 @@ export const calendar = {
     }
   },
   actions: {
-    setYear(context, year) {
-      context.commit('setYear', year);
-    },
-    setView(context, view) {
-      context.commit('setView', view);
-    },
-    setCalendarViewCurrentMonth(context, inc) {
-      context.commit('setCalendarViewCurrentMonth', inc)
-    },
-    setCalendarViewCurrentYear(context, year) {
-      context.commit('setCalendarViewCurrentYear', year)
-    },
-    setCalendarNextMonth(context) {
-      context.commit('setCalendarNextMonth');
-    },
-    setCalendarPrevMonth(context) {
-      context.commit('setCalendarPrevMonth');
-    },
-    setCurrentDate(context, date) {
-      context.commit('setCurrentDate', date)
-    }
+    setYear: (context, year) => context.commit('setYear', year),
+    setView: (context, view) => context.commit('setView', view),
+    setCalendarViewCurrentMonth: (context, inc) => context.commit('setCalendarViewCurrentMonth', inc),
+    setCalendarViewCurrentYear: (context, year) => context.commit('setCalendarViewCurrentYear', year),
+    setCalendarNextMonth: (context) => context.commit('setCalendarNextMonth'),
+    setCalendarPrevMonth: (context) => context.commit('setCalendarPrevMonth'),
+    setCurrentDate: (context, date) => context.commit('setCurrentDate', date),
   }
 };
 
