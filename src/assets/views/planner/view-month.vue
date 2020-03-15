@@ -2,6 +2,7 @@
   <div class="month-view">
     <!-- Configurable month change in getter month() -->
     <month-component
+      class="scroll-area"
       :mode="'year'"
       :month="month(currentDate.month)">
     </month-component>

@@ -35,6 +35,7 @@
     import {uDateToValue, valueToUDate} from "../calendar/core";
     import calendarComponent from '../calendar/calendar';
 
+    // TODO make today-view events [add] and edit (drag and drop)
     export default {
         name: "event-edit",
         components: {

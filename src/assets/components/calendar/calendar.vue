@@ -1,4 +1,7 @@
 <template>
+
+  <!-- TODO highlight selected day by dint $store-->
+
   <div class="calendar">
     <div v-if="mode === 'calendar'" class="calendar__header">
       <button class="calendar__button btn" @click="prevMonth"> <</button>
@@ -25,7 +28,6 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
     import {mapActions} from 'vuex';
     import {calendarApi} from '../calendar/calendar-api-mixin';
     import monthComponent from '../../components/calendar/month-component';

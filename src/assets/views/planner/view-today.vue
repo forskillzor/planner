@@ -1,8 +1,7 @@
 <template>
-  <!-- TODO add scroll area like view-year -->
   <div class="view-today">
     <h1 class="view-today__header">{{ currentDay }} {{ monthNames[currentMonth] }}</h1>
-    <day-component :date="localeDate"></day-component>
+    <day-component :date="localeDate" class="scroll-area"></day-component>
   </div>
 </template>
 

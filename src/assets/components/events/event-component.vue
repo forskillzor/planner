@@ -1,8 +1,8 @@
 <template>
-  <div @mousemove.stop="drag" class="rectangle"
-      :class="{ 'selected': isSelected }"
+  <div class="rectangle"
+       :class="{ 'selected': isSelected }"
        :id="'event-' + event.id"
-      @click.stop="isSelected = !isSelected">
+       @click.stop="isSelected = !isSelected">
     <p class="event__title">{{event.title}}</p>
   </div>
 
@@ -18,11 +18,18 @@
             }
         },
         methods: {
-            showToolTip() {
-                console.log('TOOLTIP!');
+            showToolbox: function () {
+                this.$emit('showtoolbox', {
+                    id: this.event.id,
+                    x: 0,
+                    y: this.$el.offsetTop,
+                });
+            },
+            hideToolbox: function () {
+                this.$emit('hidetoolbox')
             },
             // TODO make implementation of drag and drop
-            drag(e){
+            drag(e) {
             }
         },
         computed: {},

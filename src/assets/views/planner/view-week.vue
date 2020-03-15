@@ -1,5 +1,5 @@
 <template>
-    <div class="week-view">
+  <div class="week-view scroll-area">
       <day date="03/14/2020"></day>
       <day date="03/15/2020"></day>
       <day date="03/16/2020"></day>
@@ -9,7 +9,9 @@
       <day date="03/20/2020"></day>
     </div>
 </template>
-<!-- TODO date array for week header date-list -->
+
+<!-- TODO date for days array for week header date-list -->
+
 <script>
     import dayTodayComponent from '../../components/calendar/day-today-component';
 
@@ -18,18 +20,13 @@
         components: {
             'day': dayTodayComponent,
         },
-        data: function () {
-            return {
-            }
-        }
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+
   .week-view{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    height: 600px;
-    overflow-y: scroll;
   }
 </style>

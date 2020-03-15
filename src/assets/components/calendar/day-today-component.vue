@@ -1,4 +1,7 @@
 <template>
+
+  <!-- TODO add current time line -->
+
   <div class="day-view">
     <transition enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut">
@@ -10,13 +13,24 @@
       </event-editor>
     </transition>
     <ul class="hours__list">
+
+      <!-- TODO very bad implementation of toolbox -->
+
+      <transition appear
+                  enter-active-class="animated fadeIn"
+                  leave-active-class="animated fadeOut">
+        <event-toolbox v-show="isToolbox"
+                       :innerData="toolboxData">
+        </event-toolbox>
+      </transition>
       <li v-for="hour in hoursList" class="hour noselect" :style="{height: hourHeight + 'px'}"
           @mousedown="setStartDate"
           @mouseup="setEndDate">
         <div class="hour__time">{{ hour }}</div>
       </li>
-      <!-- TODO get events by datestring -->
-      <event v-for="(event, index) in events(date)" class="event"
+      <event @showtoolbox="showToolbox"
+             @hidetoolbox="hideToolbox"
+             v-for="(event, index) in events(date)" class="event"
              :hourHeight="hourHeight"
              :event="event"
              :dayRef="this"
@@ -29,6 +43,7 @@
 <script>
     import eventComponent from '../events/event-component';
     import eventEditor from '../modals/event-editor';
+    import eventToolBox from '../events/event-toolbox';
     import {calendarApi} from '../../components/calendar/calendar-api-mixin';
     import {eventApi} from "../events/event-api-mixin";
 
@@ -37,12 +52,15 @@
         components: {
             'event': eventComponent,
             'event-editor': eventEditor,
+            'event-toolbox': eventToolBox,
         },
         // TODO unusable prop -->
         props: ['date'],
         mixins: [calendarApi, eventApi],
         data() {
             return {
+                isToolbox: false,
+                toolboxData: null,
                 hourHeight: 50,
                 showEditor: false,
                 start: '',
@@ -50,7 +68,7 @@
             }
         },
         methods: {
-            setStartDate(e) {
+            setStartDate: function (e) {
                 this.start = Math.ceil(e.target.offsetTop / 50) + 7;
             },
             setEndDate(e) {
@@ -58,8 +76,15 @@
                 this.end = (endDate - this.start) ? endDate + 1 : this.start + 1;
                 this.toggleEventEditor()
             },
-            toggleEventEditor() {
+            toggleEventEditor: function () {
                 this.showEditor = !this.showEditor;
+            },
+            showToolbox: function (toolboxdata) {
+                this.isToolbox = true;
+                this.toolboxData = toolboxdata;
+            },
+            hideToolbox: function () {
+                this.isToolbox = false;
             }
         },
     }
@@ -120,12 +145,6 @@
       text-align: center;
       margin-bottom: 0;
     }
-  }
-
-  .hours__clip {
-    height: 500px;
-    overflow-y: scroll;
-    overflow-x: hidden;
   }
 
   .hours__list {
