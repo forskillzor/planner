@@ -1,21 +1,29 @@
 export function getCurrentDateLocalString() {
   const date = new Date();
-  return dateFromLocalDateString(date.toLocaleDateString());
+  return localStringToUDate(date.toLocaleDateString());
 }
 
-export function dateFormatter(date) {
+export function valueToUDate(date) {
   const temp = date.split('-');
-  const result = `${temp[1]}/${temp[2]}/${temp[0]}`;
-  return result;
+  return `${temp[1]}/${temp[2]}/${temp[0]}`;
+  // return uDate
 }
 
-export function dateFromLocalDateString(date) {
+export function localStringToUDate(date) {
   const dateString = date.split('/');
   let month = dateString[0];
   if (month.toString().length === 1) {
     month = '0' + month;
   }
   return `${month}/${dateString[1]}/${dateString[2]}`;
+  // add zero to month number
+  // 14/03/2020
+}
+
+export function uDateToValue(uDate) {
+  const temp = uDate.split('/');
+  return `${temp[2]}-${temp[0]}-${temp[1]}`;
+  // 2020-03-14
 }
 
 export function getCurrentYear() {
@@ -53,7 +61,7 @@ export function createMonth(year, month) {
       const currentMonth = getCurrentMonth();
       const actual = (month === currentMonth);
       week.push({
-        date: dateFromLocalDateString(date.toLocaleDateString()),
+        date: localStringToUDate(date.toLocaleDateString()),
         year: date.getFullYear(),
         month: date.getMonth(),
         day: date.getDate(),

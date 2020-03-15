@@ -4,6 +4,7 @@
                 leave-active-class="animated fadeOut">
       <event-editor
         v-if="showEditor"
+        :dateOfTheDay="date"
         :eventBegin="start"
         :eventEnd="end">
       </event-editor>

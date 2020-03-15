@@ -32,7 +32,7 @@
 
 <script>
     import {mapActions} from 'vuex';
-    import {dateFormatter} from "../calendar/core";
+    import {uDateToValue, valueToUDate} from "../calendar/core";
     import calendarComponent from '../calendar/calendar';
 
     export default {
@@ -40,12 +40,12 @@
         components: {
             'calendar-widget': calendarComponent,
         },
-        props: ['eventBegin', 'eventEnd'],
+        props: ['dateOfTheDay', 'eventBegin', 'eventEnd'],
         data: function () {
             return {
                 title: '',
                 id: '',
-                date: '',
+                date: uDateToValue(this.dateOfTheDay),
                 color: '#d2d2d2',
                 begin: this.eventBegin,
                 end: this.eventEnd
@@ -58,14 +58,14 @@
                 this.id = genarateId();
                 this.addEvent({
                     title: this.title,
-                    date: dateFormatter(this.date),
+                    date: valueToUDate(this.date),
                     begin: this.eventBegin,
                     end: this.eventEnd,
                     id: genarateId(),
                     color: this.color,
                 });
                 this.$parent.showEditor = false;
-                console.log('new event:', this.title, this.id, dateFormatter(this.date));
+                console.log('new event:', this.title, this.id, valueToUDate(this.date));
             },
         },
     }
