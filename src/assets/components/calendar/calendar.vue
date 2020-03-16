@@ -1,7 +1,4 @@
 <template>
-
-  <!-- TODO highlight selected day by dint $store-->
-
   <div class="calendar">
     <div v-if="mode === 'calendar'" class="calendar__header">
       <button class="calendar__button btn" @click="prevMonth"> <</button>

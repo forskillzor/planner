@@ -11,20 +11,15 @@
         data: function () {
             return {}
         },
-        mounted() {
-            console.warn('toolbox data:', this.innerData)
+        computed: {
         },
-        updated() {
-            console.warn('update toolbox data:', this.innerData)
-        },
-        computed: {},
-        watch: {
-            innerData: function (data) {
-                const el = this.$vnode.elm;
-                el.style.top = data.y + 'px';
-                console.warn('watch:', data)
-            },
-        }
+        // watch: {
+        //     innerData: function (data) {
+        //         const el = this.$vnode.elm;
+        //         el.style.top = data.y + 'px';
+        //         console.warn('watch:', data)
+        //     },
+        // }
     }
 </script>
 

@@ -58,7 +58,7 @@
       align-items: center;
       font-weight: 600;
       margin-bottom: 0;
-      background-color: #eeeeee;
+      background-color: #d2d2d2;
     }
 
     &__days-of-week {
@@ -70,39 +70,13 @@
 
     &__weeks {
       @include reset-list;
+      border: 1px solid #eee;
 
       .days__list {
         @include reset-list;
         display: grid;
         grid-template-columns: repeat(7, 1fr);
 
-        .today {
-          background-color: #d2d2d2;
-        }
-
-        .actual {
-          color: $black !important;
-          font-weight: 400 !important;
-        }
-
-        .day-view {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: #777;
-          font-weight: 200;
-          min-height: 30px;
-          border: 1px solid transparent;
-
-          &:hover {
-            cursor: pointer;
-            border: 1px solid #d2d2d2;
-          }
-
-          &:active {
-            background-color: #ff96b9;
-          }
-        }
       }
     }
   }

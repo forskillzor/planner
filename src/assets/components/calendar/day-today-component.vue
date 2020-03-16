@@ -2,7 +2,7 @@
 
   <!-- TODO add current time line -->
 
-  <div class="day-view">
+  <div class="day-view-calendar">
     <transition enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut">
       <event-editor
@@ -16,21 +16,12 @@
 
       <!-- TODO very bad implementation of toolbox -->
 
-      <transition appear
-                  enter-active-class="animated fadeIn"
-                  leave-active-class="animated fadeOut">
-        <event-toolbox v-show="isToolbox"
-                       :innerData="toolboxData">
-        </event-toolbox>
-      </transition>
       <li v-for="hour in hoursList" class="hour noselect" :style="{height: hourHeight + 'px'}"
           @mousedown="setStartDate"
           @mouseup="setEndDate">
         <div class="hour__time">{{ hour }}</div>
       </li>
-      <event @showtoolbox="showToolbox"
-             @hidetoolbox="hideToolbox"
-             v-for="(event, index) in events(date)" class="event"
+      <event v-for="(event, index) in events(date)" class="event"
              :hourHeight="hourHeight"
              :event="event"
              :dayRef="this"
@@ -43,7 +34,6 @@
 <script>
     import eventComponent from '../events/event-component';
     import eventEditor from '../modals/event-editor';
-    import eventToolBox from '../events/event-toolbox';
     import {calendarApi} from '../../components/calendar/calendar-api-mixin';
     import {eventApi} from "../events/event-api-mixin";
 
@@ -52,7 +42,6 @@
         components: {
             'event': eventComponent,
             'event-editor': eventEditor,
-            'event-toolbox': eventToolBox,
         },
         // TODO unusable prop -->
         props: ['date'],
@@ -60,7 +49,6 @@
         data() {
             return {
                 isToolbox: false,
-                toolboxData: null,
                 hourHeight: 50,
                 showEditor: false,
                 start: '',
@@ -79,13 +67,6 @@
             toggleEventEditor: function () {
                 this.showEditor = !this.showEditor;
             },
-            showToolbox: function (toolboxdata) {
-                this.isToolbox = true;
-                this.toolboxData = toolboxdata;
-            },
-            hideToolbox: function () {
-                this.isToolbox = false;
-            }
         },
     }
 </script>
@@ -101,7 +82,7 @@
     display: flex;
   }
 
-  .day-view {
+  .day-calendar {
     position: relative;
     margin: 0;
   }
