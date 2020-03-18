@@ -43,7 +43,7 @@
             'event': eventComponent,
             'event-editor': eventEditor,
         },
-        // TODO unusable prop -->
+        // TODO unusable prop --> for future modifications
         props: ['date'],
         mixins: [calendarApi, eventApi],
         data() {

@@ -10,20 +10,21 @@ export function valueToUDate(date) {
 }
 
 export function localStringToUDate(date) {
+  // add zero to month number
+  // 04/03/2020
   const dateString = date.split('/');
   let month = dateString[0];
   if (month.toString().length === 1) {
     month = '0' + month;
   }
   return `${month}/${dateString[1]}/${dateString[2]}`;
-  // add zero to month number
-  // 14/03/2020
 }
 
 export function uDateToValue(uDate) {
+  // value for input
+  // 2020-03-04
   const temp = uDate.split('/');
   return `${temp[2]}-${temp[0]}-${temp[1]}`;
-  // 2020-03-14
 }
 
 export function getCurrentYear() {

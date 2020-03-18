@@ -33,9 +33,11 @@
 <script>
     import {mapActions} from 'vuex';
     import {uDateToValue, valueToUDate} from "../calendar/core";
+    import {generateId} from "../events/core/core";
     import calendarComponent from '../calendar/calendar';
 
     // TODO make today-view events [add] and edit (drag and drop)
+
     export default {
         name: "event-edit",
         components: {
@@ -54,15 +56,15 @@
         },
         computed: {},
         methods: {
-            ...mapActions('events', ['addEvent']),
-            save() {
-                this.id = genarateId();
+            ...mapActions('events', ['addEvent', 'changeEvent']),
+            save: function () {
+                this.id = generateId();
                 this.addEvent({
                     title: this.title,
                     date: valueToUDate(this.date),
                     begin: this.eventBegin,
                     end: this.eventEnd,
-                    id: genarateId(),
+                    id: generateId(),
                     color: this.color,
                 });
                 this.$parent.showEditor = false;
@@ -70,9 +72,6 @@
             },
         },
     }
-    const genarateId = function () {
-        return `f${(+new Date).toString(16)}`;
-    };
 </script>
 
 <style lang="scss">

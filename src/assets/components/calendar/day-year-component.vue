@@ -40,9 +40,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #000000;
+    background-color: blue;
     border-radius: 50%;
-    opacity: 0.5;
+    opacity: 0.2;
   }
 
   .day-calendar.actual {
