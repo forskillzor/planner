@@ -3,12 +3,13 @@ import {createYear} from "../../components/calendar/core";
 export const calendar = {
   namespaced: true,
   state: {
-    year: createYear(2020),
+    year: createYear(getCurrentDate().year),
     calendarViewCurrentMonth: getCurrentDate().month,
     calendarViewCurrentYear: getCurrentDate().year,
     currentDate: getCurrentDate(),
+    currentTime: getCurrentTime(),
     hoursList: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,],
-    hourHeight: 50,
+    hourHeight: 60,
     getSelectedMonth: getCurrentDate().month,
     namesOfMonth: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',],
     dayNames: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
@@ -34,6 +35,9 @@ export const calendar = {
     getNamesOfMonth: (state) => state.namesOfMonth,
     getMonthDataModel: state => month => state.year[month],
     getHoursList: (state) => state.hoursList,
+    getCurrentHour: (state) => state.currentTime.hour,
+    getCurrentMinute: (state) => state.currentTime.minute,
+    getHourHeight: (state) => state.hourHeight,
   },
   mutations: {
     setYear: (state, year) => state.year = createYear(year),
@@ -79,4 +83,12 @@ export function getCurrentDate() {
     day: date.getDate(),
     dayOfWeek: date.getDay(),
   };
+}
+
+export function getCurrentTime() {
+  const date = new Date();
+  return {
+    hour: date.getHours(),
+    minute: date.getMinutes(),
+  }
 }

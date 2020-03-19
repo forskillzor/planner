@@ -1,12 +1,16 @@
 <template>
-  <li @click="changeCurrentDate"
-      class="day-calendar"
+
+  <!-- TODO move class logic to computed -->
+
+  <li ref="day" @click="changeCurrentDate"
+      class="day-calendar noselect"
       :data-date="day.date"
       :class="[{'today': (day.date === actualDate),
               'actual':  day.month === day.currentMonth,
               'current': day.day === currentDay &&
                          day.month === currentMonth &&
-                         day.year === currentYear }]">
+                         day.year === currentYear &&
+                         day.month === day.currentMonth}]">
     {{ day.day }}
   </li>
 </template>
@@ -23,7 +27,8 @@
         },
         methods: {
             changeCurrentDate() {
-                this.setCurrentDate(this.day);
+                if (this.$refs.day.classList.contains('actual'))
+                    this.setCurrentDate(this.day);
             }
         },
     }

@@ -12,9 +12,11 @@
         :eventEnd="end">
       </event-editor>
     </transition>
+    <div ref="timeline" :style="{top: timelineTop}" class="timeline"></div>
     <ul class="hours__list">
 
       <!-- TODO very bad implementation of toolbox -->
+
 
       <li v-for="hour in hoursList" class="hour noselect" :style="{height: hourHeight + 'px'}"
           @mousedown="setStartDate"
@@ -49,7 +51,6 @@
         data() {
             return {
                 isToolbox: false,
-                hourHeight: 50,
                 showEditor: false,
                 start: '',
                 end: '',
@@ -68,6 +69,12 @@
                 this.showEditor = !this.showEditor;
             },
         },
+        computed: {
+            // TODO to improve implementation of timeline with general time interval to update time
+            timelineTop: function () {
+                return this.hourHeight * (this.currentHour - 7) + this.currentMinute + 'px';
+            }
+        }
     }
 </script>
 
@@ -85,6 +92,10 @@
   .day-calendar {
     position: relative;
     margin: 0;
+  }
+
+  .day-view-calendar {
+    position: relative;
   }
 
   p {
@@ -160,5 +171,13 @@
     margin: 0;
     top: 0;
     left: 0;
+  }
+
+  .timeline {
+    position: absolute;
+    border-bottom: 4px solid red;
+    width: 100%;
+    z-index: 10;
+    opacity: 0.2;
   }
 </style>

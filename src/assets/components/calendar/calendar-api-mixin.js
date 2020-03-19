@@ -24,6 +24,9 @@ export const calendarApi = {
       currentMonth: 'getCurrentMonth',
       currentDay: 'getCurrentDay',
       currentDayOfWeek: 'getCurrentDayOfWeek',
+      currentHour: 'getCurrentHour',
+      currentMinute: 'getCurrentMinute',
+      hourHeight: 'getHourHeight',
     }),
     actualDate: getCurrentDateLocalString, //from calendar/core.js
   }

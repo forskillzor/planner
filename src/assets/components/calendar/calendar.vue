@@ -1,11 +1,11 @@
 <template>
   <div class="calendar">
     <div v-if="mode === 'calendar'" class="calendar__header">
-      <button class="calendar__button btn" @click="prevMonth"> <</button>
+      <button class="calendar__button btn" @click="prevMonth"> *</button>
       <h1 class="month-name">{{ monthNames[activeMonth] }}
         <span class="year">{{ activeYear }}</span>
       </h1>
-      <button class="calendar__button btn" @click="nextMonth"> ></button>
+      <button class="calendar__button btn" @click="nextMonth"> *</button>
     </div>
 
     <ul class="calendar__month-list">
