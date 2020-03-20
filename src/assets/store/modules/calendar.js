@@ -1,4 +1,4 @@
-import {createYear} from "../../components/calendar/core";
+import {createYear, dateFormatter} from "../../components/calendar/core";
 
 export const calendar = {
   namespaced: true,
@@ -21,7 +21,7 @@ export const calendar = {
       if (month.toString().length === 1) {
         month = '0' + month;
       }
-      return `${month}/${state.currentDate.day}/${state.currentDate.year}`
+      return dateFormatter(`${month}/${state.currentDate.day}/${state.currentDate.year}`)
 
     },
     getCurrentYear: (state) => state.currentDate.year,

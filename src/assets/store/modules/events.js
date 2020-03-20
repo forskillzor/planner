@@ -5,6 +5,7 @@ export const events = {
   },
   getters: {
     // date === date.toLocaleDateString()
+
     getEvents: (state) => (date) => state.events.filter(event => event.date === date)
   },
   mutations: {
