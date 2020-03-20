@@ -32,7 +32,7 @@
 
 <script>
     import {mapActions} from 'vuex';
-    import {dateFormatter, uDateToValue, valueToUDate} from "../calendar/core";
+    import {dateFormatter} from "../calendar/core";
     import {generateId} from "../events/core/core";
     import calendarComponent from '../calendar/calendar';
 
@@ -69,7 +69,25 @@
                 });
                 this.$parent.showEditor = false;
             },
+            computed() {
+                console.warn('from editor:', this)
+            }
         },
+    }
+
+    function valueToUDate(date) {
+        const temp = date.split('-');
+        return `${temp[1]}/${temp[2]}/${temp[0]}`;
+        // return uDate
+    }
+
+    function uDateToValue(uDate) {
+        // value for <input type="date"/>
+        //  return format: '2020-03-04'
+        const temp = uDate.split('/');
+        let day = temp[1].toString();
+        if (day.length === 1) day = '0' + day;
+        return `${temp[2]}-${temp[0]}-${day}`;
     }
 </script>
 

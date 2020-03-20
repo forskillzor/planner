@@ -1,3 +1,7 @@
+/*
+* UDate - String, date format in this project looks like '01/31/2020'
+* events has own property 'date', it's UDate
+ */
 export function getCurrentDateLocalString() {
   const date = new Date();
   return localStringToUDate(date.toLocaleDateString());
@@ -9,21 +13,6 @@ export function dateFormatter(dateString) {
     return item.length === 1 ? '0' + item : item
   });
   return result.join('/');
-}
-
-export function valueToUDate(date) {
-  const temp = date.split('-');
-  return `${temp[1]}/${temp[2]}/${temp[0]}`;
-  // return uDate
-}
-
-export function uDateToValue(uDate) {
-  // value for <input type="date"/>
-  //  return format: '2020-03-04'
-  const temp = uDate.split('/');
-  let day = temp[1].toString();
-  if (day.length === 1) day = '0' + day;
-  return `${temp[2]}-${temp[0]}-${day}`;
 }
 
 export function localStringToUDate(date) {
