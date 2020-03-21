@@ -44,7 +44,9 @@
             'event': eventComponent,
             'event-editor': eventEditor,
         },
+
         // TODO unusable prop --> for future modifications
+
         props: ['date'],   // String
         mixins: [calendarApi, eventApi],
         data() {
@@ -69,7 +71,9 @@
             },
         },
         computed: {
+
             // TODO to improve implementation of timeline with general time interval to update time
+
             timelineTop: function () {
                 return this.hourHeight * (this.currentHour - 7) + this.currentMinute + 'px';
             }

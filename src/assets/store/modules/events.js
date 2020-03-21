@@ -2,6 +2,7 @@ export const events = {
   namespaced: true,
   state: {
     events: [],
+    selectedEvent: null,
   },
   getters: {
     // date === date.toLocaleDateString()
