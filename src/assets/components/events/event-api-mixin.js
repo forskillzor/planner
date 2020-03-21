@@ -11,7 +11,8 @@ export const eventApi = {
   computed: {
     ...mapGetters('events', {
 
-      events: 'getEvents'
+      eventsByDate: 'getEventsByDate',
+      eventsById: 'getEventsById',
     }),
   }
 

@@ -35,6 +35,9 @@
     import {dateFormatter} from "../calendar/core";
     import {generateId} from "../events/core/core";
     import calendarComponent from '../calendar/calendar';
+    import {mapGetters} from 'vuex';
+    import {mapMutations} from 'vuex';
+    import {mapState} from 'vuex';
 
     // TODO make today-view events [add] and edit (drag and drop)
 
@@ -43,35 +46,46 @@
         components: {
             'calendar-widget': calendarComponent,
         },
-        props: ['dateOfTheDay', 'eventBegin', 'eventEnd'],
         data: function () {
             return {
                 title: '',
                 id: '',
-                date: uDateToValue(this.dateOfTheDay),
-                color: '#d2d2d2',
-                begin: this.eventBegin,
-                end: this.eventEnd
+                date: this.selectedHours.date || '',
+                begin: this.selectedHours.begin || '',
+                end: this.selectedHours.end,
+                color: '',
             }
         },
-        computed: {},
+        computed: {
+            ...mapState('events', ['selectedHours', 'editorMode']),
+            ...mapGetters('events', {
+                currentEvent: 'getCurrentEvent',
+                selectedEvents: 'getSelectedEvents',
+                selectedHours: 'getSelectedHours',
+            }),
+        },
         methods: {
-            ...mapActions('events', ['addEvent', 'changeEvent']),
+            ...mapActions('events', [
+                'addEvent',
+                'changeEvent',
+            ]),
+            ...mapMutations('events', [
+                'resetEditorState',
+                'hideEditor',
+            ]),
             save: function () {
-                this.id = generateId();
+                console.warn('lololo', this.date);
                 this.addEvent({
                     title: this.title,
                     date: dateFormatter(valueToUDate(this.date)),
-                    begin: this.eventBegin,
-                    end: this.eventEnd,
+                    begin: this.begin,
+                    end: this.end,
                     id: generateId(),
                     color: this.color,
                 });
-                this.$parent.showEditor = false;
+                this.hideEditor();
+                this.resetEditorState();
             },
-            computed() {
-                console.warn('from editor:', this)
-            }
         },
     }
 
@@ -98,21 +112,22 @@
     padding: 20px;
     width: 800px;
     /*height: 200px;*/
-    top: 100px;
-    left: 100px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 100;
     background-color: #f1f1f1;
     font-family: 'Montserrat', sans-serif;
     border: 1px solid #d4d4d4;
     border-radius: 15px;
 
-    &__row{
+    &__row {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
     }
 
-    &__column{
+    &__column {
       width: 47%;
     }
 

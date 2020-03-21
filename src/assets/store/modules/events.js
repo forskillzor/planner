@@ -1,30 +1,88 @@
 export const events = {
-  namespaced: true,
-  state: {
-    events: [],
-    selectedEvent: null,
-  },
-  getters: {
-    // date === date.toLocaleDateString()
+    namespaced: true,
+    state: {
 
-    getEvents: (state) => (date) => state.events.filter(event => event.date === date)
-  },
-  mutations: {
-    addEvent: (state, event) => state.events.push(event),
-  },
-  actions: {
-    addEvent: (context, event) => context.commit('addEvent', event),
+      // Events
+      events: [],
 
-    // TODO make change event action
+      // Editors
+      selectedEvents: [],
+      currentEvent: null,
+      isEditor: false,
+      selectedHours: null,
+      editorMode: '',
+    },
+    getters: {
 
-    changeEvent: (context, eventId) => undefined,
-    fetchEvents: (context) => {
-      eventsArray.forEach(event => {
-        context.commit('addEvent', event);
-      });
-    }
-  },
-};
+      // Events
+      getEventsByDate: (state) => (date) => state.events.filter(event => event.date === date),
+      getEventsById: state => id => state.events.filter(event => event.id === id),
+
+      // Editor
+      getCurrentEvent: state => state.currentEvent,
+      getSelectedHours: state => state.selectedHours,
+      getSelectedEvents: state => state.selectedEvents,
+      isEditor: (state) => state.isEditor,
+    },
+    mutations: {
+
+      // Events
+      addEvent: (state, event) => state.events.push(event),
+      changeEvent: (state, event) => {
+        const filteredEvents = state.events.filter(item => {
+          return item.id === event.id;
+        });
+        console.warn('from events mutations:', filteredEvents[0]);
+      },
+      setCurrentEvent: (state, event) => {
+        state.currentEvent = event;
+        state.editorMode = 'update';
+      },
+
+      // Editor
+      showEditor: state => {state.isEditor = true},
+      selectHours: (state, payload) => {
+        state.selectedHours = payload;
+        state.editorMode = 'create';
+      },
+      resetEditorState: state => {
+        state.selectedHours = null;
+        state.currentEvent = null;
+      },
+      hideEditor: state => {state.isEditor = false},
+      pushToSelected: (state, eventId) => {
+        const event = state.events.find(item => item.id === eventId);
+        state.selectedEvents.push(event);
+      },
+      popFromSelected: (state, eventId) => {
+        const event = state.selectedEvents.filter(item => item.id === eventId);
+        const i = state.selectedEvents.indexOf(event[0]);
+        const deleted = state.selectedEvents.splice(i, 1);
+      },
+    },
+    actions: {
+      addEvent: (context, event) => context.commit('addEvent', event),
+
+      // TODO make change event action
+      selectEvent: (context, eventId) => {
+        context.commit('pushToSelected', eventId);
+      },
+      deselectEvent: (context, eventId) => {
+        context.commit('popFromSelected', eventId);
+      },
+      changeEvent: (context, eventId) => {
+        context.commit('changeEvent', eventId)
+      },
+      fetchEvents: (context) => {
+        eventsArray.forEach(event => {
+            context.commit('addEvent', event);
+          }
+        )
+        ;
+      }
+    },
+  }
+;
 // date.toLocaleDateString()
 // TODO move this to JSON
 const eventsArray = [

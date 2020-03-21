@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <transition enter-active-class="animated fadeIn"
+                leave-active-class="animated fadeOut">
+      <event-editor
+        v-if="isEditor">
+      </event-editor>
+    </transition>
     <app-header class="header"></app-header>
     <div class="horizontal-wrapper">
       <navibar class="navibar"></navibar>
@@ -24,6 +30,7 @@
   import navibar from './assets/components/app-components/navibar-component';
   import {mapGetters} from 'vuex';
   import {mapActions} from 'vuex';
+  import eventEditor from './assets/components/modals/event-editor';
 
   export default {
         name: 'app',
@@ -32,6 +39,7 @@
             'view-year': viewYear,
             'view-week': viewWeek,
             'navibar': navibar,
+            'event-editor': eventEditor,
         },
         data() {
             return {
@@ -41,7 +49,8 @@
         computed:{
             ...mapGetters('calendar', {
                 view: 'getView',
-            })
+            }),
+            ...mapGetters('events', ['isEditor'])
         },
       methods: {
             ...mapActions('events', {
@@ -55,6 +64,10 @@
 </script>
 
 <style lang="scss">
+
+  #app{
+    position: relative;
+  }
   .header{
     min-height: 50px;
     /*background-color: #eeeeee;*/

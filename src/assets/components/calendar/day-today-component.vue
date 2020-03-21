@@ -3,15 +3,6 @@
   <!-- TODO add current time line -->
 
   <div class="day-view-calendar">
-    <transition enter-active-class="animated fadeIn"
-                leave-active-class="animated fadeOut">
-      <event-editor
-        v-if="showEditor"
-        :dateOfTheDay="date"
-        :eventBegin="start"
-        :eventEnd="end">
-      </event-editor>
-    </transition>
     <div ref="timeline" :style="{top: timelineTop}" class="timeline"></div>
     <ul class="hours__list">
 
@@ -22,7 +13,7 @@
           @mouseup="setEndDate">
         <div class="hour__time">{{ hour }}</div>
       </li>
-      <event v-for="(event, index) in events(date)" class="event"
+      <event v-for="(event, index) in eventsByDate(date)" class="event"
              :hourHeight="hourHeight"
              :event="event"
              :dayRef="this"
@@ -34,15 +25,14 @@
 
 <script>
     import eventComponent from '../events/event-component';
-    import eventEditor from '../modals/event-editor';
     import {calendarApi} from '../../components/calendar/calendar-api-mixin';
     import {eventApi} from "../events/event-api-mixin";
+    import {mapMutations} from 'vuex';
 
     export default {
         name: "view-day",
         components: {
             'event': eventComponent,
-            'event-editor': eventEditor,
         },
 
         // TODO unusable prop --> for future modifications
@@ -52,26 +42,32 @@
         data() {
             return {
                 isToolbox: false,
-                showEditor: false,
-                start: '',
+                begin: '',
                 end: '',
             }
         },
         methods: {
+            ...mapMutations('events', [
+                'showEditor',
+                'hideEditor',
+                'selectHours',
+            ]),
             setStartDate: function (e) {
-                this.start = Math.ceil(e.target.offsetTop / 50) + 7;
+                this.begin = Math.ceil(e.target.offsetTop / this.hourHeight) + 7;
             },
             setEndDate(e) {
-                const endDate = (Math.ceil(e.target.offsetTop / 50) + 7);
-                this.end = (endDate - this.start) ? endDate + 1 : this.start + 1;
-                this.toggleEventEditor()
-            },
-            toggleEventEditor: function () {
-                this.showEditor = !this.showEditor;
+                // console.warn('today date', this.date);
+                const endDate = (Math.ceil(e.target.offsetTop / this.hourHeight) + 7);
+                this.end = (endDate - this.begin) ? endDate + 1 : this.begin + 1;
+                this.selectHours({
+                    date: this.date,
+                    begin: this.begin,
+                    end: this.end,
+                });
+                this.showEditor();
             },
         },
         computed: {
-
             // TODO to improve implementation of timeline with general time interval to update time
 
             timelineTop: function () {

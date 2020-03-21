@@ -1,25 +1,27 @@
 <template>
-  <div class="event__toolbox">
+  <div @click="edit" class="event__toolbox">
     <span>{{innerData}}</span>
   </div>
 </template>
 
 <script>
+  import {mapMutations} from 'vuex';
     export default {
         name: "event-toolbox",
         props: ['innerData'],
         data: function () {
             return {}
         },
+        methods: {
+            ...mapMutations('events', ['showEditor','setCurrentEvent']),
+            edit: function () {
+                const event = this.$store.getters['events/getEventsById'](this.innerData.id);
+                this.setCurrentEvent(event[0]);
+                this.showEditor();
+            }
+        },
         computed: {
         },
-        // watch: {
-        //     innerData: function (data) {
-        //         const el = this.$vnode.elm;
-        //         el.style.top = data.y + 'px';
-        //         console.warn('watch:', data)
-        //     },
-        // }
     }
 </script>
 

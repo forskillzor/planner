@@ -2,7 +2,7 @@
   <div ref="eventItem" class="rectangle"
        :class="{ 'selected': isSelected }"
        :id="'event-' + event.id"
-       @click.stop="isSelected = !isSelected">
+       @click.stop="selection">
     <transition appear
                 enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut">
@@ -16,7 +16,8 @@
 </template>
 
 <script>
-    import eventToolBox from './event-toolbox'
+    import eventToolBox from './event-toolbox';
+    import {mapMutations} from 'vuex';
 
     export default {
         name: "event-component",
@@ -30,9 +31,18 @@
             }
         },
         methods: {
+            ...mapMutations('events', ['pushToSelected', 'popFromSelected']),
             // TODO make implementation of drag and drop
             drag(e) {
-            }
+            },
+            selection: function () {
+                this.isSelected = !this.isSelected;
+                // TODO !!!!!!!!!
+                if (this.isSelected)
+                    this.pushToSelected(this.event.id);
+                else
+                    this.popFromSelected(this.event.id);
+            },
         },
         computed: {
             isToolbox: function () {
@@ -42,7 +52,6 @@
                 return {
                     id: this.event.id,
                     x: 0,
-                    // y: this.$refs.eventItem.offsetTop,
                 }
             },
         },
