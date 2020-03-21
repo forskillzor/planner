@@ -28,3 +28,17 @@
   }
 
 }
+
+.btn--warning {
+  background-color: $button-warning-color;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($button-warning-color, 5);
+  }
+
+  &:active {
+    background-color: darken($button-warning-color, 10);
+  }
+
+}

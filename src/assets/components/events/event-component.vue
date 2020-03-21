@@ -32,9 +32,11 @@
         },
         methods: {
             ...mapMutations('events', ['pushToSelected', 'popFromSelected']),
+
             // TODO make implementation of drag and drop
             drag(e) {
             },
+
             selection: function () {
                 this.isSelected = !this.isSelected;
                 // TODO !!!!!!!!!

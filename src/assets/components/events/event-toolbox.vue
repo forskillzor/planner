@@ -3,7 +3,7 @@
     <span @click="edit"
           class="toolbox__button">Edit</span>
     <span @click="del"
-          class="toolbox__button">Delete</span>
+          class="toolbox__button mdi mdi-home">Delete</span>
   </div>
 </template>
 

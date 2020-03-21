@@ -1,7 +1,4 @@
 <template>
-
-  <!-- TODO add current time line -->
-
   <div class="day-view-calendar">
     <div ref="timeline" :style="{top: timelineTop}" class="timeline"></div>
     <ul class="hours__list">
@@ -34,9 +31,6 @@
         components: {
             'event': eventComponent,
         },
-
-        // TODO unusable prop --> for future modifications
-
         props: ['date'],   // String
         mixins: [calendarApi, eventApi],
         data() {
@@ -56,7 +50,6 @@
                 this.begin = Math.ceil(e.target.offsetTop / this.hourHeight) + 7;
             },
             setEndDate(e) {
-                // console.warn('today date', this.date);
                 const endDate = (Math.ceil(e.target.offsetTop / this.hourHeight) + 7);
                 this.end = (endDate - this.begin) ? endDate + 1 : this.begin + 1;
                 this.selectHours({

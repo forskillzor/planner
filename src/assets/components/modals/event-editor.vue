@@ -1,9 +1,5 @@
 <template>
-
-  <!-- TODO add close button -->
-
   <div class="event-editor">
-    <span @click="hideEditor" class="event-editor__close">CLOSE</span>
     <div class="event-editor__row">
       <div class="event-editor__column">
         <label for="event-name" class="event-editor__input-label">Название</label>
@@ -28,6 +24,7 @@
       </div>
       <div class="event-editor__column">
         <calendar-widget mode="calendar"></calendar-widget>
+        <button @click="hideEditor" class="btn btn--warning event-editor__button--close">Закрыть</button>
         <button @click="save" class="btn btn--active event-editor__button">Сохранить</button>
       </div>
     </div>
@@ -39,8 +36,6 @@
     import {dateFormatter} from "../calendar/core";
     import {generateId} from "../events/core/core";
     import calendarComponent from '../calendar/calendar';
-
-    // TODO make today-view events [add] and edit (drag and drop)
 
     export default {
         name: "event-edit",
@@ -132,7 +127,6 @@
     box-sizing: border-box;
     padding: 20px;
     width: 800px;
-    /*height: 200px;*/
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -149,6 +143,7 @@
     }
 
     &__column {
+      position: relative;
       width: 47%;
     }
 
@@ -177,7 +172,12 @@
     }
 
     &__button {
-      margin: 10px 0;
+      margin: 10px 5px;
+      float: right;
+    }
+
+    &__button--close {
+      margin: 10px 5px;
       float: right;
     }
   }

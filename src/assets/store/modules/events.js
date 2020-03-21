@@ -78,7 +78,6 @@ export const events = {
       changeEvent: (context, event) => {
         context.commit('changeEvent', event);
       },
-      // TODO make change event action
       selectEvent: (context, eventId) => {
         context.commit('pushToSelected', eventId);
       },
