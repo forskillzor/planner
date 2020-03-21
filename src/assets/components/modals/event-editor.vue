@@ -1,5 +1,9 @@
 <template>
+
+  <!-- TODO add close button -->
+
   <div class="event-editor">
+    <span @click="hideEditor" class="event-editor__close">CLOSE</span>
     <div class="event-editor__row">
       <div class="event-editor__column">
         <label for="event-name" class="event-editor__input-label">Название</label>
@@ -31,13 +35,10 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex';
+    import {mapActions, mapMutations} from 'vuex';
     import {dateFormatter} from "../calendar/core";
     import {generateId} from "../events/core/core";
     import calendarComponent from '../calendar/calendar';
-    import {mapGetters} from 'vuex';
-    import {mapMutations} from 'vuex';
-    import {mapState} from 'vuex';
 
     // TODO make today-view events [add] and edit (drag and drop)
 
@@ -46,23 +47,16 @@
         components: {
             'calendar-widget': calendarComponent,
         },
+        props: ['mode', 'currentEvent', 'selectedHours'],
         data: function () {
             return {
                 title: '',
                 id: '',
-                date: this.selectedHours.date || '',
-                begin: this.selectedHours.begin || '',
-                end: this.selectedHours.end,
+                date: '',
+                begin: '',
+                end: '',
                 color: '',
             }
-        },
-        computed: {
-            ...mapState('events', ['selectedHours', 'editorMode']),
-            ...mapGetters('events', {
-                currentEvent: 'getCurrentEvent',
-                selectedEvents: 'getSelectedEvents',
-                selectedHours: 'getSelectedHours',
-            }),
         },
         methods: {
             ...mapActions('events', [
@@ -74,19 +68,46 @@
                 'hideEditor',
             ]),
             save: function () {
-                console.warn('lololo', this.date);
-                this.addEvent({
-                    title: this.title,
-                    date: dateFormatter(valueToUDate(this.date)),
-                    begin: this.begin,
-                    end: this.end,
-                    id: generateId(),
-                    color: this.color,
-                });
+                if (this.mode === 'create') {
+                    // console.warn('create event', this.title);
+                    this.addEvent({
+                        title: this.title,
+                        date: dateFormatter(valueToUDate(this.date)),
+                        begin: this.begin,
+                        end: this.end,
+                        id: generateId(),
+                        color: this.color,
+                    });
+                } else if (this.mode === 'update') {
+                    // console.warn('change event:', this.title);
+                    this.changeEvent({
+                        title: this.title,
+                        date: dateFormatter(valueToUDate(this.date)),
+                        begin: this.begin,
+                        end: this.end,
+                        id: this.id,
+                        color: this.color,
+                    })
+                }
                 this.hideEditor();
                 this.resetEditorState();
             },
         },
+        mounted: function () {
+            if (this.mode === 'create') {
+                this.date = uDateToValue(this.selectedHours.date);
+                this.begin = this.selectedHours.begin;
+                this.end = this.selectedHours.end;
+            } else if (this.mode === 'update') {
+                console.warn('event:', this.currentEvent);
+                this.title = this.currentEvent.title;
+                this.date = uDateToValue(this.currentEvent.date);
+                this.begin = this.currentEvent.begin;
+                this.end = this.currentEvent.end;
+                this.id = this.currentEvent.id;
+                this.color = this.currentEvent.color;
+            }
+        }
     }
 
     function valueToUDate(date) {
@@ -129,6 +150,13 @@
 
     &__column {
       width: 47%;
+    }
+
+    &__close {
+      background-color: #d2d2d2;
+      border: 5px;
+      padding: 5px;
+      cursor: pointer;
     }
 
     &__input-label {

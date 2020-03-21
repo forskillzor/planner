@@ -94,6 +94,7 @@
   }
 
   .day-view-calendar {
+    padding-top: 40px;
     position: relative;
   }
 

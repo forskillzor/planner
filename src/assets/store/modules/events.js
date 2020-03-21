@@ -22,6 +22,7 @@ export const events = {
       getCurrentEvent: state => state.currentEvent,
       getSelectedHours: state => state.selectedHours,
       getSelectedEvents: state => state.selectedEvents,
+      getEditorMode: state => state.editorMode,
       isEditor: (state) => state.isEditor,
     },
     mutations: {
@@ -31,8 +32,20 @@ export const events = {
       changeEvent: (state, event) => {
         const filteredEvents = state.events.filter(item => {
           return item.id === event.id;
-        });
-        console.warn('from events mutations:', filteredEvents[0]);
+        })[0];
+        console.warn('from events mutations:', filteredEvents);
+        const index = state.events.indexOf(filteredEvents);
+        console.warn('index', index);
+        state.events.splice(index, 1, event);
+      },
+      deleteEvent: (state, event) => {
+        const filteredEvents = state.events.filter(item => {
+          return item.id === event.id;
+        })[0];
+        console.warn('from events mutations:', filteredEvents);
+        const index = state.events.indexOf(filteredEvents);
+        console.warn('index', index);
+        state.events.splice(index, 1);
       },
       setCurrentEvent: (state, event) => {
         state.currentEvent = event;
@@ -62,7 +75,9 @@ export const events = {
     },
     actions: {
       addEvent: (context, event) => context.commit('addEvent', event),
-
+      changeEvent: (context, event) => {
+        context.commit('changeEvent', event);
+      },
       // TODO make change event action
       selectEvent: (context, eventId) => {
         context.commit('pushToSelected', eventId);
@@ -70,16 +85,13 @@ export const events = {
       deselectEvent: (context, eventId) => {
         context.commit('popFromSelected', eventId);
       },
-      changeEvent: (context, eventId) => {
-        context.commit('changeEvent', eventId)
-      },
       fetchEvents: (context) => {
         eventsArray.forEach(event => {
             context.commit('addEvent', event);
           }
         )
         ;
-      }
+      },
     },
   }
 ;

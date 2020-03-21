@@ -3,7 +3,10 @@
     <transition enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut">
       <event-editor
-        v-if="isEditor">
+        v-if="isEditor"
+        :mode="getEditorMode"
+        :currentEvent="getCurrentEvent"
+        :selectedHours="getSelectedHours">
       </event-editor>
     </transition>
     <app-header class="header"></app-header>
@@ -24,15 +27,14 @@
 </template>
 
 <script>
-  import header from './assets/components/app-components/header';
-  import viewWeek from './assets/views/planner/view-week';
-  import viewYear from './assets/views/planner/view-year';
-  import navibar from './assets/components/app-components/navibar-component';
-  import {mapGetters} from 'vuex';
-  import {mapActions} from 'vuex';
-  import eventEditor from './assets/components/modals/event-editor';
+    import header from './assets/components/app-components/header';
+    import viewWeek from './assets/views/planner/view-week';
+    import viewYear from './assets/views/planner/view-year';
+    import navibar from './assets/components/app-components/navibar-component';
+    import {mapActions, mapGetters} from 'vuex';
+    import eventEditor from './assets/components/modals/event-editor';
 
-  export default {
+    export default {
         name: 'app',
         components: {
             'app-header': header,
@@ -50,7 +52,12 @@
             ...mapGetters('calendar', {
                 view: 'getView',
             }),
-            ...mapGetters('events', ['isEditor'])
+            ...mapGetters('events', [
+                'isEditor',
+                'getEditorMode',
+                'getCurrentEvent',
+                'getSelectedHours',
+            ])
         },
       methods: {
             ...mapActions('events', {
@@ -83,7 +90,7 @@
   }
   .main{
     overflow: hidden;
-    padding: 20px;
+    padding: 0;
   }
   .sidebar-right{
     border-left: 1px solid #e2e2e2;
