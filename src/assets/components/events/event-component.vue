@@ -6,9 +6,6 @@
     <transition appear
                 enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut">
-      <event-toolbox v-show="isToolbox"
-                     :innerData="toolboxData">
-      </event-toolbox>
     </transition>
     <p class="event__title">{{event.title}}</p>
   </div>
@@ -16,14 +13,12 @@
 </template>
 
 <script>
-    import eventToolBox from './event-toolbox';
     import {mapMutations} from 'vuex';
 
     export default {
         name: "event-component",
         props: ['event', 'dayRef', 'hourHeight'],
         components: {
-            'event-toolbox': eventToolBox,
         },
         data: function () {
             return {
@@ -31,7 +26,12 @@
             }
         },
         methods: {
-            ...mapMutations('events', ['pushToSelected', 'popFromSelected']),
+            ...mapMutations('events', [
+                'pushToSelected',
+                'popFromSelected',
+                'setCurrentEvent',
+                'setCurrentEventClientPosition',
+            ]),
 
             // TODO make implementation of drag and drop
             drag(e) {
@@ -40,10 +40,15 @@
             selection: function () {
                 this.isSelected = !this.isSelected;
                 // TODO !!!!!!!!!
-                if (this.isSelected)
+                if (this.isSelected) {
                     this.pushToSelected(this.event.id);
-                else
+                    console.warn(this.event)
+                }
+                else{
                     this.popFromSelected(this.event.id);
+                }
+                this.setCurrentEvent(this.event);
+                this.setCurrentEventClientPosition(this.$vnode.elm.getBoundingClientRect());
             },
         },
         computed: {
