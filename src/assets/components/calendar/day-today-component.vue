@@ -1,7 +1,7 @@
 <template>
-  <div class="day-view-calendar">
+  <div ref="dayComponent" class="day-view-calendar">
     <div ref="timeline" :style="{top: timelineTop}" class="timeline"></div>
-    <ul class="hours__list">
+    <ul ref="hour" class="hours__list">
 
       <!-- TODO very bad implementation of toolbox -->
 
@@ -62,11 +62,15 @@
         },
         computed: {
             // TODO to improve implementation of timeline with general time interval to update time
+            // TODO subtract padding-top of day-view-calendar
 
             timelineTop: function () {
-                return this.hourHeight * (this.currentHour - 7) + this.currentMinute + 'px';
+                return this.hourHeight * (this.currentHour - 7) + this.currentMinute + 40 + 'px';
             }
         },
+        mounted(){
+            console.warn('padding-top:', this.paddingTop)
+        }
     }
 </script>
 

@@ -8,8 +8,9 @@
 </template>
 
 <script>
-    import {mapMutations} from 'vuex';
+    // TODO move toolbox to App.vue
 
+    import {mapMutations} from 'vuex';
     export default {
         name: "event-toolbox",
         props: ['innerData'],
