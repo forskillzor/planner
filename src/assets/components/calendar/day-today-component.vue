@@ -7,7 +7,7 @@
           @mouseup="setEndDate">
         <div class="hour__time">{{ hour }}</div>
       </li>
-      <event v-for="(event, index) in eventsByDate(date)" class="event"
+      <event v-for="(event, index) in eventsByDate(date)"
              :hourHeight="hourHeight"
              :event="event"
              :dayRef="this"

@@ -29,15 +29,6 @@ export const events = {
       getSelectedEvents: state => state.selectedEvents,
       getEditorMode: state => state.editorMode,
       isEditor: (state) => state.isEditor,
-
-      // ToolBox
-      isToolbox: state => state.isToolbox,
-      toolboxPosition: state => {
-        return {
-          x: parseInt(state.currentEventClientPosition.x),
-          y: parseInt(state.currentEventClientPosition.y),
-        }
-      },
     },
     mutations: {
 
@@ -65,10 +56,11 @@ export const events = {
         state.currentEvent = event;
         state.editorMode = 'update';
       },
-      setCurrentEventClientPosition: (state, position) => state.currentEventClientPosition = position,
 
       // Editor
-      showEditor: state => {state.isEditor = true},
+      showEditor: (state) => {
+        state.isEditor = true;
+      },
       selectHours: (state, payload) => {
         state.selectedHours = payload;
         state.editorMode = 'create';

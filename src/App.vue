@@ -10,9 +10,6 @@
       </event-editor>
     </transition>
 
-    <event-toolbox v-if="isToolbox" >
-    </event-toolbox>
-
     <app-header class="header"></app-header>
     <div class="horizontal-wrapper">
       <navibar class="navibar"></navibar>
@@ -37,7 +34,6 @@
     import navibar from './assets/components/app-components/navibar-component';
     import {mapActions, mapGetters} from 'vuex';
     import eventEditor from './assets/components/modals/event-editor';
-    import eventToolbox from './assets/components/events/event-toolbox';
 
     export default {
         name: 'app',
@@ -47,7 +43,6 @@
             'view-week': viewWeek,
             'navibar': navibar,
             'event-editor': eventEditor,
-            'event-toolbox': eventToolbox,
         },
         data() {
             return {
@@ -59,7 +54,6 @@
                 view: 'getView',
             }),
             ...mapGetters('events', [
-                'isToolbox',
                 'isEditor',
                 'getEditorMode',
                 'getCurrentEvent',
