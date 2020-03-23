@@ -15,7 +15,6 @@ export const events = {
       // ToolBox
       isToolbox: true,
       currentEventClientPosition: { x: 0 + 'px', y: 0 + 'px'},
-      // toolboxPosition: null,
     },
     getters: {
 

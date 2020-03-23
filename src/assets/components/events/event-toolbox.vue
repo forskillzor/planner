@@ -13,8 +13,8 @@
 
     // TODO move toolbox to App.vue
 
-    import {mapMutations} from 'vuex';
-    import {mapGetters} from 'vuex';
+    import {mapGetters, mapMutations} from 'vuex';
+
     export default {
         name: "event-toolbox",
         data: function () {

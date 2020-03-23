@@ -2,9 +2,6 @@
   <div ref="dayComponent" class="day-view-calendar">
     <div ref="timeline" :style="{top: timelineTop}" class="timeline"></div>
     <ul ref="hour" class="hours__list">
-
-      <!-- TODO very bad implementation of toolbox -->
-
       <li v-for="hour in hoursList" class="hour noselect" :style="{height: hourHeight + 'px'}"
           @mousedown="setStartDate"
           @mouseup="setEndDate">
