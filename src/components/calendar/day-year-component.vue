@@ -1,7 +1,4 @@
 <template>
-
-  <!-- TODO move class logic to computed -->
-
   <li ref="day" @click="changeCurrentDate"
       class="day-calendar noselect"
       :data-date="day.date"
