@@ -2,12 +2,9 @@
   <li ref="day" @click="changeCurrentDate"
       class="day-calendar noselect"
       :data-date="day.date"
-      :class="[{'today': (day.date === actualDate),
-              'actual':  day.month === day.currentMonth,
-              'current': day.day === currentDay &&
-                         day.month === currentMonth &&
-                         day.year === currentYear &&
-                         day.month === day.currentMonth}]">
+      :class="{'today': today,
+              'actual':  actual,
+              'current': current }">
     {{ day.day }}
   </li>
 </template>
@@ -21,6 +18,21 @@
         mixins: [calendarApi],
         data() {
             return {}
+        },
+        computed: {
+            today: function () {
+                return this.day.date === this.actualDate
+            },
+            actual: function () {
+                return this.day.month === this.day.currentMonth
+            },
+            current: function () {
+
+                return this.day.day === this.currentDay &&
+                    this.day.month === this.currentMonth &&
+                    this.day.year === this.currentYear &&
+                    this.day.month === this.day.currentMonth
+            },
         },
         methods: {
             changeCurrentDate() {
