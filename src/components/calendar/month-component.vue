@@ -41,8 +41,8 @@
 </script>
 
 <style lang="scss">
-  @import '../../style/core/mixins';
-  @import '../../style/core/variables';
+  @import '../../assets/style/core/mixins';
+  @import '../../assets/style/core/variables';
 
   .calendar {
 
@@ -70,7 +70,7 @@
 
     &__weeks {
       @include reset-list;
-      border: 1px solid #eee;
+      /*border: 1px solid #eee;*/
 
       .days__list {
         @include reset-list;

@@ -28,12 +28,12 @@
 </template>
 
 <script>
-    import header from './assets/components/app-components/header';
-    import viewWeek from './assets/views/planner/view-week';
-    import viewYear from './assets/views/planner/view-year';
-    import navibar from './assets/components/app-components/navibar-component';
+    import header from './components/app-components/header';
+    import viewWeek from './views/planner/view-week';
+    import viewYear from './views/planner/view-year';
+    import navibar from './components/app-components/navibar-component';
     import {mapActions, mapGetters} from 'vuex';
-    import eventEditor from './assets/components/modals/event-editor';
+    import eventEditor from './components/modals/event-editor';
 
     export default {
         name: 'app',

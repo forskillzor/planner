@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router'
 
-import Today from '../../assets/views/planner/view-today';
-import Week from '../../assets/views/planner/view-week';
-import Month from '../../assets/views/planner/view-month';
-import Year from '../../assets/views/planner/view-year';
+import Today from '../views/planner/view-today';
+import Week from '../views/planner/view-week';
+import Month from '../views/planner/view-month';
+import Year from '../views/planner/view-year';
 
 Vue.use(VueRouter);
 

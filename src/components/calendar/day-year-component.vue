@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import {calendarApi} from '../calendar/calendar-api-mixin';
+    import {calendarApi} from './calendar-api-mixin';
 
     export default {
         name: "day-component",
@@ -35,7 +35,7 @@
 </script>
 
 <style lang="scss">
-  @import '../../style/core/variables';
+  @import '../../assets/style/core/variables';
 
   .day-calendar.current::before {
     content: '';

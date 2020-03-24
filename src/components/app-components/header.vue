@@ -34,7 +34,7 @@
 </script>
 
 <style lang="scss">
-  @import '../../style/core/variables';
+  @import '../../assets/style/core/variables';
 
   .header__wrap{
   }

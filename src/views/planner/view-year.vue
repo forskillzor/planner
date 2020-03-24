@@ -47,7 +47,7 @@
 </script>
 
 <style lang="scss">
-  @import '../../style/core/mixins';
+  @import '../../assets/style/core/mixins';
   .view-year{
     padding: 5px;
 

@@ -19,7 +19,7 @@
 
 <script>
     import eventComponent from '../events/event-component';
-    import {calendarApi} from '../../components/calendar/calendar-api-mixin';
+    import {calendarApi} from './calendar-api-mixin';
     import {eventApi} from "../events/event-api-mixin";
     import {mapMutations} from 'vuex';
 
@@ -72,7 +72,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../style/core/mixins.scss';
+  @import '../../assets/style/core/mixins';
 
   h1 {
     text-align: center;

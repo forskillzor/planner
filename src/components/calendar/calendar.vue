@@ -26,8 +26,8 @@
 
 <script>
     import {mapActions} from 'vuex';
-    import {calendarApi} from '../calendar/calendar-api-mixin';
-    import monthComponent from '../../components/calendar/month-component';
+    import {calendarApi} from './calendar-api-mixin';
+    import monthComponent from './month-component';
 
     export default {
         name: "calendar",
@@ -49,8 +49,8 @@
 </script>
 
 <style lang="scss">
-  @import '../../style/core/mixins';
-  @import '../../style/core/variables';
+  @import '../../assets/style/core/mixins';
+  @import '../../assets/style/core/variables';
 
   .list {
     @include reset-list;
