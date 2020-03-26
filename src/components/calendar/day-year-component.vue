@@ -28,6 +28,8 @@
             },
             current: function () {
 
+                // TODO implement one dateString comparison
+
                 return this.day.day === this.currentDay &&
                     this.day.month === this.currentMonth &&
                     this.day.year === this.currentYear &&

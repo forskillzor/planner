@@ -106,7 +106,7 @@ export const events = {
 const eventsArray = [
   {
     title: 'Совещание',
-    date: '03/18/2020',
+    date: '03/24/2020',
     begin: 9,
     end: 11,
     id: '23jfi3iowfio2',
@@ -114,7 +114,7 @@ const eventsArray = [
   },
   {
     title: 'Презентация!',
-    date: '03/18/2020',
+    date: '03/24/2020',
     begin: 15,
     end: 16,
     id: 'd23fid93fd',
@@ -122,7 +122,7 @@ const eventsArray = [
   },
   {
     title: 'Встреча с подрядчиком',
-    date: '03/19/2020',
+    date: '03/25/2020',
     begin: 10,
     end: 12,
     id: 'd23fiddf93fd',
@@ -130,7 +130,7 @@ const eventsArray = [
   },
   {
     title: 'Шоппинг!!',
-    date: '03/20/2020',
+    date: '03/26/2020',
     begin: 8,
     end: 12,
     id: 'd23fidf93fd',

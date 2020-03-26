@@ -1,12 +1,15 @@
 <template>
+
+  <!-- TODO make array by query -->
+
   <div class="week-view scroll-area">
-    <day date="03/16/2020"></day>
-    <day date="03/17/2020"></day>
-    <day date="03/18/2020"></day>
-    <day date="03/19/2020"></day>
-    <day date="03/20/2020"></day>
-    <day date="03/21/2020"></day>
-    <day date="03/22/2020"></day>
+    <day date="03/23/2020"></day>
+    <day date="03/24/2020"></day>
+    <day date="03/25/2020"></day>
+    <day date="03/26/2020"></day>
+    <day date="03/27/2020"></day>
+    <day date="03/28/2020"></day>
+    <day date="03/29/2020"></day>
   </div>
 </template>
 

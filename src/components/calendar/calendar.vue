@@ -9,9 +9,9 @@
     </div>
 
     <ul class="calendar__month-list">
-      <transition appear mode="out-in"
-        enter-active-class="animated fadeIn"
-        leave-active-class="animated faster fadeOut">
+      <!--      <transition appear mode="out-in"-->
+      <!--        enter-active-class="animated fadeIn"-->
+      <!--        leave-active-class="animated faster fadeOut">-->
         <template v-for="(month, index) in yearModel">
             <month v-if="index === activeMonth"
                    :key="'month' + index"
@@ -19,7 +19,7 @@
                    :month="month" >
             </month>
         </template>
-      </transition>
+      <!--      </transition>-->
     </ul>
   </div>
 </template>

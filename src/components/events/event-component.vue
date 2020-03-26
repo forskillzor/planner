@@ -65,7 +65,9 @@
 
             selection: function () {
                 this.isSelected = !this.isSelected;
-                // TODO !!!!!!!!!
+
+                // TODO apply a decision to defer implementation
+
                 if (this.isSelected) {
                     this.pushToSelected(this.event.id);
                 }
@@ -103,6 +105,7 @@
     padding: 10px;
     opacity: 0.8;
     position: absolute;
+    z-index: 10;
 
     &:hover {
       opacity: 1;

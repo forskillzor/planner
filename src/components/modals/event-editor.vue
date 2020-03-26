@@ -37,6 +37,8 @@
     import {generateId} from "../events/core/core";
     import calendarComponent from '../calendar/calendar';
 
+    // TODO implement draggable popup window
+
     export default {
         name: "event-edit",
         components: {
@@ -131,7 +133,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
-    background-color: #f1f1f1;
+    background-color: #ffffff;
+    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.8);
     font-family: 'Montserrat', sans-serif;
     border: 1px solid #d4d4d4;
     border-radius: 15px;
@@ -167,7 +170,8 @@
       line-height: 30px;
       font-size: 18px;
       border-radius: 5px;
-      border: 1px solid #afafaf;
+      border: none;
+      border-bottom: 1px solid #afafaf;
       margin: 10px 0;
     }
 

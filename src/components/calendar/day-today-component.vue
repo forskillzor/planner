@@ -73,6 +73,7 @@
 
 <style scoped lang="scss">
   @import '../../assets/style/core/mixins';
+  @import '../../assets/style/core/variables.scss';
 
   h1 {
     text-align: center;
@@ -169,9 +170,9 @@
 
   .timeline {
     position: absolute;
-    border-bottom: 4px solid red;
+    border-bottom: 4px solid $button-active-color;
     width: 100%;
-    z-index: 10;
-    opacity: 0.2;
+    z-index: 9;
+    opacity: 0.8;
   }
 </style>
